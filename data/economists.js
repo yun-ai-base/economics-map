@@ -3,7 +3,7 @@
 window._econData = {
   metadata: {
     title: '经济经纬 · 思想交易所',
-    subtitle: '30 位经济学大师的思想光谱与生活兑换',
+    subtitle: '40 位经济学大师的思想光谱与生活兑换',
     version: '1.0'
   },
 
@@ -95,7 +95,7 @@ window._econData = {
       } }
   ],
 
-  /* ── 经济学家（30 位） ── */
+  /* ── 经济学家（40 位） ── */
   economists: [
     {
       id: 'quesnay', name: '弗朗索瓦·魁奈', nameEn: 'François Quesnay', lifespan: '1694—1774',

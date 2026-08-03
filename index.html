@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>经济经纬 · 思想交易所</title>
-<meta name="description" content="从亚当·斯密到行为经济学——30 位经济学大师的思想光谱，理论与生活的每一次兑换">
+<meta name="description" content="从亚当·斯密到行为经济学——40 位经济学大师的思想光谱，理论与生活的每一次兑换">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,6 +157,55 @@ main { position: relative; z-index: 1; }
   letter-spacing: 0.04em;
 }
 
+/* ───────────── 区块导航 Section Nav ───────────── */
+.section-nav {
+  position: sticky;
+  top: 40px;
+  z-index: 55;
+  background: rgba(11,15,26,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  flex-wrap: wrap;
+}
+.sn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 100px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.sn-link .sn-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+}
+.sn-link:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+.sn-link.active {
+  background: color-mix(in srgb, var(--gold) 16%, transparent);
+  border-color: var(--gold);
+  color: var(--gold-bright);
+}
+.sn-link.active .sn-num { color: var(--gold-bright); }
+
+/* 锚点跳转时不被 sticky 条盖住标题 */
+section[id] { scroll-margin-top: 120px; }
+
 /* ───────────── Header ───────────── */
 .site-header {
   position: relative;
@@ -266,6 +315,22 @@ main { position: relative; z-index: 1; }
 }
 .compass-title .cn { color: var(--gold); }
 .compass-sub { font-size: 13px; color: var(--text-mute); letter-spacing: 0.05em; }
+.compass-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 12px;
+  color: var(--gold-bright);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.compass-toggle:hover { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 10%, transparent); }
+.compass-toggle.showing-all { color: var(--text-dim); }
 
 .compass-stage {
   position: relative;
@@ -946,6 +1011,8 @@ footer .foot-twin a:hover {
 
 /* ───────────── 响应式 ───────────── */
 @media (max-width: 820px) {
+  .section-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .sn-link { flex: 0 0 auto; }
   .site-header { flex-direction: column; padding-top: 40px; }
   .header-stats { width: 100%; }
   .compass-section, .timeline-section, .market-section, .debate-section, .policy-section { padding-left: 16px; padding-right: 16px; }
@@ -976,6 +1043,15 @@ footer .foot-twin a:hover {
   </div>
 </div>
 
+<!-- 区块导航 -->
+<nav class="section-nav" id="sectionNav">
+  <a class="sn-link active" href="#compass"><span class="sn-num">01</span>经济罗盘</a>
+  <a class="sn-link" href="#timeline"><span class="sn-num">02</span>思想交割</a>
+  <a class="sn-link" href="#debate"><span class="sn-num">03</span>思想擂台</a>
+  <a class="sn-link" href="#policy"><span class="sn-num">04</span>政策溯源馆</a>
+  <a class="sn-link" href="#market"><span class="sn-num">05</span>街市应用馆</a>
+</nav>
+
 <main>
   <!-- Header -->
   <header class="site-header">
@@ -984,7 +1060,7 @@ footer .foot-twin a:hover {
       <h1>经济经纬
         <span class="en">ECONOMIC MERIDIANS</span>
       </h1>
-      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>30 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
+      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>40 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
     </div>
     <div class="header-stats">
       <div class="stat-cell"><div class="n" id="statCount">0</div><div class="l">经济学大师</div></div>
@@ -1001,6 +1077,7 @@ footer .foot-twin a:hover {
         <h2 class="compass-title"><span class="cn">经济罗盘</span> — 每一位大师在思想光谱上的坐标</h2>
       </div>
       <div class="compass-sub">横轴：市场自由 ⇄ 国家干预 · 纵轴：微观个体 ⇄ 宏观系统</div>
+      <button class="compass-toggle" id="compassToggle">仅核心 <span>12</span> 位</button>
     </div>
     <div class="compass-stage">
       <div class="axis-label axis-n"><b>SYSTEM</b> 系统 · 宏观</div>
@@ -1113,6 +1190,27 @@ footer .foot-twin a:hover {
   document.getElementById('statCount').textContent = ECONOMISTS.length;
   document.getElementById('statSchool').textContent = SCHOOLS.length;
 
+  /* ─── 区块导航 scrollspy ─── */
+  (function initSectionNav() {
+    var links = document.querySelectorAll('#sectionNav .sn-link');
+    var sectionIds = ['compass', 'timeline', 'debate', 'policy', 'market'];
+    var lastActive = 'compass';
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          lastActive = en.target.id;
+          links.forEach(function (l) {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + lastActive);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sectionIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  })();
+
   /* ─── 经济罗盘 ─── */
   var canvas = document.getElementById('compassCanvas');
   var ctx = canvas.getContext('2d');
@@ -1120,6 +1218,7 @@ footer .foot-twin a:hover {
   var dpr = window.devicePixelRatio || 1;
   var W = 0, H = 0;
   var view = { scale: 1, tx: 0, ty: 0, target: { scale: 1, tx: 0, ty: 0 } };
+  var viewMode = 'core';     // 'core' 仅核心节点 | 'all' 全部
   var activeFilter = null;   // schoolId or null
   var hoverId = null;
   var dragState = null;
@@ -1153,8 +1252,8 @@ footer .foot-twin a:hover {
   }
 
   function isVisible(e) {
-    if (!activeFilter) return true;
-    return e.schoolId === activeFilter;
+    if (activeFilter) return e.schoolId === activeFilter; // 学派筛选优先，忽略 core/all
+    return viewMode === 'all' || e.influence >= 9;        // 核心阈值：12 位
   }
 
   function draw() {
@@ -1367,6 +1466,33 @@ footer .foot-twin a:hover {
     view.tx = 0; view.ty = 0; view.scale = 1;
     draw();
     openSchool(s);
+  });
+
+  /* ─── 罗盘视图切换：核心 / 全部 ─── */
+  var coreCount = ECONOMISTS.filter(function (e) { return e.influence >= 9; }).length;
+  var toggleBtn = document.getElementById('compassToggle');
+  function syncToggle() {
+    if (viewMode === 'all') {
+      toggleBtn.innerHTML = '显示全部 <span>' + ECONOMISTS.length + '</span> 位';
+      toggleBtn.classList.add('showing-all');
+    } else {
+      toggleBtn.innerHTML = '仅核心 <span>' + coreCount + '</span> 位';
+      toggleBtn.classList.remove('showing-all');
+    }
+  }
+  syncToggle();
+  toggleBtn.addEventListener('click', function () {
+    viewMode = (viewMode === 'core') ? 'all' : 'core';
+    // 切到"全部"时清除学派筛选，避免双重过滤
+    if (viewMode === 'all' && activeFilter) {
+      activeFilter = null;
+      filterEl.querySelectorAll('.school-chip').forEach(function (c) { c.classList.remove('active'); });
+      var allChip = filterEl.querySelector('.all-chip');
+      if (allChip) allChip.classList.add('active');
+    }
+    syncToggle();
+    view.tx = 0; view.ty = 0; view.scale = 1;
+    draw();
   });
 
   /* ─── 时间线渲染 ─── */
