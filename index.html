@@ -512,6 +512,35 @@ main { position: relative; z-index: 1; }
   box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,160,99,0.08);
   animation: panelUp 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
 }
+
+/* ───────────── 自定义滚动条（金铜细条） ───────────── */
+.detail-panel::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.detail-panel::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: rgba(11,15,26,0.4);
+  border-left: 1px solid rgba(201,160,99,0.08);
+}
+.detail-panel::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(201,160,99,0.55), rgba(150,115,60,0.4));
+  border-radius: 5px;
+  border: 2px solid rgba(11,15,26,0.7);
+}
+.detail-panel::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(232,216,184,0.8), rgba(201,160,99,0.5));
+}
+.detail-panel::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner { background: transparent; }
+/* Firefox */
+.detail-panel, body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,160,99,0.5) rgba(11,15,26,0.4);
+}
 @keyframes panelUp { from { opacity: 0; transform: translateY(24px) scale(0.98); } to { opacity: 1; transform: none; } }
 .detail-close {
   position: sticky;
