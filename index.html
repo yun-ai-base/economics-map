@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>经济经纬 · 思想交易所</title>
+<meta name="description" content="从亚当·斯密到行为经济学——30 位经济学大师的思想光谱，理论与生活的每一次兑换">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 底与高光 */
+  --bg: #0B0F1A;
+  --bg-2: #0E1420;
+  --panel: #121826;
+  --panel-2: #161E2E;
+  --line: rgba(201,160,99,0.16);
+  --line-soft: rgba(255,255,255,0.06);
+  --gold: #C9A063;
+  --gold-bright: #E8D8B8;
+  --ivory: #EFE9DC;
+  --text: #EFE9DC;
+  --text-dim: #A9A295;
+  --text-mute: #6E6A60;
+
+  /* 学派色板 */
+  --col-classical: #C9A063;    /* 古典 铜金 */
+  --col-marx: #E05D5D;         /* 马克思 绯红 */
+  --col-marginal: #4FB3A8;     /* 边际/新古典 青玉 */
+  --col-austrian: #E8A33D;     /* 奥派 琥珀 */
+  --col-institutional: #8B7EC8; /* 制度 紫藤 */
+  --col-keynes: #5B8DEF;       /* 凯恩斯 群青 */
+  --col-chicago: #58B7E0;      /* 芝加哥 钢青 */
+  --col-welfare: #9BC47A;      /* 福利/公共选择 橄榄 */
+  --col-game: #D17BC8;         /* 博弈/计量 洋红 */
+  --col-behavioral: #F2C14E;   /* 行为 明黄 */
+
+  --radius: 14px;
+  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'DM Mono', 'SF Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 背景：行情纸网格 + 顶部光晕 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgba(201,160,99,0.08), transparent 60%),
+    radial-gradient(40% 35% at 85% 75%, rgba(91,141,239,0.06), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-paper {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+main { position: relative; z-index: 1; }
+
+/* ───────────── 顶部行情条 Ticker ───────────── */
+.ticker-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(11,15,26,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.ticker-label {
+  flex: 0 0 auto;
+  padding: 0 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--gold-bright);
+  background: linear-gradient(90deg, rgba(201,160,99,0.18), transparent);
+  border-right: 1px solid var(--line);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  z-index: 2;
+}
+.ticker-viewport { flex: 1; overflow: hidden; position: relative; height: 100%; }
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+  animation: tickerScroll 60s linear infinite;
+  will-change: transform;
+}
+.ticker-viewport:hover .ticker-track { animation-play-state: paused; }
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 26px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  border-right: 1px solid var(--line-soft);
+  height: 100%;
+}
+.ticker-item .tk-name { color: var(--text); font-family: var(--font-serif); font-size: 13px; }
+.ticker-item .tk-bar {
+  width: 64px; height: 3px;
+  background: var(--line-soft);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.ticker-item .tk-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: var(--w, 60%);
+  background: var(--c, var(--gold));
+  opacity: 0.85;
+}
+.ticker-item .tk-dir {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* ───────────── Header ───────────── */
+.site-header {
+  position: relative;
+  z-index: 5;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 28px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand .brand-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand .brand-eyebrow::before {
+  content: '';
+  width: 26px; height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.brand h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  background: linear-gradient(120deg, #F6EFDF 20%, #C9A063 55%, #F6EFDF 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand h1 .en {
+  display: block;
+  font-size: 0.5em;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--text-mute);
+  -webkit-text-fill-color: var(--text-mute);
+  margin-top: 10px;
+  font-family: var(--font-sans);
+}
+.brand .tagline {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--text-dim);
+  max-width: 34em;
+  line-height: 1.8;
+}
+.brand .tagline b { color: var(--gold-bright); font-weight: 600; }
+
+.header-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(76px, 1fr));
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.stat-cell {
+  border: 1px solid var(--line);
+  background: rgba(18,24,38,0.6);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+  min-width: 84px;
+}
+.stat-cell .n {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--gold-bright);
+  line-height: 1.2;
+}
+.stat-cell .l {
+  font-size: 11px;
+  color: var(--text-mute);
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+
+/* ───────────── 罗盘 Hero ───────────── */
+.compass-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 44px 28px 0;
+}
+.compass-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.compass-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+}
+.compass-title .cn { color: var(--gold); }
+.compass-sub { font-size: 13px; color: var(--text-mute); letter-spacing: 0.05em; }
+
+.compass-stage {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(45% 45% at 50% 50%, rgba(201,160,99,0.06), transparent 70%),
+    linear-gradient(180deg, rgba(18,24,38,0.7), rgba(11,15,26,0.9));
+  overflow: hidden;
+}
+.compass-canvas-wrap { position: relative; width: 100%; }
+#compassCanvas { display: block; width: 100%; cursor: grab; }
+
+/* 罗盘四角轴标签 */
+.axis-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  z-index: 3;
+  pointer-events: none;
+}
+.axis-label.axis-n { top: 12px; left: 50%; transform: translateX(-50%); }
+.axis-label.axis-s { bottom: 12px; left: 50%; transform: translateX(-50%); }
+.axis-label.axis-e { right: 14px; top: 50%; transform: translateY(-50%); }
+.axis-label.axis-w { left: 14px; top: 50%; transform: translateY(-50%); }
+.axis-label b { color: var(--gold-bright); font-weight: 500; }
+
+/* 学派筛选 */
+.school-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--line-soft);
+}
+.school-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 100px;
+  font-size: 12px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  background: transparent;
+}
+.school-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--gold)); }
+.school-chip:hover { border-color: var(--c, var(--gold)); color: var(--text); }
+.school-chip.active {
+  background: color-mix(in srgb, var(--c, var(--gold)) 18%, transparent);
+  border-color: var(--c, var(--gold));
+  color: var(--text);
+}
+.school-chip.all-chip { border-color: var(--line); color: var(--text); }
+
+.compass-hint {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  z-index: 3;
+  font-size: 12px;
+  color: var(--text-mute);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.compass-hint .key {
+  font-family: var(--font-mono);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--gold-bright);
+}
+
+/* ───────────── 思想交割时间线 ───────────── */
+.timeline-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 28px 0;
+}
+.section-head { margin-bottom: 26px; }
+.section-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-kicker::before { content: ''; width: 24px; height: 1px; background: var(--gold); opacity: 0.6; }
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+}
+.section-sub { font-size: 13px; color: var(--text-mute); margin-top: 6px; max-width: 46em; }
+
+.milestone-track {
+  position: relative;
+  padding: 10px 0 30px;
+}
+.milestone-track::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--line-soft));
+  opacity: 0.6;
+}
+.milestone-item {
+  position: relative;
+  padding: 8px 0 8px 44px;
+  cursor: pointer;
+}
+.milestone-dot {
+  position: absolute;
+  left: 7px;
+  top: 20px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--m, var(--gold));
+  transition: all 0.25s ease;
+}
+.milestone-item:hover .milestone-dot {
+  background: var(--m, var(--gold));
+  box-shadow: 0 0 14px var(--m, var(--gold));
+}
+.milestone-card {
+  background: rgba(18,24,38,0.6);
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 12px 16px;
+  transition: all 0.25s ease;
+}
+.milestone-item:hover .milestone-card {
+  border-color: var(--line);
+  background: rgba(22,30,46,0.8);
+}
+.milestone-card .ms-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold-bright);
+  letter-spacing: 0.1em;
+}
+.milestone-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 2px 0 4px; font-family: var(--font-serif); }
+.milestone-card p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+.milestone-card .ms-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.milestone-card .ms-tag {
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--line-soft);
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.milestone-card .ms-tag:hover { color: var(--text); border-color: var(--gold); }
+
+/* ───────────── 街市应用馆 ───────────── */
+.market-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 28px 0;
+}
+.life-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.life-topic {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  padding: 18px;
+  background: rgba(18,24,38,0.5);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.life-topic::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--c, var(--gold));
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.life-topic:hover {
+  border-color: var(--line);
+  transform: translateY(-2px);
+  background: rgba(22,30,46,0.8);
+}
+.life-topic:hover::before { opacity: 1; }
+.life-topic .lt-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.life-topic h3 { font-size: 15px; font-weight: 600; color: var(--text); font-family: var(--font-serif); }
+.life-topic .lt-q { font-size: 12px; color: var(--text-mute); margin-top: 3px; }
+.life-topic .lt-matches { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+.life-topic .lt-m {
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--c, var(--gold)) 14%, transparent);
+  color: var(--text-dim);
+}
+
+/* ───────────── 理论档案弹层 ───────────── */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,8,15,0.72);
+  backdrop-filter: blur(6px);
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.detail-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.detail-panel {
+  width: min(680px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,160,99,0.08);
+  animation: panelUp 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes panelUp { from { opacity: 0; transform: translateY(24px) scale(0.98); } to { opacity: 1; transform: none; } }
+.detail-close {
+  position: sticky;
+  top: 12px;
+  float: right;
+  margin: 12px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(11,15,26,0.8);
+  color: var(--text-dim);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.detail-close:hover { color: var(--text); border-color: var(--gold); }
+
+.detail-hero {
+  padding: 34px 30px 22px;
+  border-bottom: 1px solid var(--line-soft);
+  position: relative;
+}
+.detail-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 80% at 20% 0%, color-mix(in srgb, var(--sc, var(--gold)) 14%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.detail-hero-top { display: flex; gap: 20px; align-items: flex-start; position: relative; }
+.avatar-block {
+  width: 78px; height: 78px;
+  flex: 0 0 78px;
+  border-radius: 16px;
+  background:
+    radial-gradient(60% 60% at 30% 25%, rgba(255,255,255,0.28), transparent 60%),
+    var(--sc, var(--gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 900;
+  color: rgba(0,0,0,0.72);
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--sc, var(--gold)) 40%, transparent);
+}
+.detail-name h2 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.detail-name .en { font-size: 13px; color: var(--text-mute); letter-spacing: 0.08em; margin-top: 2px; }
+.detail-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font-size: 12px; color: var(--text-dim); position: relative; }
+.detail-meta .meta-item { display: flex; align-items: center; gap: 5px; }
+.detail-meta .meta-item b { color: var(--gold-bright); font-weight: 500; }
+.school-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--sc, var(--gold)) 16%, transparent);
+  color: var(--text);
+  font-size: 12px;
+  border: 1px solid color-mix(in srgb, var(--sc, var(--gold)) 35%, transparent);
+}
+.market-cap {
+  margin-left: auto;
+  text-align: right;
+  position: relative;
+}
+.market-cap .cap-label { font-size: 10px; color: var(--text-mute); letter-spacing: 0.1em; text-transform: uppercase; }
+.market-cap .cap-val { font-family: var(--font-mono); font-size: 26px; color: var(--gold-bright); line-height: 1.2; }
+.market-cap .cap-note { font-size: 10px; color: var(--text-mute); }
+.cap-stars { display: flex; gap: 3px; margin-top: 2px; }
+.cap-stars .s { color: var(--gold); font-size: 11px; }
+.cap-stars .s.off { opacity: 0.2; }
+
+.detail-quote {
+  margin: 18px 30px 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--gold);
+  background: rgba(201,160,99,0.05);
+  border-radius: 0 10px 10px 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--gold-bright);
+  position: relative;
+}
+.detail-quote::after { content: '」'; }
+
+.detail-body { padding: 22px 30px 34px; }
+
+.d-block { margin-bottom: 24px; }
+.d-block:last-child { margin-bottom: 0; }
+.d-block-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.d-block-title::before { content: ''; width: 18px; height: 1px; background: var(--gold); opacity: 0.5; }
+.d-block p { font-size: 14px; color: var(--text-dim); line-height: 1.85; }
+.d-block p + p { margin-top: 10px; }
+
+.theory-list { display: grid; gap: 10px; }
+.theory-item {
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: rgba(11,15,26,0.4);
+}
+.theory-item .th-title { font-size: 14px; font-weight: 600; color: var(--text); font-family: var(--font-serif); }
+.theory-item .th-year { font-family: var(--font-mono); font-size: 11px; color: var(--text-mute); margin-left: 6px; }
+.theory-item .th-desc { font-size: 13px; color: var(--text-dim); margin-top: 4px; line-height: 1.7; }
+
+.work-list { display: grid; gap: 8px; }
+.work-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line-soft);
+}
+.work-item:last-child { border-bottom: none; }
+.work-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold);
+  flex: 0 0 auto;
+  padding-top: 2px;
+}
+.work-item .wk-title { font-size: 14px; font-weight: 600; color: var(--text); font-family: var(--font-serif); }
+.work-item .wk-desc { font-size: 12px; color: var(--text-mute); margin-top: 2px; }
+
+/* 生活换算 — 差异化亮点 */
+.life-convert {
+  border: 1px solid color-mix(in srgb, var(--sc, var(--gold)) 40%, transparent);
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--sc, var(--gold)) 8%, transparent), transparent 55%),
+    rgba(11,15,26,0.5);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-top: 4px;
+}
+.life-convert .lc-title {
+  font-size: 12px;
+  color: var(--gold-bright);
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.life-convert .lc-title::before { content: '⇄'; font-family: var(--font-mono); color: var(--sc, var(--gold)); }
+.lc-item { padding: 9px 0; border-top: 1px dashed var(--line-soft); }
+.lc-item:first-of-type { border-top: none; }
+.lc-item .lc-scene { font-size: 13px; color: var(--text); font-weight: 600; }
+.lc-item .lc-scene::before { content: '› '; color: var(--sc, var(--gold)); }
+.lc-item .lc-say { font-size: 12.5px; color: var(--text-dim); margin-top: 3px; line-height: 1.7; }
+.lc-item .lc-say b { color: var(--gold-bright); font-weight: 500; }
+
+/* 关系链 */
+.relation-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.relation-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 100px;
+  border: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(11,15,26,0.4);
+}
+.relation-chip:hover { border-color: var(--gold); color: var(--text); transform: translateY(-1px); }
+.relation-chip .rc-name { color: var(--text); font-weight: 500; }
+.relation-chip .rc-type { font-size: 10px; color: var(--text-mute); }
+.relation-chip .rc-type.t-study { color: #4FB3A8; }
+.relation-chip .rc-type.t-influence { color: #5B8DEF; }
+.relation-chip .rc-type.t-debate { color: #E05D5D; }
+
+/* ───────────── 孪生宇宙 + Footer ───────────── */
+.twin-section { max-width: 1180px; margin: 0 auto; padding: 56px 28px 0; }
+/* 深色主题 override（适配 twin-universe.js 生成的卡片结构） */
+.twin-container { display: block; }
+.tw-section { margin-bottom: 22px; }
+.tw-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.tw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.tw-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(18,24,38,0.6);
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  flex: 1;
+  min-width: 0;
+}
+.tw-card:hover {
+  border-color: var(--line);
+  background: rgba(22,30,46,0.8);
+  transform: translateY(-2px);
+}
+.tw-card-icon {
+  font-size: 20px;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.tw-card-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.tw-card-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.tw-card-desc { font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-top: 2px; }
+.tw-card-arrow { font-size: 14px; color: var(--text-mute); flex-shrink: 0; transition: 0.25s; }
+.tw-card:hover .tw-card-arrow { color: var(--gold); transform: translateX(2px); }
+
+footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 28px 48px;
+  text-align: center;
+  border-top: 1px solid var(--line-soft);
+  margin-top: 56px;
+}
+footer p { font-family: var(--font-mono); font-size: 12px; color: var(--text-mute); letter-spacing: 0.05em; }
+footer .foot-mark { color: var(--gold); }
+
+/* ───────────── 响应式 ───────────── */
+@media (max-width: 820px) {
+  .site-header { flex-direction: column; padding-top: 40px; }
+  .header-stats { width: 100%; }
+  .compass-section, .timeline-section, .market-section, .twin-section { padding-left: 16px; padding-right: 16px; }
+  .detail-hero { padding: 26px 20px 18px; }
+  .detail-body { padding: 18px 20px 26px; }
+  .detail-quote { margin: 14px 20px 0; }
+  .axis-label { font-size: 9px; letter-spacing: 0.12em; }
+}
+@media (max-width: 480px) {
+  .brand h1 { font-size: 1.7rem; }
+  .stat-cell .n { font-size: 18px; }
+  .avatar-block { width: 62px; height: 62px; flex-basis: 62px; font-size: 26px; }
+  .detail-name h2 { font-size: 21px; }
+  .market-cap .cap-val { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="grid-paper"></div>
+
+<!-- 行情条 -->
+<div class="ticker-wrap">
+  <div class="ticker-label">思想交易所 · SCL</div>
+  <div class="ticker-viewport">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<main>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-eyebrow">Economist Bourse · Est. 1776</div>
+      <h1>经济经纬
+        <span class="en">ECONOMIC MERIDIANS</span>
+      </h1>
+      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>30 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
+    </div>
+    <div class="header-stats">
+      <div class="stat-cell"><div class="n" id="statCount">0</div><div class="l">经济学大师</div></div>
+      <div class="stat-cell"><div class="n" id="statSchool">0</div><div class="l">思想学派</div></div>
+      <div class="stat-cell"><div class="n">2.5<span style="font-size:12px">世纪</span></div><div class="l">思想演进</div></div>
+    </div>
+  </header>
+
+  <!-- 经济罗盘 -->
+  <section class="compass-section" id="compass">
+    <div class="compass-head">
+      <div>
+        <div class="section-kicker">01 · The Compass</div>
+        <h2 class="compass-title"><span class="cn">经济罗盘</span> — 每一位大师在思想光谱上的坐标</h2>
+      </div>
+      <div class="compass-sub">横轴：市场自由 ⇄ 国家干预 · 纵轴：微观个体 ⇄ 宏观系统</div>
+    </div>
+    <div class="compass-stage">
+      <div class="axis-label axis-n"><b>SYSTEM</b> 系统 · 宏观</div>
+      <div class="axis-label axis-s"><b>AGENT</b> 个体 · 微观</div>
+      <div class="axis-label axis-e">干预 <b>STATE</b></div>
+      <div class="axis-label axis-w"><b>MARKET</b> 市场</div>
+      <div class="compass-canvas-wrap">
+        <canvas id="compassCanvas"></canvas>
+      </div>
+      <div class="compass-hint"><span class="key">⌘/Ctrl+滚轮</span> 缩放 · <span class="key">拖拽</span> 平移 · <span class="key">点击节点</span> 打开档案</div>
+      <div class="school-filter" id="schoolFilter"></div>
+    </div>
+  </section>
+
+  <!-- 思想交割时间线 -->
+  <section class="timeline-section" id="timeline">
+    <div class="section-head">
+      <div class="section-kicker">02 · Settlement</div>
+      <h2 class="section-title">思想交割 — 改变世界价格的关键时刻</h2>
+      <p class="section-sub">每一次理论"成交"，都改变了人类看待财富与分配的方式。点击事件查看背后的思想交易。</p>
+    </div>
+    <div class="milestone-track" id="milestoneTrack"></div>
+  </section>
+
+  <!-- 街市应用馆 -->
+  <section class="market-section" id="market">
+    <div class="section-head">
+      <div class="section-kicker">03 · The Street</div>
+      <h2 class="section-title">街市应用馆 — 理论落地，寻常百姓家</h2>
+      <p class="section-sub">你关心的每件日常小事，都有人在几百年前研究过。选择一个你生活里的问题。</p>
+    </div>
+    <div class="life-topic-grid" id="lifeTopicGrid"></div>
+  </section>
+
+  <!-- 孪生宇宙 -->
+  <section class="section twin-section" id="twin-universe">
+    <div class="section-head">
+      <div class="section-kicker">∞ · TwinVerse</div>
+      <h2 class="section-title">🧬 孪生宇宙 — 我的其他项目</h2>
+      <p class="section-sub">同一片宇宙里的其他知识图谱 · 点击跳转探索</p>
+    </div>
+    <div class="twin-container" id="twin-container"></div>
+  </section>
+</main>
+
+<!-- 理论档案弹层 -->
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-panel" id="detailPanel">
+    <button class="detail-close" id="detailClose" aria-label="关闭">&times;</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<footer>
+  <p>经济经纬 · 思想交易所 — <span class="foot-mark">ECO</span>DATA v1.0 · 数据来自开源百科 · 纯前端知识可视化</p>
+</footer>
+
+<script src="data/economists.js"></script>
+<script src="https://yun-ai-base.github.io/psychscope/twin-universe.js" data-project="economics-map"></script>
+<script>
+(function () {
+  'use strict';
+
+  var DATA = window._econData;
+  if (!DATA) { document.getElementById('compassCanvas').outerHTML = '<p style="padding:40px;color:#A9A295">数据加载失败</p>'; return; }
+
+  var ECONOMISTS = DATA.economists;
+  var SCHOOLS = DATA.schools;
+  var schoolMap = {};
+  SCHOOLS.forEach(function (s) { schoolMap[s.id] = s; });
+  var econMap = {};
+  ECONOMISTS.forEach(function (e) { econMap[e.id] = e; });
+
+  /* ─── 行情条渲染 ─── */
+  (function renderTicker() {
+    var track = document.getElementById('tickerTrack');
+    var html = '';
+    for (var i = 0; i < 2; i++) {  // 两份实现无缝滚动
+      SCHOOLS.forEach(function (s) {
+        var dir = s.trend.dir === 'up' ? '▲' : (s.trend.dir === 'down' ? '▼' : '—');
+        var dirClass = s.trend.dir === 'up' ? 'color:#E05D5D' : (s.trend.dir === 'down' ? 'color:#4FB3A8' : 'color:#A9A295');
+        html += '<div class="ticker-item">'
+          + '<span class="tk-name">' + s.name + '</span>'
+          + '<span class="tk-bar" style="--c:' + s.color + ';--w:' + s.trend.w + '%"></span>'
+          + '<span class="tk-dir" style="' + dirClass + '">' + dir + ' ' + s.trend.label + '</span>'
+          + '</div>';
+      });
+    }
+    track.innerHTML = html;
+  })();
+
+  /* ─── 统计 ─── */
+  document.getElementById('statCount').textContent = ECONOMISTS.length;
+  document.getElementById('statSchool').textContent = SCHOOLS.length;
+
+  /* ─── 经济罗盘 ─── */
+  var canvas = document.getElementById('compassCanvas');
+  var ctx = canvas.getContext('2d');
+  var stage = canvas.parentElement;
+  var dpr = window.devicePixelRatio || 1;
+  var W = 0, H = 0;
+  var view = { scale: 1, tx: 0, ty: 0, target: { scale: 1, tx: 0, ty: 0 } };
+  var activeFilter = null;   // schoolId or null
+  var hoverId = null;
+  var dragState = null;
+  var nodePos = {};  // id -> {x,y} screen coords
+
+  function resize() {
+    var r = stage.getBoundingClientRect();
+    W = r.width;
+    H = Math.max(360, Math.min(560, r.width * 0.55));
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    computeNodes();
+    draw();
+  }
+
+  // 逻辑坐标: axis.x/y in [-1,1], 映射到画布中心，留边距
+  function toScreen(ax, ay) {
+    var padX = 84, padY = 66;
+    var sx = padX + (ax + 1) / 2 * (W - padX * 2);
+    var sy = padY + (1 - (ay + 1) / 2) * (H - padY * 2);
+    return { x: sx, y: sy };
+  }
+  function computeNodes() {
+    nodePos = {};
+    ECONOMISTS.forEach(function (e) {
+      var p = toScreen(e.axis.x, e.axis.y);
+      nodePos[e.id] = p;
+    });
+  }
+
+  function isVisible(e) {
+    if (!activeFilter) return true;
+    return e.schoolId === activeFilter;
+  }
+
+  function draw() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.save();
+    ctx.translate(view.tx, view.ty);
+    ctx.scale(view.scale, view.scale);
+
+    // 十字轴
+    drawAxis();
+
+    // 连线
+    ECONOMISTS.forEach(function (e) {
+      if (!isVisible(e)) return;
+      (e.relationships || []).forEach(function (rel) {
+        var t = econMap[rel.target];
+        if (!t || !isVisible(t)) return;
+        var p1 = nodePos[e.id], p2 = nodePos[t.id];
+        if (!p1 || !p2) return;
+        var style = rel.type === 'teacher-student' ? [3, 0] : (rel.type === 'debate' ? [2, 3] : [1, 3]);
+        ctx.strokeStyle = rel.type === 'debate' ? 'rgba(224,93,93,0.35)' : 'rgba(255,255,255,0.13)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash(style);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+    });
+
+    // 节点
+    ECONOMISTS.forEach(function (e) {
+      if (!isVisible(e)) return;
+      var p = nodePos[e.id];
+      var s = schoolMap[e.schoolId] || {};
+      var r = 7 + e.influence * 0.8;
+      var isHover = e.id === hoverId;
+      var col = s.color || '#C9A063';
+
+      // 光晕
+      if (isHover) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r + 12, 0, Math.PI * 2);
+        ctx.fillStyle = hexA(col, 0.18);
+        ctx.fill();
+      }
+
+      // 主体
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      var grad = ctx.createRadialGradient(p.x - r * 0.35, p.y - r * 0.35, r * 0.15, p.x, p.y, r);
+      grad.addColorStop(0, lighten(col, 0.35));
+      grad.addColorStop(0.6, col);
+      grad.addColorStop(1, shade(col, 0.35));
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.lineWidth = isHover ? 2 : 1;
+      ctx.strokeStyle = isHover ? '#EFE9DC' : hexA(col, 0.7);
+      ctx.stroke();
+
+      // 名字标签（影响力高的始终显示，其余悬浮显示）
+      var showLabel = e.influence >= 8 || isHover;
+      if (view.scale > 0.9) {
+        if (e.influence >= 7) showLabel = true;
+      }
+      if (showLabel) {
+        ctx.font = '500 ' + (isHover ? 13 : 11) + 'px "Noto Serif SC", serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = isHover ? '#EFE9DC' : 'rgba(239,233,220,0.78)';
+        ctx.fillText(e.name, p.x, p.y - r - 7);
+      }
+    });
+
+    ctx.restore();
+  }
+
+  function drawAxis() {
+    var cx = W / 2, cy = H / 2;
+    ctx.strokeStyle = 'rgba(201,160,99,0.14)';
+    ctx.lineWidth = 1;
+    // 水平轴
+    ctx.beginPath(); ctx.moveTo(40, cy); ctx.lineTo(W - 40, cy); ctx.stroke();
+    // 垂直轴
+    ctx.beginPath(); ctx.moveTo(cx, 40); ctx.lineTo(cx, H - 40); ctx.stroke();
+    // 象限淡色
+    ctx.fillStyle = 'rgba(255,255,255,0.02)';
+    ctx.fillRect(0, 0, cx, cy);      // NW 系统·市场
+    ctx.fillStyle = 'rgba(255,255,255,0.016)';
+    ctx.fillRect(cx, 0, W - cx, cy); // NE 系统·干预
+    // 象限标签（小字）
+    ctx.font = '400 10px "DM Mono", monospace';
+    ctx.fillStyle = 'rgba(110,106,96,0.7)';
+    ctx.textAlign = 'center';
+    ctx.fillText('古典 × 奥地利', cx * 0.52, cy - 22);
+    ctx.fillText('凯恩斯 × 制度', cx * 1.48, cy - 22);
+    ctx.fillText('新古典 × 博弈', cx * 0.52, cy + 34);
+    ctx.fillText('行为 × 发展', cx * 1.48, cy + 34);
+  }
+
+  function hexA(hex, a) {
+    var h = hex.replace('#', '');
+    var r = parseInt(h.substring(0, 2), 16);
+    var g = parseInt(h.substring(2, 4), 16);
+    var b = parseInt(h.substring(4, 6), 16);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+  }
+  function shade(hex, f) {
+    var h = hex.replace('#', '');
+    var r = parseInt(h.substring(0, 2), 16) * (1 - f);
+    var g = parseInt(h.substring(2, 4), 16) * (1 - f);
+    var b = parseInt(h.substring(4, 6), 16) * (1 - f);
+    return 'rgb(' + r.toFixed(0) + ',' + g.toFixed(0) + ',' + b.toFixed(0) + ')';
+  }
+  function lighten(hex, f) {
+    var h = hex.replace('#', '');
+    var r = parseInt(h.substring(0, 2), 16) + (255 - parseInt(h.substring(0, 2), 16)) * f;
+    var g = parseInt(h.substring(2, 4), 16) + (255 - parseInt(h.substring(2, 4), 16)) * f;
+    var b = parseInt(h.substring(4, 6), 16) + (255 - parseInt(h.substring(4, 6), 16)) * f;
+    return 'rgb(' + r.toFixed(0) + ',' + g.toFixed(0) + ',' + b.toFixed(0) + ')';
+  }
+
+  // 命中检测
+  function hitTest(px, py) {
+    var best = null, bestDist = Infinity;
+    ECONOMISTS.forEach(function (e) {
+      if (!isVisible(e)) return;
+      var p = nodePos[e.id];
+      var r = 7 + e.influence * 0.8 + 8;  // 命中宽容度
+      var d = Math.hypot(px - p.x, py - p.y);
+      if (d < r && d < bestDist) { bestDist = d; best = e; }
+    });
+    return best;
+  }
+
+  // 指针坐标 → 逻辑坐标（考虑平移缩放）
+  function toWorld(clientX, clientY) {
+    var rect = canvas.getBoundingClientRect();
+    var x = (clientX - rect.left - view.tx) / view.scale;
+    var y = (clientY - rect.top - view.ty) / view.scale;
+    return { x: x, y: y };
+  }
+
+  canvas.addEventListener('pointermove', function (ev) {
+    if (dragState) {
+      view.tx = view.target.tx + (ev.clientX - dragState.sx);
+      view.ty = view.target.ty + (ev.clientY - dragState.sy);
+      draw();
+      return;
+    }
+    var w = toWorld(ev.clientX, ev.clientY);
+    var hit = hitTest(w.x, w.y);
+    if (hit && hit.id !== hoverId) { hoverId = hit.id; canvas.style.cursor = 'pointer'; draw(); }
+    else if (!hit && hoverId) { hoverId = null; canvas.style.cursor = 'grab'; draw(); }
+  });
+  canvas.addEventListener('pointerdown', function (ev) {
+    var w = toWorld(ev.clientX, ev.clientY);
+    var hit = hitTest(w.x, w.y);
+    if (hit) { openDetail(hit.id); return; }
+    dragState = { sx: ev.clientX, sy: ev.clientY, tx: view.tx, ty: view.ty };
+    canvas.style.cursor = 'grabbing';
+    canvas.setPointerCapture(ev.pointerId);
+  });
+  canvas.addEventListener('pointerup', function (ev) {
+    dragState = null;
+    canvas.style.cursor = 'grab';
+  });
+  canvas.addEventListener('pointerleave', function () {
+    hoverId = null;
+    if (!dragState) draw();
+  });
+  canvas.addEventListener('wheel', function (ev) {
+    ev.preventDefault();
+    var delta = ev.deltaY > 0 ? 0.92 : 1.08;
+    var w = toWorld(ev.clientX, ev.clientY);
+    var ns = Math.min(3, Math.max(0.5, view.scale * delta));
+    var k = ns / view.scale;
+    view.tx = w.x - (w.x - view.tx) * k;
+    view.ty = w.y - (w.y - view.ty) * k;
+    view.scale = ns;
+    draw();
+  }, { passive: false });
+
+  /* ─── 学派筛选 ─── */
+  var filterEl = document.getElementById('schoolFilter');
+  var chips = '<button class="school-chip all-chip active">全部学派</button>';
+  SCHOOLS.forEach(function (s) {
+    chips += '<button class="school-chip" data-s="' + s.id + '" style="--c:' + s.color + '"><span class="dot"></span>' + s.name + '</button>';
+  });
+  filterEl.innerHTML = chips;
+  filterEl.addEventListener('click', function (ev) {
+    var chip = ev.target.closest('.school-chip');
+    if (!chip) return;
+    filterEl.querySelectorAll('.school-chip').forEach(function (c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    var s = chip.getAttribute('data-s');
+    activeFilter = s;
+    // 简化平移回到中心
+    view.tx = 0; view.ty = 0; view.scale = 1;
+    draw();
+  });
+
+  /* ─── 时间线渲染 ─── */
+  var tl = document.getElementById('milestoneTrack');
+  var tlHtml = '';
+  // 简名：取全名最后一个分隔单元（"约翰·梅纳德·凯恩斯"→"凯恩斯"）
+  function shortName(n) {
+    if (!n) return '';
+    var parts = n.split('·');
+    return parts.length > 1 ? parts[parts.length - 1] : n;
+  }
+  DATA.milestones.forEach(function (m) {
+    var tags = (m.economists || []).map(function (id) {
+      var e = econMap[id];
+      return e ? '<span class="ms-tag" data-econ="' + id + '">' + shortName(e.name) + '</span>' : '';
+    }).join('');
+    tlHtml += '<div class="milestone-item" data-ms="' + m.id + '">'
+      + '<span class="milestone-dot" style="--m:' + (m.color || '#C9A063') + '"></span>'
+      + '<div class="milestone-card">'
+      + '<div class="ms-year">' + m.year + '</div>'
+      + '<h3>' + m.title + '</h3>'
+      + '<p>' + m.desc + '</p>'
+      + (tags ? '<div class="ms-tags">' + tags + '</div>' : '')
+      + '</div></div>';
+  });
+  tl.innerHTML = tlHtml;
+  tl.addEventListener('click', function (ev) {
+    var tag = ev.target.closest('.ms-tag');
+    if (tag) {
+      var id = tag.getAttribute('data-econ');
+      if (econMap[id]) openDetail(id);
+      return;
+    }
+    var item = ev.target.closest('.milestone-item');
+    if (item && item.getAttribute('data-ms') && DATA.milestoneDetail && DATA.milestoneDetail[item.getAttribute('data-ms')]) {
+      var md = DATA.milestoneDetail[item.getAttribute('data-ms')];
+      if (md && md.desc) openMilestone(md);
+    }
+  });
+
+  /* ─── 街市应用馆 ─── */
+  var lg = document.getElementById('lifeTopicGrid');
+  var lgHtml = '';
+  DATA.lifeTopics.forEach(function (t) {
+    var col = t.color || '#C9A063';
+    var ms = (t.matches || []).map(function (m) {
+      return '<span class="lt-m">' + (econMap[m.econId] ? shortName(econMap[m.econId].name) : m.econId) + '</span>';
+    }).join('');
+    lgHtml += '<div class="life-topic" data-topic="' + t.id + '" style="--c:' + col + '">'
+      + '<span class="lt-icon">' + t.icon + '</span>'
+      + '<h3>' + t.label + '</h3>'
+      + '<div class="lt-q">' + t.question + '</div>'
+      + '<div class="lt-matches">' + ms + '</div>'
+      + '</div>';
+  });
+  lg.innerHTML = lgHtml;
+  lg.addEventListener('click', function (ev) {
+    var card = ev.target.closest('.life-topic');
+    if (card) {
+      var id = card.getAttribute('data-topic');
+      var topic = null;
+      DATA.lifeTopics.forEach(function (t) { if (t.id === id) topic = t; });
+      if (topic) openTopic(topic);
+    }
+  });
+
+  /* ─── 弹层：理论档案 ─── */
+  var overlay = document.getElementById('detailOverlay');
+  var panel = document.getElementById('detailPanel');
+  var contentEl = document.getElementById('detailContent');
+
+  function openDetail(id) {
+    var e = econMap[id];
+    if (!e) return;
+    var s = schoolMap[e.schoolId] || {};
+    var color = s.color || '#C9A063';
+
+    var theories = (e.keyTheories || []).map(function (t) {
+      return '<div class="theory-item"><span class="th-title">' + t.title + '</span>'
+        + (t.year ? '<span class="th-year">' + t.year + '</span>' : '')
+        + '<div class="th-desc">' + t.desc + '</div></div>';
+    }).join('');
+
+    var works = (e.works || []).map(function (w) {
+      return '<div class="work-item"><div class="work-year">' + w.year + '</div><div>'
+        + '<div class="wk-title">' + w.title + '</div>'
+        + (w.desc ? '<div class="wk-desc">' + w.desc + '</div>' : '')
+        + '</div></div>';
+    }).join('');
+
+    var converts = (e.lifeConvert || []).map(function (c) {
+      return '<div class="lc-item"><div class="lc-scene">' + c.scene + '</div>'
+        + '<div class="lc-say">' + c.say + '</div></div>';
+    }).join('');
+
+    var rels = (e.relationships || []).map(function (r) {
+      var t = econMap[r.target];
+      var typeLabel = r.type === 'teacher-student' ? '师承' : (r.type === 'debate' ? '论战' : '影响');
+      return '<span class="relation-chip" data-rel="' + r.target + '">'
+        + '<span class="rc-name">' + (t ? t.name : r.target) + '</span>'
+        + '<span class="rc-type t-' + r.type + '">' + typeLabel + '</span>'
+        + '</span>';
+    }).join('');
+
+    var stars = '';
+    for (var i = 1; i <= 10; i++) stars += '<span class="s' + (i <= e.influence ? '' : ' off') + '">★</span>';
+
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:' + color + '">'
+      + '<div class="detail-hero-top">'
+      + '<div class="avatar-block" style="--sc:' + color + '">' + e.name.charAt(0) + '</div>'
+      + '<div class="detail-name"><h2>' + e.name + '</h2>'
+      + '<div class="en">' + e.nameEn + '</div></div>'
+      + '<div class="market-cap"><div class="cap-label">思想市值</div>'
+      + '<div class="cap-val">' + e.influence + '</div>'
+      + '<div class="cap-stars">' + stars + '</div>'
+      + '<div class="cap-note">' + (e.era || '') + '</div></div>'
+      + '</div>'
+      + '<div class="detail-meta">'
+      + '<span class="meta-item">🏷 <b>' + (s.name || '') + '</b></span>'
+      + '<span class="meta-item">🌍 ' + e.nationality + '</span>'
+      + '<span class="meta-item">⌛ ' + e.lifespan + '</span>'
+      + '</div>'
+      + '</div>'
+      + (e.quote ? '<div class="detail-quote">' + e.quote + '</div>' : '')
+      + '<div class="detail-body">'
+      + (e.bio ? '<div class="d-block"><div class="d-block-title">生平 · Life</div><p>' + e.bio + '</p></div>' : '')
+      + (theories ? '<div class="d-block"><div class="d-block-title">核心理论 · Theses</div><div class="theory-list">' + theories + '</div></div>' : '')
+      + (works ? '<div class="d-block"><div class="d-block-title">代表著作 · Works</div><div class="work-list">' + works + '</div></div>' : '')
+      + (e.impact ? '<div class="d-block"><div class="d-block-title">历史影响 · Impact</div><p>' + e.impact + '</p></div>' : '')
+      + (converts ? '<div class="d-block"><div class="life-convert" style="--sc:' + color + '"><div class="lc-title">生活换算 · 这笔理论落到你钱包里</div>' + converts + '</div></div>' : '')
+      + (rels ? '<div class="d-block"><div class="d-block-title">思想关系 · Relations</div><div class="relation-chips">' + rels + '</div></div>' : '')
+      + '</div>';
+
+    // 关系芯片跳转
+    contentEl.querySelectorAll('.relation-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var tid = chip.getAttribute('data-rel');
+        if (econMap[tid]) { openDetail(tid); }
+      });
+    });
+
+    overlay.classList.add('open');
+    panel.scrollTop = 0;
+  }
+
+  function openMilestone(md) {
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:#C9A063">'
+      + '<div class="detail-hero-top">'
+      + '<div class="detail-name"><h2>' + md.title + '</h2>'
+      + '<div class="en">' + md.year + ' · 思想交割</div></div>'
+      + '</div>'
+      + '<div class="detail-meta"><span class="meta-item">⌛ ' + md.year + '</span></div>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + (md.desc ? '<div class="d-block"><div class="d-block-title">交易内容 · Settlement</div><p>' + md.desc + '</p></div>' : '')
+      + (md.price ? '<div class="d-block"><div class="d-block-title">它改变了什么价格 · Price</div><p>' + md.price + '</p></div>' : '')
+      + '</div>';
+    overlay.classList.add('open');
+    panel.scrollTop = 0;
+  }
+
+  function openTopic(t) {
+    var matches = (t.matches || []).map(function (m) {
+      var e = econMap[m.econId];
+      if (!e) return '';
+      var s = schoolMap[e.schoolId] || {};
+      return '<div class="theory-item"><span class="th-title">' + e.name + '</span>'
+        + '<span class="th-year">' + (s.name || '') + '</span>'
+        + '<div class="th-desc">' + m.say + '</div></div>';
+    }).join('');
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:' + (t.color || '#C9A063') + '">'
+      + '<div class="detail-hero-top">'
+      + '<div class="detail-name"><h2>' + t.icon + ' ' + t.label + '</h2>'
+      + '<div class="en">' + t.question + '</div></div>'
+      + '</div>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + '<div class="d-block"><div class="d-block-title">研究过你这个问题的大师</div><div class="theory-list">' + matches + '</div></div>'
+      + '</div>';
+    overlay.classList.add('open');
+    panel.scrollTop = 0;
+  }
+
+  document.getElementById('detailClose').addEventListener('click', function () { overlay.classList.remove('open'); });
+  overlay.addEventListener('click', function (ev) {
+    if (ev.target === overlay) overlay.classList.remove('open');
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') overlay.classList.remove('open');
+  });
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  // 初始入场：轻微弹入
+  canvas.style.opacity = '0';
+  canvas.style.transition = 'opacity 0.8s ease';
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { canvas.style.opacity = '1'; });
+  });
+})();
+</script>
+</body>
+</html>
