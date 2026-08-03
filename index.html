@@ -439,6 +439,170 @@ main { position: relative; z-index: 1; }
 }
 .milestone-card .ms-tag:hover { color: var(--text); border-color: var(--gold); }
 
+/* ───────────── 思想擂台 ───────────── */
+.debate-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 28px 0;
+}
+.debate-list { display: grid; gap: 16px; }
+.debate-item {
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18,24,38,0.6), rgba(11,15,26,0.5));
+  padding: 20px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.debate-item:hover { border-color: var(--line); background: rgba(22,30,46,0.7); }
+.debate-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.debate-head .db-era {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  border: 1px solid var(--line-soft);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.debate-head h3 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+.debate-head .db-vs {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+}
+.debate-arena { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.debate-side {
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: rgba(11,15,26,0.4);
+}
+.debate-side .ds-fig {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.debate-side .ds-fig .ds-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--c, var(--gold));
+  box-shadow: 0 0 8px var(--c, var(--gold));
+}
+.debate-side .ds-school { font-size: 11px; color: var(--text-mute); }
+.debate-side ul { list-style: none; padding: 0; margin: 0; }
+.debate-side li {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  padding: 5px 0;
+  border-top: 1px dashed var(--line-soft);
+  position: relative;
+  padding-left: 14px;
+}
+.debate-side li:first-child { border-top: none; }
+.debate-side li::before { content: '›'; position: absolute; left: 2px; color: var(--c, var(--gold)); }
+.debate-verdict {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border-left: 3px solid var(--gold);
+  background: rgba(201,160,99,0.05);
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+.debate-verdict b { color: var(--gold-bright); font-weight: 600; }
+
+/* ───────────── 政策溯源馆 ───────────── */
+.policy-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 28px 0;
+}
+.policy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+.policy-card {
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(18,24,38,0.55);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.policy-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--c, var(--gold));
+  opacity: 0.7;
+}
+.policy-card:hover {
+  border-color: var(--line);
+  transform: translateY(-2px);
+  background: rgba(22,30,46,0.75);
+}
+.policy-card .pc-top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.policy-card .pc-name { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--text); }
+.policy-card .pc-country { font-size: 11px; color: var(--text-mute); }
+.policy-card .pc-years {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold-bright);
+  margin-left: auto;
+  letter-spacing: 0.06em;
+}
+.policy-card .pc-theory {
+  font-size: 12px;
+  color: var(--gold);
+  background: color-mix(in srgb, var(--c, var(--gold)) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c, var(--gold)) 30%, transparent);
+  padding: 3px 10px;
+  border-radius: 100px;
+  display: inline-block;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+.policy-card .pc-how {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.75;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.policy-card .pc-figures { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.policy-card .pc-fig {
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--line-soft);
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.policy-card .pc-fig:hover { color: var(--text); border-color: var(--gold); }
+
 /* ───────────── 街市应用馆 ───────────── */
 .market-section {
   max-width: 1180px;
@@ -658,6 +822,21 @@ body::-webkit-scrollbar-corner { background: transparent; }
 .d-block p { font-size: 14px; color: var(--text-dim); line-height: 1.85; }
 .d-block p + p { margin-top: 10px; }
 
+.school-concepts { display: flex; flex-wrap: wrap; gap: 8px; }
+.school-concept {
+  font-size: 12.5px;
+  padding: 5px 13px;
+  border-radius: 100px;
+  border: 1px solid color-mix(in srgb, var(--c, var(--gold)) 40%, transparent);
+  background: color-mix(in srgb, var(--c, var(--gold)) 10%, transparent);
+  color: var(--text);
+  transition: all 0.2s;
+}
+.school-concept:hover {
+  background: color-mix(in srgb, var(--c, var(--gold)) 20%, transparent);
+  border-color: var(--c, var(--gold));
+}
+
 .theory-list { display: grid; gap: 10px; }
 .theory-item {
   border: 1px solid var(--line-soft);
@@ -769,7 +948,9 @@ footer .foot-twin a:hover {
 @media (max-width: 820px) {
   .site-header { flex-direction: column; padding-top: 40px; }
   .header-stats { width: 100%; }
-  .compass-section, .timeline-section, .market-section { padding-left: 16px; padding-right: 16px; }
+  .compass-section, .timeline-section, .market-section, .debate-section, .policy-section { padding-left: 16px; padding-right: 16px; }
+  .debate-arena { grid-template-columns: 1fr; }
+  .policy-grid { grid-template-columns: 1fr; }
   .detail-hero { padding: 26px 20px 18px; }
   .detail-body { padding: 18px 20px 26px; }
   .detail-quote { margin: 14px 20px 0; }
@@ -844,10 +1025,30 @@ footer .foot-twin a:hover {
     <div class="milestone-track" id="milestoneTrack"></div>
   </section>
 
+  <!-- 思想擂台 -->
+  <section class="debate-section" id="debate">
+    <div class="section-head">
+      <div class="section-kicker">03 · The Arena</div>
+      <h2 class="section-title">思想擂台 — 学派与学派的世纪交锋</h2>
+      <p class="section-sub">经济学史不是独白，而是一场场针锋相对的论战。左右对峙，看谁说服了时代。</p>
+    </div>
+    <div class="debate-list" id="debateList"></div>
+  </section>
+
+  <!-- 政策溯源馆 -->
+  <section class="policy-section" id="policy">
+    <div class="section-head">
+      <div class="section-kicker">04 · The Policy</div>
+      <h2 class="section-title">政策溯源馆 — 现实政策背后的理论源头</h2>
+      <p class="section-sub">今天写进法律、印进钞票的每一项政策，都能回溯到某个思想家的书页。点击查看溯源链路。</p>
+    </div>
+    <div class="policy-grid" id="policyGrid"></div>
+  </section>
+
   <!-- 街市应用馆 -->
   <section class="market-section" id="market">
     <div class="section-head">
-      <div class="section-kicker">03 · The Street</div>
+      <div class="section-kicker">05 · The Street</div>
       <h2 class="section-title">街市应用馆 — 理论落地，寻常百姓家</h2>
       <p class="section-sub">你关心的每件日常小事，都有人在几百年前研究过。选择一个你生活里的问题。</p>
     </div>
@@ -891,7 +1092,7 @@ footer .foot-twin a:hover {
       SCHOOLS.forEach(function (s) {
         var dir = s.trend.dir === 'up' ? '▲' : (s.trend.dir === 'down' ? '▼' : '—');
         var dirClass = s.trend.dir === 'up' ? 'color:#E05D5D' : (s.trend.dir === 'down' ? 'color:#4FB3A8' : 'color:#A9A295');
-        html += '<div class="ticker-item">'
+        html += '<div class="ticker-item" data-school="' + s.id + '" title="查看' + s.name + '研报" style="cursor:pointer">'
           + '<span class="tk-name">' + s.name + '</span>'
           + '<span class="tk-bar" style="--c:' + s.color + ';--w:' + s.trend.w + '%"></span>'
           + '<span class="tk-dir" style="' + dirClass + '">' + dir + ' ' + s.trend.label + '</span>'
@@ -899,6 +1100,13 @@ footer .foot-twin a:hover {
       });
     }
     track.innerHTML = html;
+    track.addEventListener('click', function (ev) {
+      var item = ev.target.closest('.ticker-item');
+      if (item) {
+        var sid = item.getAttribute('data-school');
+        if (schoolMap[sid]) openSchool(sid);
+      }
+    });
   })();
 
   /* ─── 统计 ─── */
@@ -1142,13 +1350,23 @@ footer .foot-twin a:hover {
   filterEl.addEventListener('click', function (ev) {
     var chip = ev.target.closest('.school-chip');
     if (!chip) return;
+    var s = chip.getAttribute('data-s');
+    // 全部学派：只筛选不开研报
+    if (!s) {
+      filterEl.querySelectorAll('.school-chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      activeFilter = null;
+      view.tx = 0; view.ty = 0; view.scale = 1;
+      draw();
+      return;
+    }
+    // 具体学派：筛选 + 弹出研报
     filterEl.querySelectorAll('.school-chip').forEach(function (c) { c.classList.remove('active'); });
     chip.classList.add('active');
-    var s = chip.getAttribute('data-s');
     activeFilter = s;
-    // 简化平移回到中心
     view.tx = 0; view.ty = 0; view.scale = 1;
     draw();
+    openSchool(s);
   });
 
   /* ─── 时间线渲染 ─── */
@@ -1214,6 +1432,101 @@ footer .foot-twin a:hover {
       if (topic) openTopic(topic);
     }
   });
+
+  /* ─── 思想擂台渲染 ─── */
+  var dbList = document.getElementById('debateList');
+  var dbHtml = '';
+  DATA.debates.forEach(function (b) {
+    function sideHtml(side) {
+      var pts = (side.points || []).map(function (p) { return '<li>' + p + '</li>'; }).join('');
+      return '<div class="debate-side" style="--c:' + side.color + '">'
+        + '<div class="ds-fig"><span class="ds-dot"></span>' + side.figure
+        + '<span class="ds-school">· ' + side.school + '</span></div>'
+        + '<ul>' + pts + '</ul></div>';
+    }
+    dbHtml += '<div class="debate-item" data-debate="' + b.id + '">'
+      + '<div class="debate-head"><span class="db-era">' + b.era + '</span><h3>' + b.title + '</h3></div>'
+      + '<div class="debate-arena">' + sideHtml(b.left) + sideHtml(b.right) + '</div>'
+      + '<div class="debate-verdict"><b>战果 · </b>' + b.verdict + '</div>'
+      + '</div>';
+  });
+  dbList.innerHTML = dbHtml;
+
+  /* ─── 政策溯源馆渲染 ─── */
+  var pg = document.getElementById('policyGrid');
+  var pgHtml = '';
+  DATA.policies.forEach(function (p) {
+    var figs = (p.economists || []).map(function (id) {
+      var e = econMap[id];
+      return e ? '<span class="pc-fig" data-econ="' + id + '">' + shortName(e.name) + '</span>' : '';
+    }).join('');
+    pgHtml += '<div class="policy-card" data-policy="' + p.id + '" style="--c:' + p.color + '">'
+      + '<div class="pc-top"><span class="pc-name">' + p.name + '</span>'
+      + '<span class="pc-country">' + p.country + '</span>'
+      + '<span class="pc-years">' + p.years + '</span></div>'
+      + '<span class="pc-theory">理论源头：' + p.theory + '</span>'
+      + '<div class="pc-how">' + p.how + '</div>'
+      + (p.note ? '<div class="pc-note" style="margin-top:8px;font-size:11px;color:var(--text-mute)">⚠ ' + p.note + '</div>' : '')
+      + '<div class="pc-figures">' + figs + '</div>'
+      + '</div>';
+  });
+  pg.innerHTML = pgHtml;
+  pg.addEventListener('click', function (ev) {
+    var fig = ev.target.closest('.pc-fig');
+    if (fig) {
+      var id = fig.getAttribute('data-econ');
+      if (econMap[id]) openDetail(id);
+      return;
+    }
+    var card = ev.target.closest('.policy-card');
+    if (card) {
+      var pid = card.getAttribute('data-policy');
+      var policy = null;
+      DATA.policies.forEach(function (p) { if (p.id === pid) policy = p; });
+      if (policy) openPolicy(policy);
+    }
+  });
+
+  /* ─── 学派研报弹层 ─── */
+  function openSchool(id) {
+    var s = schoolMap[id];
+    if (!s || !s.report) return;
+    var color = s.color || '#C9A063';
+    var members = ECONOMISTS.filter(function (e) { return e.schoolId === id; })
+      .map(function (e) {
+        return '<span class="relation-chip" data-rel="' + e.id + '"><span class="rc-name">' + e.name + '</span></span>';
+      }).join('');
+    var concepts = (s.report.concepts || []).map(function (c) {
+      return '<span class="school-concept" style="--c:' + color + '">' + c + '</span>';
+    }).join('');
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:' + color + '">'
+      + '<div class="detail-hero-top">'
+      + '<div class="avatar-block" style="--sc:' + color + '">' + s.name.charAt(0) + '</div>'
+      + '<div class="detail-name"><h2>' + s.name + '</h2>'
+      + '<div class="en">学派研报 · School Report</div></div>'
+      + '<div class="market-cap"><div class="cap-label">行情</div>'
+      + '<div class="cap-val" style="font-size:16px">' + s.trend.label + '</div>'
+      + '<div class="cap-note">' + (s.trend.dir === 'up' ? '▲' : s.trend.dir === 'down' ? '▼' : '—') + ' ' + s.trend.w + '%</div></div>'
+      + '</div>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + '<div class="d-block"><div class="d-block-title">核心主张 · Thesis</div><p>' + s.report.thesis + '</p></div>'
+      + (concepts ? '<div class="d-block"><div class="d-block-title">关键概念 · Concepts</div><div class="school-concepts">' + concepts + '</div></div>' : '')
+      + '<div class="d-block"><div class="d-block-title">政策处方 · If It Ruled</div><p>' + s.report.policy + '</p></div>'
+      + '<div class="d-block"><div class="d-block-title">思想市值走向 · Trajectory</div><p>' + s.report.trajectory + '</p></div>'
+      + (members ? '<div class="d-block"><div class="d-block-title">代表人物 · Members</div><div class="relation-chips">' + members + '</div></div>' : '')
+      + '</div>';
+    // 成员跳转
+    contentEl.querySelectorAll('.relation-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var tid = chip.getAttribute('data-rel');
+        if (econMap[tid]) openDetail(tid);
+      });
+    });
+    overlay.classList.add('open');
+    panel.scrollTop = 0;
+  }
 
   /* ─── 弹层：理论档案 ─── */
   var overlay = document.getElementById('detailOverlay');
@@ -1307,6 +1620,35 @@ footer .foot-twin a:hover {
       + '<div class="detail-body">'
       + (md.desc ? '<div class="d-block"><div class="d-block-title">交易内容 · Settlement</div><p>' + md.desc + '</p></div>' : '')
       + (md.price ? '<div class="d-block"><div class="d-block-title">它改变了什么价格 · Price</div><p>' + md.price + '</p></div>' : '')
+      + '</div>';
+    overlay.classList.add('open');
+    panel.scrollTop = 0;
+  }
+
+  function openPolicy(p) {
+    var figs = (p.economists || []).map(function (id) {
+      var e = econMap[id];
+      if (!e) return '';
+      var s = schoolMap[e.schoolId] || {};
+      return '<div class="theory-item"><span class="th-title">' + e.name + '</span>'
+        + '<span class="th-year">' + (s.name || '') + '</span>'
+        + '<div class="th-desc">' + e.quote + '</div></div>';
+    }).join('');
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:' + (p.color || '#C9A063') + '">'
+      + '<div class="detail-hero-top">'
+      + '<div class="detail-name"><h2>' + p.name + '</h2>'
+      + '<div class="en">' + p.country + ' · ' + p.years + '</div></div>'
+      + '</div>'
+      + '<div class="detail-meta">'
+      + '<span class="meta-item">📜 <b>理论源头</b></span>'
+      + '<span class="meta-item">' + p.theory + '</span>'
+      + '</div>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + '<div class="d-block"><div class="d-block-title">溯源链路 · How It Landed</div><p>' + p.how + '</p></div>'
+      + (p.note ? '<div class="d-block"><div class="d-block-title">史实提示 · Note</div><p>' + p.note + '</p></div>' : '')
+      + (figs ? '<div class="d-block"><div class="d-block-title">背后的思想家</div><div class="theory-list">' + figs + '</div></div>' : '')
       + '</div>';
     overlay.classList.add('open');
     panel.scrollTop = 0;
