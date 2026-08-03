@@ -736,51 +736,7 @@ body::-webkit-scrollbar-corner { background: transparent; }
 .relation-chip .rc-type.t-influence { color: #5B8DEF; }
 .relation-chip .rc-type.t-debate { color: #E05D5D; }
 
-/* ───────────── 孪生宇宙 + Footer ───────────── */
-.twin-section { max-width: 1180px; margin: 0 auto; padding: 56px 28px 0; }
-/* 深色主题 override（适配 twin-universe.js 生成的卡片结构） */
-.twin-container { display: block; }
-.tw-section { margin-bottom: 22px; }
-.tw-section-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--line-soft);
-}
-.tw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
-.tw-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  background: rgba(18,24,38,0.6);
-  border: 1px solid var(--line-soft);
-  border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  flex: 1;
-  min-width: 0;
-}
-.tw-card:hover {
-  border-color: var(--line);
-  background: rgba(22,30,46,0.8);
-  transform: translateY(-2px);
-}
-.tw-card-icon {
-  font-size: 20px;
-  width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-.tw-card-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.tw-card-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
-.tw-card-desc { font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-top: 2px; }
-.tw-card-arrow { font-size: 14px; color: var(--text-mute); flex-shrink: 0; transition: 0.25s; }
-.tw-card:hover .tw-card-arrow { color: var(--gold); transform: translateX(2px); }
+/* ───────────── Footer ───────────── */
 
 footer {
   max-width: 1180px;
@@ -792,12 +748,28 @@ footer {
 }
 footer p { font-family: var(--font-mono); font-size: 12px; color: var(--text-mute); letter-spacing: 0.05em; }
 footer .foot-mark { color: var(--gold); }
+footer .foot-twin { margin-top: 14px; font-family: var(--font-sans); }
+footer .foot-twin a {
+  color: var(--text-mute);
+  font-size: 12px;
+  text-decoration: none;
+  border: 1px solid var(--line-soft);
+  padding: 6px 14px;
+  border-radius: 100px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.05em;
+}
+footer .foot-twin a:hover {
+  color: var(--gold-bright);
+  border-color: var(--line);
+  background: rgba(201,160,99,0.06);
+}
 
 /* ───────────── 响应式 ───────────── */
 @media (max-width: 820px) {
   .site-header { flex-direction: column; padding-top: 40px; }
   .header-stats { width: 100%; }
-  .compass-section, .timeline-section, .market-section, .twin-section { padding-left: 16px; padding-right: 16px; }
+  .compass-section, .timeline-section, .market-section { padding-left: 16px; padding-right: 16px; }
   .detail-hero { padding: 26px 20px 18px; }
   .detail-body { padding: 18px 20px 26px; }
   .detail-quote { margin: 14px 20px 0; }
@@ -881,16 +853,6 @@ footer .foot-mark { color: var(--gold); }
     </div>
     <div class="life-topic-grid" id="lifeTopicGrid"></div>
   </section>
-
-  <!-- 孪生宇宙 -->
-  <section class="section twin-section" id="twin-universe">
-    <div class="section-head">
-      <div class="section-kicker">∞ · TwinVerse</div>
-      <h2 class="section-title">🧬 孪生宇宙 — 我的其他项目</h2>
-      <p class="section-sub">同一片宇宙里的其他知识图谱 · 点击跳转探索</p>
-    </div>
-    <div class="twin-container" id="twin-container"></div>
-  </section>
 </main>
 
 <!-- 理论档案弹层 -->
@@ -903,10 +865,10 @@ footer .foot-mark { color: var(--gold); }
 
 <footer>
   <p>经济经纬 · 思想交易所 — <span class="foot-mark">ECO</span>DATA v1.0 · 数据来自开源百科 · 纯前端知识可视化</p>
+  <p class="foot-twin"><a href="https://yun-ai-base.github.io/twinverse/" target="_blank" rel="noopener">🧬 孪生宇宙 · 我的其他项目 →</a></p>
 </footer>
 
 <script src="data/economists.js"></script>
-<script src="https://yun-ai-base.github.io/psychscope/twin-universe.js" data-project="economics-map"></script>
 <script>
 (function () {
   'use strict';
