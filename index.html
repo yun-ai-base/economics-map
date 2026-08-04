@@ -85,7 +85,7 @@ main { position: relative; z-index: 1; }
 .ticker-wrap {
   position: sticky;
   top: 0;
-  z-index: 60;
+  z-index: 70;
   background: rgba(11,15,26,0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
@@ -235,12 +235,12 @@ main { position: relative; z-index: 1; }
   left: 0;
   right: 0;
   background: var(--panel-2);
-  border: 1px solid var(--line);
+  border: 1px solid var(--gold);
   border-radius: 12px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,160,99,0.2);
   overflow: hidden;
   z-index: 60;
-  max-height: 340px;
+  max-height: min(340px, calc(100vh - 160px));
   overflow-y: auto;
 }
 .search-results .sr-item {
