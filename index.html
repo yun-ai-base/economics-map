@@ -687,89 +687,196 @@ section[id] { scroll-margin-top: 120px; }
 .policy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
 
 /* ───────────── 经济工具箱：学科分层 + 术语库 ───────────── */
+.terms-section .section-sub { max-width: 640px; margin: 8px auto 0; text-align: center; }
+.terms-section .section-head { text-align: center; margin-bottom: 56px; }
+
+/* 学科分层：横向 3 卡 + 中间递进箭头 */
 .layer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-  margin-bottom: 36px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto 72px;
+  max-width: 1040px;
 }
 .layer-card {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 320px;
   border: 1px solid var(--line-soft);
   border-radius: 14px;
-  padding: 20px;
-  background: linear-gradient(160deg, rgba(18,24,38,0.7), rgba(11,15,26,0.5));
+  padding: 24px 22px;
+  background: linear-gradient(165deg, rgba(22,30,46,0.65), rgba(11,15,26,0.45));
+  display: flex;
+  flex-direction: column;
   transition: all 0.25s ease;
   border-top: 2px solid var(--gold);
 }
-.layer-card .lc-icon { font-size: 26px; }
+.layer-card:hover { border-top-color: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,160,99,0.12); }
+.layer-card .lc-icon { font-size: 30px; margin-bottom: 10px; }
 .layer-card .lc-level {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--gold-bright);
-  margin: 8px 0 2px;
+  margin: 0 0 2px;
 }
-.layer-card .lc-en { font-family: var(--font-mono); font-size: 10px; color: var(--text-mute); letter-spacing: 0.1em; }
-.layer-card .lc-scope { font-size: 12.5px; color: var(--text-dim); margin: 8px 0 4px; }
-.layer-card .lc-question { font-size: 13px; color: var(--text); margin: 4px 0; }
-.layer-card .lc-lens { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
-.layer-card .lc-life {
-  font-size: 12px;
+.layer-card .lc-en {
+  font-family: var(--font-mono);
+  font-size: 10px;
   color: var(--text-mute);
-  border-left: 2px solid var(--gold);
-  padding-left: 8px;
-  margin: 10px 0 0;
-  line-height: 1.5;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
 }
-.layer-card .lc-econs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.layer-card .lc-question {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+  flex: 1;
+}
+.layer-card .lc-econs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-soft);
+}
 .layer-card .lc-econ {
   font-size: 11px;
-  padding: 3px 10px;
+  padding: 3px 9px;
   border-radius: 100px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-soft);
   color: var(--text-dim);
   cursor: pointer;
   transition: all 0.2s;
+  background: rgba(18,24,38,0.4);
 }
-.layer-card .lc-econ:hover { border-color: var(--gold); color: var(--gold-bright); }
-.term-group { margin-bottom: 30px; }
-.term-group-title {
+.layer-card .lc-econ:hover { border-color: var(--gold); color: var(--gold-bright); background: rgba(201,160,99,0.08); }
+.layer-arrow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 44px;
+  flex: 0 0 44px;
+  color: var(--gold);
+  font-size: 22px;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+}
+.layer-arrow::before { content: '→'; }
+@media (max-width: 720px) {
+  .layer-grid { flex-direction: column; align-items: stretch; max-width: 420px; }
+  .layer-arrow { width: 100%; height: 28px; transform: rotate(90deg); }
+}
+
+/* 术语库：分类组之间大间距，分组标题精致 */
+.term-group { margin-bottom: 56px; }
+.term-group:last-child { margin-bottom: 0; }
+.term-group-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 12px;
+  margin: 0 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
 }
-.term-group-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-.term-group-title .tg-count { font-family: var(--font-mono); font-size: 11px; color: var(--text-mute); }
+.term-group-title .tg-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold-bright);
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border: 1px solid var(--gold);
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+.term-group-title .tg-sub { font-size: 13px; color: var(--text-mute); font-weight: 400; font-family: var(--font-sans); }
+.term-group-title .tg-count { font-family: var(--font-mono); font-size: 11px; color: var(--text-mute); margin-left: auto; }
+
+/* 术语卡：精致、内容克制 */
+.terms-wrap { max-width: 1100px; margin: 0 auto; }
 .term-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
 }
 .term-card {
   border: 1px solid var(--line-soft);
   border-radius: 12px;
-  padding: 14px 16px;
-  background: rgba(18,24,38,0.5);
+  padding: 18px;
+  background: linear-gradient(165deg, rgba(22,30,46,0.5), rgba(11,15,26,0.35));
   cursor: pointer;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100px;
   transition: all 0.22s ease;
+  position: relative;
 }
 .term-card:hover {
   border-color: var(--gold);
-  background: rgba(201,160,99,0.08);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,160,99,0.15);
+  background: linear-gradient(165deg, rgba(28,36,54,0.6), rgba(15,19,30,0.45));
 }
-.term-card .tc-icon { font-size: 20px; flex: 0 0 auto; }
-.term-card .tc-name { font-size: 13px; color: var(--text); font-weight: 600; }
-.term-card .tc-cat { font-size: 10.5px; color: var(--text-mute); font-family: var(--font-mono); margin-top: 2px; }
+.term-card .tc-top { display: flex; align-items: center; gap: 12px; }
+.term-card .tc-icon {
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  border: 1px solid var(--line-soft);
+  border-radius: 9px;
+  flex: 0 0 auto;
+}
+.term-card .tc-name {
+  font-size: 14.5px;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  flex: 1;
+  line-height: 1.4;
+}
+.term-card .tc-cat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold-bright);
+  letter-spacing: 0.06em;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+}
 .term-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (max-width: 820px) {
+  .term-grid { grid-template-columns: 1fr; }
+}
+
+/* 术语详情弹层 */
+.term-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.term-meta .tm-chip {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--gold-bright);
+  border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  border-radius: 100px;
+  padding: 3px 12px;
+}
+.term-block { margin-bottom: 16px; }
+.term-block .tb-label {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-mute);
+  margin-bottom: 6px;
+}
+.term-block .tb-body { font-size: 13.5px; line-height: 1.75; color: var(--text); }
 .terms-section .d-block-title { margin-bottom: 8px; }
 .terms-section .term-related {
   display: flex;
@@ -2013,9 +2120,10 @@ footer .foot-twin a:hover {
 
   function renderToolbox() {
     if (!layerGrid || !termGroups) return;
-    // 学科分层
+    // 学科分层（3 卡 + 中间递进箭头）
     var lh = '';
-    (DATA.econLayers || []).forEach(function (ly) {
+    var layers = DATA.econLayers || [];
+    layers.forEach(function (ly, i) {
       var econs = (ly.economists || []).map(function (id) {
         var e = econMap[id];
         return e ? '<span class="lc-econ" data-econ="' + id + '">' + e.name + '</span>' : '';
@@ -2023,12 +2131,10 @@ footer .foot-twin a:hover {
       lh += '<div class="layer-card"><div class="lc-icon">' + ly.icon + '</div>'
         + '<div class="lc-level">' + ly.level + '</div>'
         + '<div class="lc-en">' + ly.nameEn + '</div>'
-        + '<div class="lc-scope">' + ly.scope + '</div>'
         + '<div class="lc-question">' + ly.question + '</div>'
-        + '<div class="lc-lens">' + ly.lens + '</div>'
-        + (ly.life ? '<div class="lc-life">' + ly.life + '</div>' : '')
         + (econs ? '<div class="lc-econs">' + econs + '</div>' : '')
         + '</div>';
+      if (i < layers.length - 1) lh += '<div class="layer-arrow" aria-hidden="true"></div>';
     });
     layerGrid.innerHTML = lh;
     layerGrid.querySelectorAll('.lc-econ').forEach(function (chip) {
@@ -2038,23 +2144,35 @@ footer .foot-twin a:hover {
       });
     });
 
-    // 术语库：按 category 分组
+    // 术语库：按 category 分组（带副标题引导）
+    var catMeta = {
+      '宏观指标': { tag: 'MACRO', sub: '把整个经济的"脉搏"数字翻译成人话：增长、就业、价格、货币' },
+      '政策工具': { tag: 'POLICY', sub: '央行与政府的"工具箱"：利率、降准、QE、财政、减税' },
+      '经济现象': { tag: 'PHENOMENA', sub: '那些反复出现的经济剧情：通胀、通缩、滞胀、衰退、休克疗法' },
+      '金融投资': { tag: 'FINANCE', sub: '个人与机构都在用的金融工具：股票、债券、基金、复利、资产配置' },
+      '企业融资': { tag: 'BUSINESS', sub: '公司怎么筹钱：股权、债权、IPO、风投、杠杆、估值' }
+    };
     var cats = ['宏观指标', '政策工具', '经济现象', '金融投资', '企业融资'];
     var byCat = {};
     (DATA.econTerms || []).forEach(function (t) { (byCat[t.category] = byCat[t.category] || []).push(t); });
-    var th = '';
+    var th = '<div class="terms-wrap">';
     cats.forEach(function (cat) {
       var list = byCat[cat] || [];
       if (!list.length) return;
+      var meta = catMeta[cat] || { tag: cat, sub: '' };
       var cards = list.map(function (t) {
         return '<div class="term-card" data-term="' + t.id + '" tabindex="0" role="button">'
-          + '<span class="tc-icon">' + t.icon + '</span>'
-          + '<div><div class="tc-name">' + t.name + '</div>'
-          + '<div class="tc-cat">' + t.category + '</div></div></div>';
+          + '<div class="tc-top"><div class="tc-icon">' + t.icon + '</div>'
+          + '<div class="tc-name">' + t.name + '</div></div>'
+          + '<div class="tc-cat">' + t.category + '</div></div>';
       }).join('');
-      th += '<div class="term-group"><div class="term-group-title">' + cat + '<span class="tg-count">' + list.length + '</span></div>'
+      th += '<div class="term-group"><div class="term-group-title">'
+        + cat + '<span class="tg-tag">' + meta.tag + '</span>'
+        + (meta.sub ? '<span class="tg-sub">' + meta.sub + '</span>' : '')
+        + '<span class="tg-count">' + list.length + ' 项</span></div>'
         + '<div class="term-grid">' + cards + '</div></div>';
     });
+    th += '</div>';
     termGroups.innerHTML = th;
     termGroups.querySelectorAll('.term-card').forEach(function (card) {
       card.addEventListener('click', function () {
