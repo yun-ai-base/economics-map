@@ -205,13 +205,14 @@ main { position: relative; z-index: 1; }
 
 /* ───────────── 全站搜索 ───────────── */
 .search-wrap {
-  position: relative;
-  margin-left: auto;
-  min-width: 200px;
-  max-width: 280px;
-  flex: 1 1 220px;
-}
-.search-input {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 56;
+  width: 260px;
+  max-width: 260px;
+}.search-input {
   width: 100%;
   padding: 7px 14px 7px 32px;
   border: 1px solid var(--line);
@@ -264,8 +265,17 @@ main { position: relative; z-index: 1; }
 .search-results .sr-name { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .search-results .sr-school { font-size: 11px; color: var(--text-mute); margin-left: auto; flex: 0 0 auto; }
 .search-results .sr-empty { padding: 14px; font-size: 12px; color: var(--text-mute); text-align: center; }
-@media (max-width: 820px) {
-  .search-wrap { order: 99; max-width: none; flex-basis: 100%; margin-top: 4px; }
+/* 窄屏：搜索框退出悬浮，改为导航下方一整行，避免挤压居中的链接 */
+@media (max-width: 1020px) {
+  .search-wrap {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    order: 99;
+    flex: 1 1 100%;
+    margin: 6px 2px 2px;
+  }
 }
 
 /* 锚点跳转时不被 sticky 条盖住标题 */
@@ -1112,7 +1122,7 @@ footer .foot-twin a:hover {
 
 /* ───────────── 响应式 ───────────── */
 @media (max-width: 820px) {
-  .section-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .section-nav { justify-content: center; overflow-x: auto; flex-wrap: wrap; -webkit-overflow-scrolling: touch; }
   .sn-link { flex: 0 0 auto; }
   .site-header { flex-direction: column; padding-top: 40px; }
   .header-stats { width: 100%; }
