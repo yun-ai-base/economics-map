@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>经济经纬 · 思想交易所</title>
-<meta name="description" content="从亚当·斯密到行为经济学——46 位经济学大师的思想光谱，理论与生活的每一次兑换">
+<meta name="description" content="从亚当·斯密到行为经济学——49 位经济学大师的思想光谱，理论与生活的每一次兑换">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.loli.net">
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   /* 底与高光 */
@@ -23,7 +23,7 @@
   --ivory: #EFE9DC;
   --text: #EFE9DC;
   --text-dim: #A9A295;
-  --text-mute: #6E6A60;
+  --text-mute: #8A857A;
 
   /* 学派色板 */
   --col-classical: #C9A063;    /* 古典 铜金 */
@@ -203,8 +203,84 @@ main { position: relative; z-index: 1; }
 }
 .sn-link.active .sn-num { color: var(--gold-bright); }
 
+/* ───────────── 全站搜索 ───────────── */
+.search-wrap {
+  position: relative;
+  margin-left: auto;
+  min-width: 200px;
+  max-width: 280px;
+  flex: 1 1 220px;
+}
+.search-input {
+  width: 100%;
+  padding: 7px 14px 7px 32px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: rgba(18,24,38,0.7);
+  color: var(--text);
+  font-size: 12.5px;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: all 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236E6A60' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 13px center;
+}
+.search-input::placeholder { color: var(--text-mute); }
+.search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 14%, transparent); }
+.search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+  z-index: 60;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.search-results .sr-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.search-results .sr-item:hover, .search-results .sr-item.sr-active { background: color-mix(in srgb, var(--gold) 12%, transparent); }
+.search-results .sr-kind {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  flex: 0 0 auto;
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+.search-results .sr-name { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.search-results .sr-school { font-size: 11px; color: var(--text-mute); margin-left: auto; flex: 0 0 auto; }
+.search-results .sr-empty { padding: 14px; font-size: 12px; color: var(--text-mute); text-align: center; }
+@media (max-width: 820px) {
+  .search-wrap { order: 99; max-width: none; flex-basis: 100%; margin-top: 4px; }
+}
+
 /* 锚点跳转时不被 sticky 条盖住标题 */
 section[id] { scroll-margin-top: 120px; }
+
+/* ───────────── 入场动效 ───────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* ───────────── Header ───────────── */
 .site-header {
@@ -342,7 +418,7 @@ section[id] { scroll-margin-top: 120px; }
   overflow: hidden;
 }
 .compass-canvas-wrap { position: relative; width: 100%; }
-#compassCanvas { display: block; width: 100%; cursor: grab; }
+#compassCanvas { display: block; width: 100%; cursor: grab; touch-action: none; }
 
 /* 罗盘四角轴标签 */
 .axis-label {
@@ -517,7 +593,6 @@ section[id] { scroll-margin-top: 120px; }
   background: linear-gradient(180deg, rgba(18,24,38,0.6), rgba(11,15,26,0.5));
   padding: 20px;
   transition: all 0.25s ease;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
@@ -728,6 +803,7 @@ section[id] { scroll-margin-top: 120px; }
   justify-content: center;
   padding: 24px;
 }
+body.modal-open { overflow: hidden; }
 .detail-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .detail-panel {
@@ -897,9 +973,34 @@ body::-webkit-scrollbar-corner { background: transparent; }
   color: var(--text);
   transition: all 0.2s;
 }
+.school-concept.has-def {
+  cursor: pointer;
+  position: relative;
+  padding-right: 24px;
+}
+.school-concept.has-def::after {
+  content: '?';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c, var(--gold)) 45%, transparent);
+  color: #0B0F1A;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 13px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
 .school-concept:hover {
   background: color-mix(in srgb, var(--c, var(--gold)) 20%, transparent);
   border-color: var(--c, var(--gold));
+}
+.school-concept.has-def:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .theory-list { display: grid; gap: 10px; }
@@ -976,7 +1077,7 @@ body::-webkit-scrollbar-corner { background: transparent; }
 .relation-chip:hover { border-color: var(--gold); color: var(--text); transform: translateY(-1px); }
 .relation-chip .rc-name { color: var(--text); font-weight: 500; }
 .relation-chip .rc-type { font-size: 10px; color: var(--text-mute); }
-.relation-chip .rc-type.t-study { color: #4FB3A8; }
+.relation-chip .rc-type.t-teacher-student { color: #4FB3A8; }
 .relation-chip .rc-type.t-influence { color: #5B8DEF; }
 .relation-chip .rc-type.t-debate { color: #E05D5D; }
 
@@ -1050,6 +1151,10 @@ footer .foot-twin a:hover {
   <a class="sn-link" href="#debate"><span class="sn-num">03</span>思想擂台</a>
   <a class="sn-link" href="#policy"><span class="sn-num">04</span>政策溯源馆</a>
   <a class="sn-link" href="#market"><span class="sn-num">05</span>街市应用馆</a>
+  <div class="search-wrap" id="searchWrap">
+    <input class="search-input" id="searchInput" type="text" placeholder="搜索经济学家 / 学派 / 概念…" autocomplete="off" aria-label="搜索经济学家、学派、政策或生活话题">
+    <div class="search-results" id="searchResults" hidden></div>
+  </div>
 </nav>
 
 <main>
@@ -1060,7 +1165,7 @@ footer .foot-twin a:hover {
       <h1>经济经纬
         <span class="en">ECONOMIC MERIDIANS</span>
       </h1>
-      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>46 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
+      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>49 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
     </div>
     <div class="header-stats">
       <div class="stat-cell"><div class="n" id="statCount">0</div><div class="l">经济学大师</div></div>
@@ -1189,6 +1294,106 @@ footer .foot-twin a:hover {
   /* ─── 统计 ─── */
   document.getElementById('statCount').textContent = ECONOMISTS.length;
   document.getElementById('statSchool').textContent = SCHOOLS.length;
+
+  /* ─── 全站搜索 ─── */
+  (function initSearch() {
+    var input = document.getElementById('searchInput');
+    var box = document.getElementById('searchResults');
+    var items = [];   // 当前过滤结果 [{kind,label,school,id,obj}]
+    var activeIdx = -1;
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function allIndex() {
+      var arr = [];
+      ECONOMISTS.forEach(function (e) {
+        arr.push({ kind: '人物', label: e.name, school: (schoolMap[e.schoolId] || {}).name || '', id: e.id, obj: e, hay: (e.name + ' ' + (e.nameEn || '') + ' ' + (e.nationality || '') + ' ' + (e.bio || '') + ' ' + (schoolMap[e.schoolId] || {}).name).toLowerCase() });
+      });
+      SCHOOLS.forEach(function (s) {
+        arr.push({ kind: '学派', label: s.name, school: '', id: s.id, obj: s, hay: (s.name + ' ' + (s.report ? s.report.thesis : '') + ' ' + ((s.report && s.report.concepts) || []).join(' ')).toLowerCase() });
+      });
+      DATA.policies.forEach(function (p) {
+        arr.push({ kind: '政策', label: p.name, school: p.theory, id: p.id, obj: p, hay: (p.name + ' ' + p.country + ' ' + p.theory + ' ' + p.how).toLowerCase() });
+      });
+      DATA.lifeTopics.forEach(function (t) {
+        arr.push({ kind: '话题', label: t.label, school: '', id: t.id, obj: t, hay: (t.label + ' ' + t.question).toLowerCase() });
+      });
+      return arr;
+    }
+    var pool = allIndex();
+
+    function openResult(r) {
+      if (r.kind === '人物') openDetail(r.id);
+      else if (r.kind === '学派') openSchool(r.id);
+      else if (r.kind === '政策') openPolicy(r.obj);
+      else if (r.kind === '话题') openTopic(r.obj);
+      box.hidden = true;
+      input.blur();
+      activeIdx = -1;
+    }
+    function render(q) {
+      q = q.trim().toLowerCase();
+      var list = q ? pool.filter(function (r) { return r.hay.indexOf(q) !== -1; }).slice(0, 8) : [];
+      activeIdx = -1;
+      if (!list.length) {
+        box.innerHTML = '<div class="sr-empty">' + (q ? '没有找到与「' + esc(q) + '」相关的内容' : '输入关键词开始搜索') + '</div>';
+        box.hidden = false;
+        return;
+      }
+      items = list;
+      box.innerHTML = list.map(function (r, i) {
+        return '<div class="sr-item" data-i="' + i + '"><span class="sr-kind">' + r.kind + '</span>'
+          + '<span class="sr-name">' + esc(r.label) + '</span>'
+          + (r.school ? '<span class="sr-school">' + esc(r.school) + '</span>' : '') + '</div>';
+      }).join('');
+      box.hidden = false;
+    }
+    function markActive() {
+      box.querySelectorAll('.sr-item').forEach(function (el, i) {
+        el.classList.toggle('sr-active', i === activeIdx);
+      });
+      if (activeIdx >= 0 && items[activeIdx]) {
+        // 高亮项滚动可见
+        var el = box.querySelector('.sr-item[data-i="' + activeIdx + '"]');
+        if (el) el.scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    input.addEventListener('input', function () { render(input.value); });
+    input.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); if (!box.hidden) { activeIdx = (activeIdx + 1) % items.length; markActive(); } }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); if (!box.hidden) { activeIdx = (activeIdx - 1 + items.length) % items.length; markActive(); } }
+      else if (ev.key === 'Enter') { ev.preventDefault(); if (!box.hidden && activeIdx >= 0 && items[activeIdx]) openResult(items[activeIdx]); }
+      else if (ev.key === 'Escape') { box.hidden = true; input.blur(); }
+    });
+    box.addEventListener('mousedown', function (ev) {
+      var el = ev.target.closest('.sr-item');
+      if (el) openResult(items[parseInt(el.getAttribute('data-i'), 10)]);
+    });
+    document.addEventListener('click', function (ev) {
+      if (!box.contains(ev.target) && ev.target !== input) box.hidden = true;
+    });
+  })();
+
+
+  /* ─── 键盘可达性：tabindex + Enter/Space 触发 ─── */
+  function enableKeyNav(container, selector, trigger) {
+    var cards = container.querySelectorAll(selector);
+    cards.forEach(function (card) {
+      if (card.getAttribute('tabindex') !== null) return;
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          trigger(card);
+        }
+      });
+    });
+  }
 
   /* ─── 区块导航 scrollspy ─── */
   (function initSectionNav() {
@@ -1449,6 +1654,36 @@ footer .foot-twin a:hover {
     draw();
   }, { passive: false });
 
+  /* ─── 触屏：双指捏合缩放（移动端） ─── */
+  var pinchDist = null;
+  canvas.addEventListener('touchstart', function (ev) {
+    if (ev.touches.length === 2) {
+      pinchDist = Math.hypot(ev.touches[0].clientX - ev.touches[1].clientX, ev.touches[0].clientY - ev.touches[1].clientY);
+      ev.preventDefault();
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function (ev) {
+    if (ev.touches.length === 2 && pinchDist) {
+      ev.preventDefault();
+      var d = Math.hypot(ev.touches[0].clientX - ev.touches[1].clientX, ev.touches[0].clientY - ev.touches[1].clientY);
+      var k = d / pinchDist;
+      pinchDist = d;
+      var cx = (ev.touches[0].clientX + ev.touches[1].clientX) / 2;
+      var cy = (ev.touches[0].clientY + ev.touches[1].clientY) / 2;
+      var w = toWorld(cx, cy);
+      var ns = Math.min(3, Math.max(0.5, view.scale * k));
+      var kk = ns / view.scale;
+      view.tx = w.x - (w.x - view.tx) * kk;
+      view.ty = w.y - (w.y - view.ty) * kk;
+      view.scale = ns;
+      draw();
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', function (ev) {
+    if (ev.touches.length < 2) pinchDist = null;
+  });
+  canvas.addEventListener('touchcancel', function () { pinchDist = null; });
+
   /* ─── 学派筛选 ─── */
   var filterEl = document.getElementById('schoolFilter');
   var chips = '<button class="school-chip all-chip active">全部学派</button>';
@@ -1519,7 +1754,7 @@ footer .foot-twin a:hover {
       var e = econMap[id];
       return e ? '<span class="ms-tag" data-econ="' + id + '">' + shortName(e.name) + '</span>' : '';
     }).join('');
-    tlHtml += '<div class="milestone-item" data-ms="' + m.id + '">'
+    tlHtml += '<div class="milestone-item reveal" data-ms="' + m.id + '">'
       + '<span class="milestone-dot" style="--m:' + (m.color || '#C9A063') + '"></span>'
       + '<div class="milestone-card">'
       + '<div class="ms-year">' + m.year + '</div>'
@@ -1529,6 +1764,7 @@ footer .foot-twin a:hover {
       + '</div></div>';
   });
   tl.innerHTML = tlHtml;
+  enableKeyNav(tl, '.milestone-item', function (card) { card.dispatchEvent(new MouseEvent('click', { bubbles: true })); });
   tl.addEventListener('click', function (ev) {
     var tag = ev.target.closest('.ms-tag');
     if (tag) {
@@ -1551,7 +1787,7 @@ footer .foot-twin a:hover {
     var ms = (t.matches || []).map(function (m) {
       return '<span class="lt-m">' + (econMap[m.econId] ? shortName(econMap[m.econId].name) : m.econId) + '</span>';
     }).join('');
-    lgHtml += '<div class="life-topic" data-topic="' + t.id + '" style="--c:' + col + '">'
+    lgHtml += '<div class="life-topic reveal" data-topic="' + t.id + '" style="--c:' + col + '">'
       + '<span class="lt-icon">' + t.icon + '</span>'
       + '<h3>' + t.label + '</h3>'
       + '<div class="lt-q">' + t.question + '</div>'
@@ -1559,6 +1795,7 @@ footer .foot-twin a:hover {
       + '</div>';
   });
   lg.innerHTML = lgHtml;
+  enableKeyNav(lg, '.life-topic', function (card) { card.dispatchEvent(new MouseEvent('click', { bubbles: true })); });
   lg.addEventListener('click', function (ev) {
     var card = ev.target.closest('.life-topic');
     if (card) {
@@ -1580,7 +1817,7 @@ footer .foot-twin a:hover {
         + '<span class="ds-school">· ' + side.school + '</span></div>'
         + '<ul>' + pts + '</ul></div>';
     }
-    dbHtml += '<div class="debate-item" data-debate="' + b.id + '">'
+    dbHtml += '<div class="debate-item reveal" data-debate="' + b.id + '">'
       + '<div class="debate-head"><span class="db-era">' + b.era + '</span><h3>' + b.title + '</h3></div>'
       + '<div class="debate-arena">' + sideHtml(b.left) + sideHtml(b.right) + '</div>'
       + '<div class="debate-verdict"><b>战果 · </b>' + b.verdict + '</div>'
@@ -1596,7 +1833,7 @@ footer .foot-twin a:hover {
       var e = econMap[id];
       return e ? '<span class="pc-fig" data-econ="' + id + '">' + shortName(e.name) + '</span>' : '';
     }).join('');
-    pgHtml += '<div class="policy-card" data-policy="' + p.id + '" style="--c:' + p.color + '">'
+    pgHtml += '<div class="policy-card reveal" data-policy="' + p.id + '" style="--c:' + p.color + '">'
       + '<div class="pc-top"><span class="pc-name">' + p.name + '</span>'
       + '<span class="pc-country">' + p.country + '</span>'
       + '<span class="pc-years">' + p.years + '</span></div>'
@@ -1607,6 +1844,7 @@ footer .foot-twin a:hover {
       + '</div>';
   });
   pg.innerHTML = pgHtml;
+  enableKeyNav(pg, '.policy-card', function (card) { card.dispatchEvent(new MouseEvent('click', { bubbles: true })); });
   pg.addEventListener('click', function (ev) {
     var fig = ev.target.closest('.pc-fig');
     if (fig) {
@@ -1633,7 +1871,8 @@ footer .foot-twin a:hover {
         return '<span class="relation-chip" data-rel="' + e.id + '"><span class="rc-name">' + e.name + '</span></span>';
       }).join('');
     var concepts = (s.report.concepts || []).map(function (c) {
-      return '<span class="school-concept" style="--c:' + color + '">' + c + '</span>';
+      var hasDef = DATA.conceptDefs && DATA.conceptDefs[c];
+      return '<span class="school-concept' + (hasDef ? ' has-def' : '') + '" data-concept="' + c + '" style="--c:' + color + '"' + (hasDef ? ' title="点击查看释义"' : '') + '>' + c + '</span>';
     }).join('');
     contentEl.innerHTML =
       '<div class="detail-hero" style="--sc:' + color + '">'
@@ -1641,14 +1880,14 @@ footer .foot-twin a:hover {
       + '<div class="avatar-block" style="--sc:' + color + '">' + s.name.charAt(0) + '</div>'
       + '<div class="detail-name"><h2>' + s.name + '</h2>'
       + '<div class="en">学派研报 · School Report</div></div>'
-      + '<div class="market-cap"><div class="cap-label">行情</div>'
+      + '<div class="market-cap"><div class="cap-label">模拟行情</div>'
       + '<div class="cap-val" style="font-size:16px">' + s.trend.label + '</div>'
       + '<div class="cap-note">' + (s.trend.dir === 'up' ? '▲' : s.trend.dir === 'down' ? '▼' : '—') + ' ' + s.trend.w + '%</div></div>'
       + '</div>'
       + '</div>'
       + '<div class="detail-body">'
       + '<div class="d-block"><div class="d-block-title">核心主张 · Thesis</div><p>' + s.report.thesis + '</p></div>'
-      + (concepts ? '<div class="d-block"><div class="d-block-title">关键概念 · Concepts</div><div class="school-concepts">' + concepts + '</div></div>' : '')
+      + (concepts ? '<div class="d-block"><div class="d-block-title">关键概念 · Concepts（点击查看释义）</div><div class="school-concepts">' + concepts + '</div></div>' : '')
       + '<div class="d-block"><div class="d-block-title">政策处方 · If It Ruled</div><p>' + s.report.policy + '</p></div>'
       + '<div class="d-block"><div class="d-block-title">思想市值走向 · Trajectory</div><p>' + s.report.trajectory + '</p></div>'
       + (members ? '<div class="d-block"><div class="d-block-title">代表人物 · Members</div><div class="relation-chips">' + members + '</div></div>' : '')
@@ -1660,7 +1899,24 @@ footer .foot-twin a:hover {
         if (econMap[tid]) openDetail(tid);
       });
     });
-    overlay.classList.add('open');
+    // 概念释义：点击有词条的 chip 弹出定义
+    contentEl.querySelectorAll('.school-concept.has-def').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var name = chip.getAttribute('data-concept');
+        if (DATA.conceptDefs && DATA.conceptDefs[name]) openConcept(name);
+      });
+      chip.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          var name = chip.getAttribute('data-concept');
+          if (DATA.conceptDefs && DATA.conceptDefs[name]) openConcept(name);
+        }
+      });
+      chip.setAttribute('tabindex', '0');
+      chip.setAttribute('role', 'button');
+    });
+    openOverlay();
+    syncHash('school', id);
     panel.scrollTop = 0;
   }
 
@@ -1668,6 +1924,52 @@ footer .foot-twin a:hover {
   var overlay = document.getElementById('detailOverlay');
   var panel = document.getElementById('detailPanel');
   var contentEl = document.getElementById('detailContent');
+
+  function openOverlay() {
+    overlay.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+  function closeOverlay() {
+    overlay.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    if (location.hash.indexOf('#/') === 0) history.replaceState(null, '', location.pathname + location.search);
+  }
+  /* hash 深链接：同步地址栏，支持刷新/分享直达 */
+  var currentRoute = null; // 当前弹层路由，用于避免重复渲染 & 支持 hash 切换
+  function syncHash(kind, id) {
+    var h = '#/' + kind + '/' + id;
+    currentRoute = kind + '/' + id;
+    if (location.hash !== h) history.replaceState(null, '', h);
+  }
+  function handleHash() {
+    var h = location.hash || '';
+    var m = h.match(/^#\/(econ|school|policy|topic|milestone|concept)\/([\w%]+)$/);
+    if (!m) { if (overlay.classList.contains('open')) closeOverlay(); currentRoute = null; return; }
+    var kind = m[1], id = m[2];
+    var route = kind + '/' + id;
+    if (overlay.classList.contains('open')) {
+      if (currentRoute === route) return;          // 同内容，跳过
+      closeOverlay();                               // 不同内容，先关旧弹层再开新的
+    }
+    currentRoute = route;
+    if (kind === 'concept') {
+      try { id = decodeURIComponent(id); } catch (e) {}
+      if (DATA.conceptDefs && DATA.conceptDefs[id]) openConcept(id);
+    } else if (kind === 'econ' && econMap[id]) openDetail(id);
+    else if (kind === 'school' && schoolMap[id]) openSchool(id);
+    else if (kind === 'policy') {
+      var p = null;
+      DATA.policies.forEach(function (x) { if (x.id === id) p = x; });
+      if (p) openPolicy(p);
+    } else if (kind === 'topic') {
+      var t = null;
+      DATA.lifeTopics.forEach(function (x) { if (x.id === id) t = x; });
+      if (t) openTopic(t);
+    } else if (kind === 'milestone' && DATA.milestoneDetail && DATA.milestoneDetail[id]) {
+      openMilestone(DATA.milestoneDetail[id]);
+    }
+  }
+  window.addEventListener('hashchange', handleHash);
 
   function openDetail(id) {
     var e = econMap[id];
@@ -1740,7 +2042,8 @@ footer .foot-twin a:hover {
       });
     });
 
-    overlay.classList.add('open');
+    openOverlay();
+    syncHash('econ', id);
     panel.scrollTop = 0;
   }
 
@@ -1757,7 +2060,11 @@ footer .foot-twin a:hover {
       + (md.desc ? '<div class="d-block"><div class="d-block-title">交易内容 · Settlement</div><p>' + md.desc + '</p></div>' : '')
       + (md.price ? '<div class="d-block"><div class="d-block-title">它改变了什么价格 · Price</div><p>' + md.price + '</p></div>' : '')
       + '</div>';
-    overlay.classList.add('open');
+    // 反查里程碑 id 用于深链接
+    var msId = null;
+    if (DATA.milestones) DATA.milestones.forEach(function (m) { if (m.year === md.year && m.title === md.title) msId = m.id; });
+    openOverlay();
+    if (msId) syncHash('milestone', msId);
     panel.scrollTop = 0;
   }
 
@@ -1786,7 +2093,8 @@ footer .foot-twin a:hover {
       + (p.note ? '<div class="d-block"><div class="d-block-title">史实提示 · Note</div><p>' + p.note + '</p></div>' : '')
       + (figs ? '<div class="d-block"><div class="d-block-title">背后的思想家</div><div class="theory-list">' + figs + '</div></div>' : '')
       + '</div>';
-    overlay.classList.add('open');
+    openOverlay();
+    syncHash('policy', p.id);
     panel.scrollTop = 0;
   }
 
@@ -1809,20 +2117,58 @@ footer .foot-twin a:hover {
       + '<div class="detail-body">'
       + '<div class="d-block"><div class="d-block-title">研究过你这个问题的大师</div><div class="theory-list">' + matches + '</div></div>'
       + '</div>';
-    overlay.classList.add('open');
+    openOverlay();
+    syncHash('topic', t.id);
     panel.scrollTop = 0;
   }
 
-  document.getElementById('detailClose').addEventListener('click', function () { overlay.classList.remove('open'); });
+  function openConcept(name) {
+    var def = DATA.conceptDefs ? DATA.conceptDefs[name] : null;
+    if (!def) return;
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:#C9A063">'
+      + '<div class="detail-hero-top">'
+      + '<div class="avatar-block" style="--sc:#C9A063">概念</div>'
+      + '<div class="detail-name"><h2>' + name + '</h2>'
+      + '<div class="en">Concept · 关键概念</div></div>'
+      + '</div>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + '<div class="d-block"><div class="d-block-title">释义 · Definition</div><p>' + def + '</p></div>'
+      + '</div>';
+    openOverlay();
+    syncHash('concept', encodeURIComponent(name));
+    panel.scrollTop = 0;
+  }
+
+  document.getElementById('detailClose').addEventListener('click', function () { closeOverlay(); });
   overlay.addEventListener('click', function (ev) {
-    if (ev.target === overlay) overlay.classList.remove('open');
+    if (ev.target === overlay) closeOverlay();
   });
   document.addEventListener('keydown', function (ev) {
-    if (ev.key === 'Escape') overlay.classList.remove('open');
+    if (ev.key === 'Escape') closeOverlay();
   });
 
   window.addEventListener('resize', resize);
   resize();
+
+  // 入场动效：滚动进入视口时渐入
+  (function initReveal() {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  // 页面加载时若携带深链接 hash，直接打开对应档案
+  if (location.hash && location.hash.indexOf('#/') === 0) handleHash();
 
   // 初始入场：轻微弹入
   canvas.style.opacity = '0';
