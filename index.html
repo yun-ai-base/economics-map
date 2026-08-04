@@ -915,6 +915,42 @@ section[id] { scroll-margin-top: 120px; }
   margin-bottom: 6px;
 }
 .term-block .tb-body { font-size: 13.5px; line-height: 1.75; color: var(--text); }
+
+/* 术语对比表 */
+.term-compare { margin: 4px 0 20px; }
+.term-compare .tc-title {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin-bottom: 10px;
+}
+.term-compare .tc-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+.term-compare .tc-table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 12.5px; }
+.term-compare .tc-table th, .term-compare .tc-table td {
+  padding: 9px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.term-compare .tc-table thead th {
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  color: var(--gold-bright);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.term-compare .tc-table tbody th {
+  color: var(--text-dim);
+  font-weight: 600;
+  background: rgba(18,24,38,0.5);
+  white-space: nowrap;
+}
+.term-compare .tc-table tbody tr:last-child th, .term-compare .tc-table tbody tr:last-child td { border-bottom: none; }
+.term-compare .tc-table tbody tr:hover td { background: rgba(201,160,99,0.05); }
+
 .policy-card {
   border: 1px solid var(--line-soft);
   border-radius: 14px;
@@ -2492,6 +2528,22 @@ footer .foot-twin a:hover {
       var e = econMap[eid];
       return e ? '<span class="school-concept has-def" data-econ="' + eid + '" tabindex="0" role="button">👤 ' + e.name + '</span>' : '';
     }).join('');
+    // 延伸小节（sections）
+    var sections = (t.sections || []).map(function (s) {
+      return '<div class="term-block"><div class="tb-label">' + s.t + '</div><div class="tb-body">' + s.d + '</div></div>';
+    }).join('');
+    // 对比表（compare）
+    var compare = '';
+    if (t.compare && t.compare.headers && t.compare.rows) {
+      var thead = '<thead><tr>' + t.compare.headers.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr></thead>';
+      var tbody = '<tbody>' + t.compare.rows.map(function (row) {
+        return '<tr>' + row.map(function (cell, ci) {
+          return ci === 0 ? '<th>' + cell + '</th>' : '<td>' + cell + '</td>';
+        }).join('') + '</tr>';
+      }).join('') + '</tbody>';
+      compare = '<div class="term-compare"><div class="tc-title">' + (t.compare.title || '对比') + '</div>'
+        + '<div class="tc-scroll"><table class="tc-table">' + thead + tbody + '</table></div></div>';
+    }
     contentEl.innerHTML =
       '<div class="detail-hero" style="--sc:#C9A063">'
       + '<div class="detail-hero-top">'
@@ -2501,13 +2553,16 @@ footer .foot-twin a:hover {
       + '</div>'
       + '<div class="term-meta">'
       + '<span class="tm-chip">' + t.category + '</span>'
-      + '<span class="tm-chip">点击下方标签可跳转关联</span>'
+      + (t.sections ? '<span class="tm-chip">' + t.sections.length + ' 个延伸维度</span>' : '')
+      + (t.compare ? '<span class="tm-chip">含对比表</span>' : '')
       + '</div>'
       + '</div>'
       + '<div class="detail-body">'
       + '<div class="term-block"><div class="tb-label">它是什么 · What</div><div class="tb-body">' + t.def + '</div></div>'
       + (t.how ? '<div class="term-block"><div class="tb-label">怎么算/怎么运作 · How</div><div class="tb-body">' + t.how + '</div></div>' : '')
       + (t.watch ? '<div class="term-block"><div class="tb-label">怎么看 · What to Watch</div><div class="tb-body">' + t.watch + '</div></div>' : '')
+      + sections
+      + compare
       + (rels ? '<div class="d-block"><div class="d-block-title">相关术语 · Related</div><div class="school-concepts">' + rels + '</div></div>' : '')
       + (pols ? '<div class="d-block"><div class="d-block-title">关联政策</div><div class="school-concepts">' + pols + '</div></div>' : '')
       + (econs ? '<div class="d-block"><div class="d-block-title">关联思想家</div><div class="school-concepts">' + econs + '</div></div>' : '')
