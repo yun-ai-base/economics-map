@@ -1317,6 +1317,16 @@ footer .foot-twin a:hover {
       ctx.strokeStyle = isHover ? '#EFE9DC' : hexA(col, 0.7);
       ctx.stroke();
 
+      // 诺奖标记：球内小字"诺"
+      if (e.nobel) {
+        ctx.font = '700 8px "Noto Serif SC", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(0,0,0,0.68)';
+        ctx.fillText('诺', p.x, p.y + 0.5);
+        ctx.textBaseline = 'alphabetic';
+      }
+
       // 名字标签（影响力高的始终显示，其余悬浮显示）
       var showLabel = e.influence >= 8 || isHover;
       if (view.scale > 0.9) {

@@ -449,6 +449,7 @@ window._econData = {
       id: 'hick', name: '约翰·希克斯', nameEn: 'John Hicks', lifespan: '1904—1989',
       nationality: '英国', schoolId: 'keynesian', era: '凯恩斯主义 · 1937',
       influence: 7, axis: { x: -0.35, y: -0.2 },
+      nobel: true,
       quote: '把凯恩斯装进 IS-LM 的抽屉里，宏观经济学就有了可教学的骨架。',
       bio: '英国经济学家，1972 年诺贝尔经济学奖得主。1937 年提出 IS-LM 模型，把凯恩斯理论图形化，成为宏观经济学标准分析工具。',
       keyTheories: [
@@ -520,6 +521,7 @@ window._econData = {
       id: 'hayek', name: '弗里德里希·哈耶克', nameEn: 'Friedrich Hayek', lifespan: '1899—1992',
       nationality: '奥地利/英国', schoolId: 'austrian', era: '奥地利学派 · 1944',
       influence: 9, axis: { x: 0.88, y: -0.15 },
+      nobel: true,
       quote: '价格体系是一种奇妙的机制——它用最少的语言，传递了分散在无数人手中的知识。',
       bio: '1974 年诺贝尔经济学奖得主。1944 年出版《通往奴役之路》，1974 年与缪尔达尔共获诺贝尔奖，是自由市场思想在 20 世纪的最高代言人。',
       keyTheories: [
@@ -545,6 +547,7 @@ window._econData = {
       id: 'friedman', name: '米尔顿·弗里德曼', nameEn: 'Milton Friedman', lifespan: '1912—2006',
       nationality: '美国', schoolId: 'chicago', era: '芝加哥学派 · 1963',
       influence: 9, axis: { x: 0.7, y: -0.35 },
+      nobel: true,
       quote: '通货膨胀无论何时何地都是一种货币现象。',
       bio: '1976 年诺贝尔经济学奖得主，芝加哥学派领袖。1963 年出版《美国货币史》，论证货币供应是经济波动的根源，掀起对凯恩斯主义的"货币主义革命"。',
       keyTheories: [
@@ -572,6 +575,7 @@ window._econData = {
       id: 'coase', name: '罗纳德·科斯', nameEn: 'Ronald Coase', lifespan: '1910—2013',
       nationality: '英国', schoolId: 'chicago', era: '制度经济学 · 1960',
       influence: 9, axis: { x: 0.55, y: 0.1 },
+      nobel: true,
       quote: '如果交易成本为零，资源的初始分配就不影响最终效率——但现实里交易成本无处不在。',
       bio: '1991 年诺贝尔经济学奖得主。1937 年提出"交易成本"，1960 年提出"科斯定理"，重新定义了企业与市场的边界，被称作"法律经济学之父"。',
       keyTheories: [
@@ -597,6 +601,7 @@ window._econData = {
       id: 'stigler', name: '乔治·斯蒂格勒', nameEn: 'George Stigler', lifespan: '1911—1991',
       nationality: '美国', schoolId: 'chicago', era: '芝加哥学派 · 1962',
       influence: 7, axis: { x: 0.6, y: 0.05 },
+      nobel: true,
       quote: '监管往往是被监管行业自己争取来的——他们用监管筑起护城河。',
       bio: '1982 年诺贝尔经济学奖得主。1962 年提出"规制俘获理论"，1971 年开创"监管经济学"，将政治行为纳入经济分析。',
       keyTheories: [
@@ -621,6 +626,7 @@ window._econData = {
       id: 'becker', name: '加里·贝克尔', nameEn: 'Gary Becker', lifespan: '1930—2014',
       nationality: '美国', schoolId: 'chicago', era: '经济学帝国主义 · 1981',
       influence: 8, axis: { x: 0.5, y: 0.4 },
+      nobel: true,
       quote: '经济学是一种方法，不是一套主题——它能分析婚姻、犯罪、歧视，正如分析商品与市场。',
       bio: '1992 年诺贝尔经济学奖得主。把经济学方法推向婚姻、生育、犯罪、歧视等"非经济"领域，被称为"经济学帝国主义者"。',
       keyTheories: [
@@ -646,6 +652,7 @@ window._econData = {
       id: 'lucas', name: '罗伯特·卢卡斯', nameEn: 'Robert Lucas', lifespan: '1937—2023',
       nationality: '美国', schoolId: 'chicago', era: '理性预期革命 · 1976',
       influence: 8, axis: { x: 0.5, y: -0.25 },
+      nobel: true,
       quote: '如果你以为政策能愚弄所有人，那么政策的效果将被人们的预期所抵消。',
       bio: '1995 年诺贝尔经济学奖得主，理性预期革命的主将。1976 年提出"卢卡斯批判"，动摇了凯恩斯主义宏观经济模型的根基。',
       keyTheories: [
@@ -694,6 +701,7 @@ window._econData = {
       id: 'buchanan', name: '詹姆斯·布坎南', nameEn: 'James Buchanan', lifespan: '1919—2013',
       nationality: '美国', schoolId: 'welfare', era: '公共选择 · 1962',
       influence: 7, axis: { x: 0.15, y: -0.3 },
+      nobel: true,
       quote: '政客不是天使，他们也在追求自己的利益——公共选择理论把经济学方法用在政治上。',
       bio: '1986 年诺贝尔经济学奖得主，公共选择学派创始人。1962 年出版《同意的计算》，用经济学方法分析政治决策，揭示政府同样可能失灵。',
       keyTheories: [
@@ -718,6 +726,7 @@ window._econData = {
       id: 'samuelson', name: '保罗·萨缪尔森', nameEn: 'Paul Samuelson', lifespan: '1915—2009',
       nationality: '美国', schoolId: 'game', era: '新古典综合 · 1948',
       influence: 9, axis: { x: 0.1, y: -0.1 },
+      nobel: true,
       quote: '经济学是一门可以证明的科学，它用数学的语言思考，用模型的尺度丈量。',
       bio: '1970 年诺贝尔经济学奖得主，现代经济学教父。1948 年出版《经济学》教科书，主导战后宏观与微观的"新古典综合"。',
       keyTheories: [
@@ -744,6 +753,7 @@ window._econData = {
       id: 'nash', name: '约翰·纳什', nameEn: 'John Nash', lifespan: '1928—2015',
       nationality: '美国', schoolId: 'game', era: '博弈论 · 1950',
       influence: 8, axis: { x: 0.2, y: 0.5 },
+      nobel: true,
       quote: '在均衡中，每个人都在给定他人策略时选择最优——没人有单方面改变的动机。',
       bio: '1994 年诺贝尔经济学奖得主。1950 年博士论文提出"纳什均衡"，定义了非合作博弈的解，彻底改变经济学对策略互动的理解。',
       keyTheories: [
@@ -767,6 +777,7 @@ window._econData = {
       id: 'arrow', name: '肯尼斯·阿罗', nameEn: 'Kenneth Arrow', lifespan: '1921—2017',
       nationality: '美国', schoolId: 'game', era: '社会选择 · 1951',
       influence: 8, axis: { x: 0.05, y: -0.2 },
+      nobel: true,
       quote: '不存在一个完全公平又不会矛盾的社会选择规则——除非它是独裁。',
       bio: '1972 年诺贝尔经济学奖得主（最年轻的获奖者之一）。1951 年提出"不可能定理"，证明不存在完美兼顾公平与一致的社会投票规则。',
       keyTheories: [
@@ -790,6 +801,7 @@ window._econData = {
       id: 'kahneman', name: '丹尼尔·卡尼曼', nameEn: 'Daniel Kahneman', lifespan: '1934—2024',
       nationality: '以色列/美国', schoolId: 'behavioral', era: '行为经济学 · 1979',
       influence: 10, axis: { x: 0.15, y: 0.45 },
+      nobel: true,
       quote: '人类有两种思维：系统1 快速直觉，系统2 缓慢理性——而生活大多数时候由系统1 接管。',
       bio: '2002 年诺贝尔经济学奖得主（心理学家首获经济学诺奖）。与特沃斯基共同提出前景理论，揭示人类决策中的系统性偏差，开创行为经济学。',
       keyTheories: [
@@ -816,6 +828,7 @@ window._econData = {
       id: 'thaler', name: '理查德·塞勒', nameEn: 'Richard Thaler', lifespan: '1945—',
       nationality: '美国', schoolId: 'behavioral', era: '行为经济学 · 2017',
       influence: 9, axis: { x: 0.2, y: 0.35 },
+      nobel: true,
       quote: '别指望人算得完美，但你可以设计环境，让"错误"指向更好的选择。',
       bio: '2017 年诺贝尔经济学奖得主，行为经济学与行为金融学的奠基人。提出"心理账户"与"助推"理论，让行为经济学从理论走向政策。',
       keyTheories: [
@@ -842,6 +855,7 @@ window._econData = {
       id: 'sen', name: '阿玛蒂亚·森', nameEn: 'Amartya Sen', lifespan: '1933—',
       nationality: '印度', schoolId: 'development', era: '发展经济学 · 1998',
       influence: 9, axis: { x: -0.5, y: 0.25 },
+      nobel: true,
       quote: '发展不是财富的增长，而是能力的扩展——让人过上他珍视的生活。',
       bio: '1998 年诺贝尔经济学奖得主。1998 年提出"可行能力"理论，把发展从 GDP 转向人的自由与能力，参与设计人类发展指数（HDI）。',
       keyTheories: [
@@ -891,6 +905,7 @@ window._econData = {
       id: 'akerlof', name: '乔治·阿克洛夫', nameEn: 'George Akerlof', lifespan: '1940—',
       nationality: '美国', schoolId: 'welfare', era: '信息经济学 · 2001',
       influence: 8, axis: { x: -0.3, y: 0.35 },
+      nobel: true,
       quote: '如果买家分不清好货坏货，市场就会被"柠檬"（次品）淹没——信息不对称是市场的根本裂缝。',
       bio: '2001 年诺贝尔经济学奖得主（与斯宾塞、斯蒂格利茨同获）。1970 年发表《柠檬市场》，用二手车市场揭示信息不对称如何导致逆向选择，开创信息经济学。',
       keyTheories: [
@@ -917,6 +932,7 @@ window._econData = {
       id: 'stiglitz', name: '约瑟夫·斯蒂格利茨', nameEn: 'Joseph Stiglitz', lifespan: '1943—',
       nationality: '美国', schoolId: 'welfare', era: '信息经济学 · 2001',
       influence: 9, axis: { x: -0.5, y: 0.2 },
+      nobel: true,
       quote: '当信息不对称时，看不见的手常常看不见——市场需要制度与干预来纠偏。',
       bio: '2001 年诺贝尔经济学奖得主，信息经济学旗手，曾任世界银行首席经济学家。系统研究了信息不对称下的逆向选择、道德风险与市场失灵，晚年转向全球化批判。',
       keyTheories: [
@@ -943,6 +959,7 @@ window._econData = {
       id: 'solow', name: '罗伯特·索洛', nameEn: 'Robert Solow', lifespan: '1924—2023',
       nationality: '美国', schoolId: 'game', era: '增长理论 · 1987',
       influence: 8, axis: { x: 0.35, y: -0.45 },
+      nobel: true,
       quote: '经济增长的绝大部分，无法用资本和劳动的增加来解释——剩下的，叫技术进步。',
       bio: '1987 年诺贝尔经济学奖得主。1956 年提出索洛增长模型，证明长期增长主要来自技术进步而非资本积累，是现代增长理论的开端。',
       keyTheories: [
@@ -969,6 +986,7 @@ window._econData = {
       id: 'nordhaus', name: '威廉·诺德豪斯', nameEn: 'William Nordhaus', lifespan: '1941—',
       nationality: '美国', schoolId: 'welfare', era: '气候经济学 · 2018',
       influence: 7, axis: { x: -0.15, y: -0.35 },
+      nobel: true,
       quote: '气候是最典型的全球公共品——每个人排放，却没人买单，最终所有人一起承受。',
       bio: '2018 年诺贝尔经济学奖得主（与罗默同获）。将气候变化整合进经济增长模型，创建 DICE 综合评估模型，为气候政策提供成本收益的量化基础。',
       keyTheories: [
@@ -995,6 +1013,7 @@ window._econData = {
       id: 'deaton', name: '安格斯·迪顿', nameEn: 'Angus Deaton', lifespan: '1945—',
       nationality: '英国', schoolId: 'development', era: '消费与贫困 · 2015',
       influence: 8, axis: { x: -0.25, y: 0.4 },
+      nobel: true,
       quote: '贫困不只是缺钱，更关乎能力、健康与尊严——测量贫困本身就是一个政治选择。',
       bio: '2015 年诺贝尔经济学奖得主。以家庭微观数据研究消费、储蓄与贫困，开发出科学的贫困测量方法，重塑了发展与福利研究。',
       keyTheories: [
@@ -1021,6 +1040,7 @@ window._econData = {
       id: 'krugman', name: '保罗·克鲁格曼', nameEn: 'Paul Krugman', lifespan: '1953—',
       nationality: '美国', schoolId: 'keynesian', era: '新贸易理论 · 2008',
       influence: 9, axis: { x: 0.1, y: -0.35 },
+      nobel: true,
       quote: '贸易不是零和游戏，但政策往往是——规模经济让"谁先进入"变得至关重要。',
       bio: '2008 年诺贝尔经济学奖得主。创立新贸易理论，用规模经济与垄断竞争解释产业内贸易，是当代最著名的经济评论家之一。',
       keyTheories: [
@@ -1047,6 +1067,7 @@ window._econData = {
       id: 'roth', name: '埃尔文·罗斯', nameEn: 'Alvin Roth', lifespan: '1951—',
       nationality: '美国', schoolId: 'game', era: '市场设计 · 2012',
       influence: 7, axis: { x: 0.25, y: 0.5 },
+      nobel: true,
       quote: '有些市场不是用钱交易的——你无法给肾移植、学校录取、工作配对定个价，但它们依然需要"设计"。',
       bio: '2012 年诺贝尔经济学奖得主（与沙普利同获）。把博弈论用于"市场设计"，设计肾移植交换链、纽约市学校录取匹配，让没有价格的市场也能高效运作。',
       keyTheories: [
@@ -1072,6 +1093,7 @@ window._econData = {
       id: 'shapley', name: '劳埃德·沙普利', nameEn: 'Lloyd Shapley', lifespan: '1923—2016',
       nationality: '美国', schoolId: 'game', era: '合作博弈 · 2012',
       influence: 7, axis: { x: 0.15, y: 0.58 },
+      nobel: true,
       quote: '合作的收益如何分配，应当反映每个人的边际贡献——这比"平分"更公平。',
       bio: '2012 年诺贝尔经济学奖得主（与罗斯同获）。提出沙普利值，用边际贡献决定合作中的收益分配，是合作博弈论的奠基人。',
       keyTheories: [
