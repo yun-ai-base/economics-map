@@ -687,8 +687,13 @@ section[id] { scroll-margin-top: 120px; }
 .policy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
 
 /* ───────────── 经济工具箱：学科分层 + 术语库 ───────────── */
-.terms-section .section-sub { max-width: 640px; margin: 8px auto 0; text-align: center; }
-.terms-section .section-head { text-align: center; margin-bottom: 56px; }
+.terms-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 28px 0;
+}
+/* section-head/kicker/title 沿用全站默认（左对齐 + 金色横线） */
+.terms-section .section-head { margin-bottom: 56px; }
 
 /* 学科分层：横向 3 卡 + 中间递进箭头 */
 .layer-grid {
@@ -1351,7 +1356,7 @@ footer .foot-twin a:hover {
   .sn-link { flex: 0 0 auto; }
   .site-header { flex-direction: column; padding-top: 40px; }
   .header-stats { width: 100%; }
-  .compass-section, .timeline-section, .market-section, .debate-section, .policy-section { padding-left: 16px; padding-right: 16px; }
+  .compass-section, .timeline-section, .market-section, .debate-section, .policy-section, .terms-section { padding-left: 16px; padding-right: 16px; }
   .debate-arena { grid-template-columns: 1fr; }
   .policy-grid { grid-template-columns: 1fr; }
   .detail-hero { padding: 26px 20px 18px; }
