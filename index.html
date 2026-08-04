@@ -926,6 +926,58 @@ section[id] { scroll-margin-top: 120px; }
   margin-bottom: 10px;
 }
 .term-compare .tc-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+
+/* 术语可视化 */
+.term-viz { margin: 4px 0 22px; }
+.term-viz .vz-title {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin-bottom: 12px;
+}
+/* 横向条形图 */
+.term-viz .vz-bars { display: grid; gap: 8px; }
+.term-viz .vz-bar-row { display: flex; align-items: center; gap: 10px; }
+.term-viz .vz-bar-label { flex: 0 0 86px; font-size: 12px; color: var(--text-dim); text-align: right; }
+.term-viz .vz-bar-track { flex: 1; height: 18px; background: rgba(18,24,38,0.6); border-radius: 9px; overflow: hidden; border: 1px solid var(--line-soft); }
+.term-viz .vz-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--gold) 35%, transparent), var(--gold));
+  border-radius: 9px 0 0 9px;
+  transition: width 0.6s ease;
+}
+.term-viz .vz-bar-val { flex: 0 0 30px; font-family: var(--font-mono); font-size: 12px; color: var(--text); }
+/* 传导流程图 */
+.term-viz .vz-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.term-viz .vz-flow-node { display: flex; align-items: center; gap: 4px; }
+.term-viz .vz-flow-label {
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  color: var(--text);
+  white-space: nowrap;
+}
+.term-viz .vz-flow-arrow { color: var(--gold); font-size: 14px; }
+/* 曲线示意 */
+.term-viz .vz-curve { position: relative; }
+.term-viz .vz-curve svg { width: 100%; height: 150px; display: block; }
+.term-viz .vz-curve-labels { position: relative; height: 22px; }
+.term-viz .vz-curve-x { position: absolute; top: 4px; font-size: 10.5px; color: var(--text-mute); text-align: center; width: 48px; }
+.term-viz .vz-note { font-size: 12px; color: var(--text-mute); margin-top: 6px; text-align: center; }
+/* 环形占比 */
+.term-viz .vz-rings { position: relative; width: 130px; height: 130px; margin: 0 auto; }
+.term-viz .vz-ring { width: 130px; height: 130px; border-radius: 50%; }
+.term-viz .vz-ring-hole {
+  position: absolute; inset: 32px; border-radius: 50%;
+  background: var(--panel-2);
+}
+.term-viz .vz-ring-legends { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; margin-top: 12px; }
+.term-viz .vz-ring-legend { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-dim); }
+.term-viz .vz-ring-legend b { color: var(--text); font-family: var(--font-mono); margin-left: 2px; }
+.term-viz .vz-ring-dot { width: 10px; height: 10px; border-radius: 3px; }
 .term-compare .tc-table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 12.5px; }
 .term-compare .tc-table th, .term-compare .tc-table td {
   padding: 9px 12px;
@@ -2532,6 +2584,71 @@ footer .foot-twin a:hover {
     var sections = (t.sections || []).map(function (s) {
       return '<div class="term-block"><div class="tb-label">' + s.t + '</div><div class="tb-body">' + s.d + '</div></div>';
     }).join('');
+    // 可视化（viz）：bars 横向条形图 / flow 传导流程图 / curve 曲线示意
+    var vizHtml = '';
+    var viz = t.viz;
+    if (viz) {
+      if (viz.type === 'bars' && viz.items) {
+        var max = Math.max.apply(null, viz.items.map(function (it) { return it.v; }));
+        var bars = viz.items.map(function (it) {
+          var pct = Math.round(it.v / max * 100);
+          return '<div class="vz-bar-row"><span class="vz-bar-label">' + it.l + '</span>'
+            + '<div class="vz-bar-track"><div class="vz-bar-fill" style="width:' + pct + '%"></div></div>'
+            + '<span class="vz-bar-val">' + it.v + '</span></div>';
+        }).join('');
+        vizHtml = '<div class="term-viz"><div class="vz-title">' + (viz.title || '') + '</div><div class="vz-bars">' + bars + '</div></div>';
+      } else if (viz.type === 'flow' && viz.nodes) {
+        var steps = viz.nodes.map(function (n, i) {
+          return '<div class="vz-flow-node"><div class="vz-flow-label">' + n + '</div>'
+            + (i < viz.nodes.length - 1 ? '<div class="vz-flow-arrow">→</div>' : '')
+            + '</div>';
+        }).join('');
+        vizHtml = '<div class="term-viz"><div class="vz-title">' + (viz.title || '') + '</div><div class="vz-flow">' + steps + '</div></div>';
+      } else if (viz.type === 'curve' && viz.points) {
+        // 简单折线示意：用 SVG polyline
+        var W = 560, H = 140, pad = 16;
+        var min = Math.min.apply(null, viz.points.map(function (p) { return p.v; }));
+        var max = Math.max.apply(null, viz.points.map(function (p) { return p.v; }));
+        var range = (max - min) || 1;
+        var coords = viz.points.map(function (p, i) {
+          var x = pad + i * (W - pad * 2) / (viz.points.length - 1);
+          var y = H - pad - (p.v - min) / range * (H - pad * 2);
+          return x.toFixed(1) + ',' + y.toFixed(1);
+        }).join(' ');
+        var labels = viz.points.map(function (p, i) {
+          var x = pad + i * (W - pad * 2) / (viz.points.length - 1);
+          return '<span class="vz-curve-x" style="left:' + (x - 24) + 'px">' + p.l + '</span>';
+        }).join('');
+        vizHtml = '<div class="term-viz"><div class="vz-title">' + (viz.title || '') + '</div>'
+          + '<div class="vz-curve"><svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">'
+          + '<polyline points="' + coords + '" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+          + viz.points.map(function (p, i) {
+            var x = pad + i * (W - pad * 2) / (viz.points.length - 1);
+            var y = H - pad - (p.v - min) / range * (H - pad * 2);
+            return '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4" fill="var(--gold-bright)"/>';
+          }).join('')
+          + '</svg><div class="vz-curve-labels">' + labels + '</div>'
+          + (viz.note ? '<div class="vz-note">' + viz.note + '</div>' : '')
+          + '</div></div>';
+      } else if (viz.type === 'rings' && viz.items) {
+        // 环形占比示意（conic-gradient）
+        var segs = [];
+        var acc = 0;
+        viz.items.forEach(function (it) {
+          var from = acc * 3.6, to = (acc + it.v) * 3.6;
+          acc += it.v;
+          segs.push(it.c + ' ' + from.toFixed(1) + 'deg ' + to.toFixed(1) + 'deg');
+        });
+        var rings = viz.items.map(function (it) {
+          return '<div class="vz-ring-legend"><span class="vz-ring-dot" style="background:' + it.c + '"></span>'
+            + it.l + '<b>' + it.v + '%</b></div>';
+        }).join('');
+        vizHtml = '<div class="term-viz"><div class="vz-title">' + (viz.title || '') + '</div>'
+          + '<div class="vz-rings"><div class="vz-ring" style="background:conic-gradient(' + segs.join(',') + ')"></div>'
+          + '<div class="vz-ring-hole"></div></div>'
+          + '<div class="vz-ring-legends">' + rings + '</div></div>';
+      }
+    }
     // 对比表（compare）
     var compare = '';
     if (t.compare && t.compare.headers && t.compare.rows) {
@@ -2562,6 +2679,7 @@ footer .foot-twin a:hover {
       + (t.how ? '<div class="term-block"><div class="tb-label">怎么算/怎么运作 · How</div><div class="tb-body">' + t.how + '</div></div>' : '')
       + (t.watch ? '<div class="term-block"><div class="tb-label">怎么看 · What to Watch</div><div class="tb-body">' + t.watch + '</div></div>' : '')
       + sections
+      + vizHtml
       + compare
       + (rels ? '<div class="d-block"><div class="d-block-title">相关术语 · Related</div><div class="school-concepts">' + rels + '</div></div>' : '')
       + (pols ? '<div class="d-block"><div class="d-block-title">关联政策</div><div class="school-concepts">' + pols + '</div></div>' : '')
