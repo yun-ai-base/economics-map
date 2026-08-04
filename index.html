@@ -685,6 +685,124 @@ section[id] { scroll-margin-top: 120px; }
   padding: 56px 28px 0;
 }
 .policy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+
+/* ───────────── 经济工具箱：学科分层 + 术语库 ───────────── */
+.layer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.layer-card {
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  padding: 20px;
+  background: linear-gradient(160deg, rgba(18,24,38,0.7), rgba(11,15,26,0.5));
+  transition: all 0.25s ease;
+  border-top: 2px solid var(--gold);
+}
+.layer-card .lc-icon { font-size: 26px; }
+.layer-card .lc-level {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin: 8px 0 2px;
+}
+.layer-card .lc-en { font-family: var(--font-mono); font-size: 10px; color: var(--text-mute); letter-spacing: 0.1em; }
+.layer-card .lc-scope { font-size: 12.5px; color: var(--text-dim); margin: 8px 0 4px; }
+.layer-card .lc-question { font-size: 13px; color: var(--text); margin: 4px 0; }
+.layer-card .lc-lens { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+.layer-card .lc-life {
+  font-size: 12px;
+  color: var(--text-mute);
+  border-left: 2px solid var(--gold);
+  padding-left: 8px;
+  margin: 10px 0 0;
+  line-height: 1.5;
+}
+.layer-card .lc-econs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.layer-card .lc-econ {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.layer-card .lc-econ:hover { border-color: var(--gold); color: var(--gold-bright); }
+.term-group { margin-bottom: 30px; }
+.term-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.term-group-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.term-group-title .tg-count { font-family: var(--font-mono); font-size: 11px; color: var(--text-mute); }
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.term-card {
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: rgba(18,24,38,0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.22s ease;
+}
+.term-card:hover {
+  border-color: var(--gold);
+  background: rgba(201,160,99,0.08);
+  transform: translateY(-1px);
+}
+.term-card .tc-icon { font-size: 20px; flex: 0 0 auto; }
+.term-card .tc-name { font-size: 13px; color: var(--text); font-weight: 600; }
+.term-card .tc-cat { font-size: 10.5px; color: var(--text-mute); font-family: var(--font-mono); margin-top: 2px; }
+.term-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.terms-section .d-block-title { margin-bottom: 8px; }
+.terms-section .term-related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.terms-section .term-related .school-concept.has-def { cursor: pointer; }
+@media (max-width: 820px) {
+  .layer-grid { grid-template-columns: 1fr; }
+  .term-grid { grid-template-columns: 1fr; }
+}
+
+/* 术语详情弹层 */
+.term-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.term-meta .tm-chip {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--gold-bright);
+  border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  border-radius: 100px;
+  padding: 3px 12px;
+}
+.term-block { margin-bottom: 16px; }
+.term-block .tb-label {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-mute);
+  margin-bottom: 6px;
+}
+.term-block .tb-body { font-size: 13.5px; line-height: 1.75; color: var(--text); }
 .policy-card {
   border: 1px solid var(--line-soft);
   border-radius: 14px;
@@ -1169,6 +1287,7 @@ footer .foot-twin a:hover {
   <a class="sn-link" href="#debate"><span class="sn-num">03</span>思想擂台</a>
   <a class="sn-link" href="#policy"><span class="sn-num">04</span>政策溯源馆</a>
   <a class="sn-link" href="#market"><span class="sn-num">05</span>街市应用馆</a>
+  <a class="sn-link" href="#terms"><span class="sn-num">06</span>经济工具箱</a>
 </nav>
 
 <main>
@@ -1249,6 +1368,17 @@ footer .foot-twin a:hover {
       <p class="section-sub">你关心的每件日常小事，都有人在几百年前研究过。选择一个你生活里的问题。</p>
     </div>
     <div class="life-topic-grid" id="lifeTopicGrid"></div>
+  </section>
+
+  <!-- 经济工具箱 -->
+  <section class="terms-section" id="terms">
+    <div class="section-head">
+      <div class="section-kicker">06 · The Toolbox</div>
+      <h2 class="section-title">经济工具箱 — 读懂宏观指标与金融术语</h2>
+      <p class="section-sub">GDP、利率、通胀、股票、融资……日常经济金融里绕不开的词，都有定义、算法与相互关联。点击任意词条展开。</p>
+    </div>
+    <div class="layer-grid" id="layerGrid"></div>
+    <div class="term-group" id="termGroups"></div>
   </section>
 </main>
 
@@ -1412,7 +1542,7 @@ footer .foot-twin a:hover {
   /* ─── 区块导航 scrollspy ─── */
   (function initSectionNav() {
     var links = document.querySelectorAll('#sectionNav .sn-link');
-    var sectionIds = ['compass', 'timeline', 'debate', 'policy', 'market'];
+    var sectionIds = ['compass', 'timeline', 'debate', 'policy', 'market', 'terms'];
     var lastActive = 'compass';
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -1875,6 +2005,69 @@ footer .foot-twin a:hover {
     }
   });
 
+  /* ─── 经济工具箱：学科分层 + 术语库 ─── */
+  var layerGrid = document.getElementById('layerGrid');
+  var termGroups = document.getElementById('termGroups');
+  var termMap = {};
+  (DATA.econTerms || []).forEach(function (t) { termMap[t.id] = t; });
+
+  function renderToolbox() {
+    if (!layerGrid || !termGroups) return;
+    // 学科分层
+    var lh = '';
+    (DATA.econLayers || []).forEach(function (ly) {
+      var econs = (ly.economists || []).map(function (id) {
+        var e = econMap[id];
+        return e ? '<span class="lc-econ" data-econ="' + id + '">' + e.name + '</span>' : '';
+      }).join('');
+      lh += '<div class="layer-card"><div class="lc-icon">' + ly.icon + '</div>'
+        + '<div class="lc-level">' + ly.level + '</div>'
+        + '<div class="lc-en">' + ly.nameEn + '</div>'
+        + '<div class="lc-scope">' + ly.scope + '</div>'
+        + '<div class="lc-question">' + ly.question + '</div>'
+        + '<div class="lc-lens">' + ly.lens + '</div>'
+        + (ly.life ? '<div class="lc-life">' + ly.life + '</div>' : '')
+        + (econs ? '<div class="lc-econs">' + econs + '</div>' : '')
+        + '</div>';
+    });
+    layerGrid.innerHTML = lh;
+    layerGrid.querySelectorAll('.lc-econ').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var id = chip.getAttribute('data-econ');
+        if (econMap[id]) openDetail(id);
+      });
+    });
+
+    // 术语库：按 category 分组
+    var cats = ['宏观指标', '政策工具', '经济现象', '金融投资', '企业融资'];
+    var byCat = {};
+    (DATA.econTerms || []).forEach(function (t) { (byCat[t.category] = byCat[t.category] || []).push(t); });
+    var th = '';
+    cats.forEach(function (cat) {
+      var list = byCat[cat] || [];
+      if (!list.length) return;
+      var cards = list.map(function (t) {
+        return '<div class="term-card" data-term="' + t.id + '" tabindex="0" role="button">'
+          + '<span class="tc-icon">' + t.icon + '</span>'
+          + '<div><div class="tc-name">' + t.name + '</div>'
+          + '<div class="tc-cat">' + t.category + '</div></div></div>';
+      }).join('');
+      th += '<div class="term-group"><div class="term-group-title">' + cat + '<span class="tg-count">' + list.length + '</span></div>'
+        + '<div class="term-grid">' + cards + '</div></div>';
+    });
+    termGroups.innerHTML = th;
+    termGroups.querySelectorAll('.term-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var tid = card.getAttribute('data-term');
+        if (termMap[tid]) openTerm(tid);
+      });
+      card.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); card.click(); }
+      });
+    });
+  }
+  renderToolbox();
+
   /* ─── 学派研报弹层 ─── */
   function openSchool(id) {
     var s = schoolMap[id];
@@ -1957,7 +2150,7 @@ footer .foot-twin a:hover {
   }
   function handleHash() {
     var h = location.hash || '';
-    var m = h.match(/^#\/(econ|school|policy|topic|milestone|concept)\/([\w%]+)$/);
+    var m = h.match(/^#\/(econ|school|policy|topic|milestone|concept|term)\/([\w%]+)$/);
     if (!m) { if (overlay.classList.contains('open')) closeOverlay(); currentRoute = null; return; }
     var kind = m[1], id = m[2];
     var route = kind + '/' + id;
@@ -1969,7 +2162,8 @@ footer .foot-twin a:hover {
     if (kind === 'concept') {
       try { id = decodeURIComponent(id); } catch (e) {}
       if (DATA.conceptDefs && DATA.conceptDefs[id]) openConcept(id);
-    } else if (kind === 'econ' && econMap[id]) openDetail(id);
+    } else if (kind === 'term' && termMap[id]) openTerm(id);
+    else if (kind === 'econ' && econMap[id]) openDetail(id);
     else if (kind === 'school' && schoolMap[id]) openSchool(id);
     else if (kind === 'policy') {
       var p = null;
@@ -2152,6 +2346,81 @@ footer .foot-twin a:hover {
       + '</div>';
     openOverlay();
     syncHash('concept', encodeURIComponent(name));
+    panel.scrollTop = 0;
+  }
+
+  /* ─── 经济工具箱：术语详情弹层 ─── */
+  function openTerm(id) {
+    var t = termMap[id];
+    if (!t) return;
+    // 相关术语 chips
+    var rels = (t.related || []).map(function (rid) {
+      var rt = termMap[rid];
+      return rt ? '<span class="school-concept has-def" data-concept="' + rid + '" tabindex="0" role="button">' + rt.name.split('·')[0].trim() + '</span>' : '';
+    }).join('');
+    // 关联政策
+    var pols = (t.policies || []).map(function (pid) {
+      var p = null;
+      DATA.policies.forEach(function (x) { if (x.id === pid) p = x; });
+      return p ? '<span class="school-concept has-def" data-policy="' + pid + '" tabindex="0" role="button">📜 ' + p.name + '</span>' : '';
+    }).join('');
+    // 关联经济学家
+    var econs = (t.economists || []).map(function (eid) {
+      var e = econMap[eid];
+      return e ? '<span class="school-concept has-def" data-econ="' + eid + '" tabindex="0" role="button">👤 ' + e.name + '</span>' : '';
+    }).join('');
+    contentEl.innerHTML =
+      '<div class="detail-hero" style="--sc:#C9A063">'
+      + '<div class="detail-hero-top">'
+      + '<div class="avatar-block" style="--sc:#C9A063">' + t.icon + '</div>'
+      + '<div class="detail-name"><h2>' + t.name + '</h2>'
+      + '<div class="en">' + t.category + ' · Toolbox</div></div>'
+      + '</div>'
+      + '<div class="term-meta">'
+      + '<span class="tm-chip">' + t.category + '</span>'
+      + '<span class="tm-chip">点击下方标签可跳转关联</span>'
+      + '</div>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + '<div class="term-block"><div class="tb-label">它是什么 · What</div><div class="tb-body">' + t.def + '</div></div>'
+      + (t.how ? '<div class="term-block"><div class="tb-label">怎么算/怎么运作 · How</div><div class="tb-body">' + t.how + '</div></div>' : '')
+      + (t.watch ? '<div class="term-block"><div class="tb-label">怎么看 · What to Watch</div><div class="tb-body">' + t.watch + '</div></div>' : '')
+      + (rels ? '<div class="d-block"><div class="d-block-title">相关术语 · Related</div><div class="school-concepts">' + rels + '</div></div>' : '')
+      + (pols ? '<div class="d-block"><div class="d-block-title">关联政策</div><div class="school-concepts">' + pols + '</div></div>' : '')
+      + (econs ? '<div class="d-block"><div class="d-block-title">关联思想家</div><div class="school-concepts">' + econs + '</div></div>' : '')
+      + '</div>';
+    // 关联跳转：术语/政策/人物
+    contentEl.querySelectorAll('.school-concept[data-concept]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var tid = chip.getAttribute('data-concept');
+        if (termMap[tid]) openTerm(tid);
+      });
+      chip.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); chip.click(); }
+      });
+    });
+    contentEl.querySelectorAll('.school-concept[data-policy]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var pid = chip.getAttribute('data-policy');
+        var p = null;
+        DATA.policies.forEach(function (x) { if (x.id === pid) p = x; });
+        if (p) openPolicy(p);
+      });
+      chip.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); chip.click(); }
+      });
+    });
+    contentEl.querySelectorAll('.school-concept[data-econ]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var eid = chip.getAttribute('data-econ');
+        if (econMap[eid]) openDetail(eid);
+      });
+      chip.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); chip.click(); }
+      });
+    });
+    openOverlay();
+    syncHash('term', id);
     panel.scrollTop = 0;
   }
 

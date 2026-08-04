@@ -1694,5 +1694,361 @@ window._econData = {
     '规模经济': '产量越大，单位成本越低。克鲁格曼用它解释国际贸易为何发生在相似国家之间——同质化产品靠规模与分工在全球竞争。',
     '稳定匹配': '罗斯与沙普利：设计算法让双方按真实偏好排序即可达成稳定匹配——没有人能通过欺骗获得更好结果。用于器官移植配对与择校。',
     '理性经济人': '新古典的假设：人完全理性、偏好稳定、信息完备、只求自身效用最大化。行为经济学正是对它最有力的修正。'
-  }
+  },
+
+  /* ── 学科分层：微观 / 中观 / 宏观 ── */
+  econLayers: [
+    {
+      level: '微观经济学', nameEn: 'Microeconomics', icon: '🧩',
+      scope: '单个个体、家庭与企业的决策行为',
+      question: '一个消费者怎么花钱？一家企业怎么定价、雇多少人？',
+      lens: '研究"局部"：需求与供给、成本与收益、市场结构（竞争/垄断）、博弈。代表人物：马歇尔、科斯、贝克尔、纳什。',
+      life: '你买奶茶选哪家、跟房东谈租金、跳槽谈薪水——都是微观决策。',
+      economists: ['marshall', 'coase', 'becker', 'nash']
+    },
+    {
+      level: '中观经济学', nameEn: 'Meso-economics', icon: '🏭',
+      scope: '产业、区域与市场结构的中间层',
+      question: '一个行业为什么聚集在某个城市？产业政策该扶持谁？',
+      lens: '研究"中间层"：产业结构、产业集群、区域发展、市场集中度与竞争政策。它是微观到宏观的桥梁。',
+      life: '你所在城市为何是"XX之都"、某行业为何内卷、开发区为何扎堆——都是中观问题。',
+      economists: ['stigler', 'krugman', 'linyifu']
+    },
+    {
+      level: '宏观经济学', nameEn: 'Macroeconomics', icon: '🌐',
+      scope: '整个国家乃至全球经济的总量与周期',
+      question: 'GDP 为什么增长或萎缩？通胀、失业、利率由什么决定？',
+      lens: '研究"总量"：国民收入、物价水平、就业、国际收支；政策工具分财政（政府收支）与货币（央行利率/货币量）。代表人物：凯恩斯、弗里德曼、卢卡斯。',
+      life: '央行降息、政府发消费券、物价上涨、就业市场冷暖——都是宏观环境在影响你。',
+      economists: ['keynes', 'friedman', 'lucas', 'minsky']
+    }
+  ],
+
+  /* ── 经济工具箱：宏观指标 / 政策工具 / 经济现象 / 金融投资 / 企业融资 ── */
+  econTerms: [
+    /* ══ A. 宏观指标 ══ */
+    {
+      id: 'gdp', name: 'GDP · 国内生产总值', category: '宏观指标', icon: '📊',
+      def: '一定时期内（通常一年/一季）一个国家或地区生产的全部最终商品与服务的市场价值总和。它是衡量经济体"多大、多快"的最核心指标。',
+      how: '三种算法结果应相等：①生产法=各行业增加值之和；②收入法=工资+利息+租金+利润之和；③支出法=消费+投资+政府购买+净出口（C+I+G+NX）。',
+      watch: '看名义 GDP 还是实际 GDP：实际值剔除了通胀，才能反映真实增长；GDP 增速>0 为扩张，连续两季负增长通常被视为衰退。',
+      related: ['gni', 'cpi', 'unemployment', 'recession'],
+      policies: ['new-deal', 'inflation-targeting'],
+      economists: ['keynes', 'nordhaus']
+    },
+    {
+      id: 'gni', name: 'GNP/GNI · 国民生产总值', category: '宏观指标', icon: '🌍',
+      def: '本国居民在国内外创造的全部收入总和（GNP），与 GDP 的区别在于"谁创造"而非"在哪创造"。GNI 是联合国口径的国民总收入。',
+      how: 'GNI = GDP + 本国居民在国外的要素收入 − 外国居民在本国的要素收入。',
+      watch: '开放经济体两者差异大：海外投资多的国家 GNI>GDP，反之（如大量外资驻留）则 GNI<GDP。',
+      related: ['gdp', 'trade'],
+      policies: [],
+      economists: ['sen']
+    },
+    {
+      id: 'cpi', name: 'CPI · 居民消费价格指数', category: '宏观指标', icon: '🛒',
+      def: '衡量一篮子消费品与服务价格水平变化的指标，是最常用的"通胀温度计"。',
+      how: '选定基准年的一篮子商品（食品、居住、交通、医疗等，按权重加权），CPI = 当期篮子价格 / 基期篮子价格 × 100。',
+      watch: 'CPI 同比涨幅>3% 一般视为温和通胀警戒线；持续高位需警惕央行加息。但 CPI 不含房价（居住用租金近似），看房价另看其他指标。',
+      related: ['inflation', 'ppi', 'interest-rate', 'deflation'],
+      policies: ['inflation-targeting'],
+      economists: ['friedman', 'kahneman']
+    },
+    {
+      id: 'ppi', name: 'PPI · 生产者价格指数', category: '宏观指标', icon: '🏗️',
+      def: '衡量工业企业出厂价格变化的指标，是通胀的"上游先行指标"。',
+      how: '覆盖工业品出厂价、原材料、能源等；统计口径与 CPI 类似（一篮子加权），但站在生产者角度。',
+      watch: 'PPI 先动、CPI 后动——PPI 大涨常预示未来 CPI 上行（成本传导）；PPI 与 CPI 剪刀差扩大说明利润在上中下游间转移。',
+      related: ['cpi', 'inflation'],
+      policies: [],
+      economists: []
+    },
+    {
+      id: 'unemployment', name: '失业率', category: '宏观指标', icon: '🧑‍💼',
+      def: '失业人口占劳动力人口（就业+失业）的比例，反映就业市场冷暖与经济增长质量。',
+      how: '失业率 = 失业人数 /（就业人数 + 失业人数）× 100%。注意"劳动力"不含退休、学生、家庭主妇等非劳动力。',
+      watch: '自然失业率（结构性+摩擦性）约 4-5%，低于它通常伴随通胀压力；失业率领先经济周期，是政策的重要参考。',
+      related: ['gdp', 'inflation', 'business-cycle'],
+      policies: ['new-deal'],
+      economists: ['keynes', 'lucas', 'sen']
+    },
+    {
+      id: 'moneysupply', name: '货币供应量 · M0/M1/M2', category: '宏观指标', icon: '💵',
+      def: '一国流通中货币的总量分层。M0=流通现金；M1=M0+活期存款（"狭义货币"，流动性最强）；M2=M1+定期存款等（"广义货币"，代表总购买力）。',
+      how: '央行通过降准、公开市场操作等调节基础货币，银行体系通过信贷放大形成 M2。M2 增速 ≈ 名义 GDP 增速 + 适度通胀，是货币是否"过多"的参考。',
+      watch: 'M2 增速显著高于名义 GDP 增长，常预示资产价格（房/股）上行或未来通胀压力；M1-M2 剪刀差反映企业活钱多寡。',
+      related: ['interest-rate', 'inflation', 'monetary-policy'],
+      policies: ['inflation-targeting'],
+      economists: ['friedman']
+    },
+    {
+      id: 'fiscal-deficit', name: '财政赤字', category: '宏观指标', icon: '🧾',
+      def: '政府支出超过收入的差额，即"入不敷出"的部分，通常靠发行国债弥补。',
+      how: '赤字 = 政府支出（购买+转移支付+利息）− 政府收入（税收等）。赤字率=赤字/GDP，国际警戒线常取 3%。',
+      watch: '赤字是刺激还是负担取决于周期位置：衰退期扩张赤字（凯恩斯主义）可行；持续高赤字会推高债务、挤占私人投资。',
+      related: ['government-bond', 'fiscal-policy', 'gdp'],
+      policies: ['new-deal'],
+      economists: ['keynes', 'buchanan', 'ricardo']
+    },
+    {
+      id: 'trade', name: '贸易收支 · 顺差/逆差', category: '宏观指标', icon: '🚢',
+      def: '一国出口与进口的差额：出口>进口为顺差，反之为逆差。它是一国对外经济关系与竞争力的缩影。',
+      how: '贸易差额 = 商品与服务出口 − 进口。顺差常伴随外汇储备增加、本币升值压力；逆差则相反。',
+      watch: '持续巨额顺差可能引发贸易摩擦与本币升值压力；逆差未必是坏事（如资源进口国）。顺差的钱去哪了，比顺差本身更值得看。',
+      related: ['gdp', 'gni'],
+      policies: [],
+      economists: ['ricardo', 'smith', 'linyifu']
+    },
+
+    /* ══ B. 政策工具箱 ══ */
+    {
+      id: 'monetary-policy', name: '货币政策', category: '政策工具', icon: '🏦',
+      def: '央行通过调节货币供应与利率来影响总需求的政策。它是宏观调控的"总开关"之一。',
+      how: '三大工具：①利率（政策利率→市场利率）；②存款准备金率（降准→银行可贷资金增加）；③公开市场操作（买卖国债→投放/回收流动性）。',
+      watch: '宽松（降息/降准）刺激增长但易推高通胀；紧缩（加息/提准）抑制通胀但拖累增长——央行在两者间走钢丝。',
+      related: ['interest-rate', 'moneysupply', 'inflation', 'quantitative-easing'],
+      policies: ['inflation-targeting', 'macro-prudential'],
+      economists: ['friedman', 'keynes', 'lucas']
+    },
+    {
+      id: 'interest-rate', name: '利率', category: '政策工具', icon: '💹',
+      def: '资金使用的"价格"——借入资金的成本或贷出资金的回报。它是宏观与金融之间的枢纽变量。',
+      how: '央行设定政策利率（如逆回购利率、LPR），影响银行间市场利率，进而传导至贷款利率、存款利率、债券收益率。',
+      watch: '利率升降影响一切：房贷月供、存款收益、股市估值、汇率。加息周期里债市承压、成长股估值缩水。',
+      related: ['monetary-policy', 'cpi', 'bond', 'stock', 'moneysupply'],
+      policies: ['inflation-targeting'],
+      economists: ['keynes', 'fisher']
+    },
+    {
+      id: 'reserve-ratio', name: '存款准备金率', category: '政策工具', icon: '🏛️',
+      def: '银行必须按存款的一定比例缴存央行、不得贷出的资金比例。它是货币政策的"重型武器"。',
+      how: '央行降准 → 银行可贷资金增加 → 信贷扩张 → 货币乘数放大 M2；反之提准收缩流动性。',
+      watch: '降准信号意义强（被解读为明确宽松），但传导有滞后；观察央行降准后的 LPR/信贷数据验证效果。',
+      related: ['moneysupply', 'monetary-policy', 'interest-rate'],
+      policies: ['macro-prudential'],
+      economists: ['friedman']
+    },
+    {
+      id: 'quantitative-easing', name: '量化宽松 · QE', category: '政策工具', icon: '🖨️',
+      def: '当利率已近零、常规降息失效时，央行直接大规模买入长期国债等资产，向市场注入流动性（俗称"印钱"）。',
+      how: '央行开动资产负债表：买入国债/抵押证券 → 银行准备金增加 → 压低长端利率 → 刺激贷款与资产价格。',
+      watch: 'QE 压低无风险收益率，通常推升股市与房价、压制货币升值；退出（缩表）时反向。2008 与 2020 年两轮全球 QE 是典型样本。',
+      related: ['monetary-policy', 'interest-rate', 'inflation', 'bond'],
+      policies: ['inflation-targeting'],
+      economists: ['friedman', 'minsky']
+    },
+    {
+      id: 'fiscal-policy', name: '财政政策', category: '政策工具', icon: '🧮',
+      def: '政府通过税收与支出来调节经济的政策，与货币政策并列宏观两大工具。',
+      how: '扩张性：减税、增加支出（基建、转移支付）→ 直接补需求；紧缩性：加税、压缩支出 → 给过热降温。乘数效应放大其影响。',
+      watch: '财政空间看赤字率与债务率；"政府花钱"的挤出效应与"放水"的通胀压力需要权衡。',
+      related: ['fiscal-deficit', 'government-bond', 'monetary-policy'],
+      policies: ['new-deal', 'supply-side'],
+      economists: ['keynes', 'buchanan']
+    },
+    {
+      id: 'government-bond', name: '国债 · 政府债券', category: '政策工具', icon: '📜',
+      def: '政府为弥补赤字或筹资发行的债券，被视作无风险资产的基准（尤其大国国债）。',
+      how: '政府按面值发行、定期付息、到期还本；收益率由市场定价，反映对主权信用与通胀的预期。',
+      watch: '国债收益率是全球资产定价之锚：收益率上行→股债双杀；倒挂（长<短）常预示衰退。个人理财中的"国债"是低风险底仓。',
+      related: ['fiscal-deficit', 'fiscal-policy', 'bond', 'interest-rate'],
+      policies: ['new-deal'],
+      economists: ['keynes', 'ricardo']
+    },
+    {
+      id: 'supply-side', name: '供给侧政策', category: '政策工具', icon: '⚙️',
+      def: '从生产端（而非需求端）发力：减税降费、放松管制、促进创新，提高潜在增长率。',
+      how: '降低企业成本（税、费、融资）→ 企业扩产创新 → 总供给右移 → 在控制通胀的同时实现增长。',
+      watch: '与需求管理的区别：供给政策更"治本"但见效慢；中国供给侧改革（去产能/降成本/补短板）是其当代实践。',
+      related: ['fiscal-policy', 'gdp', 'inflation'],
+      policies: ['supply-side'],
+      economists: ['smith', 'hayek', 'linyifu']
+    },
+
+    /* ══ C. 经济现象 ══ */
+    {
+      id: 'inflation', name: '通货膨胀', category: '经济现象', icon: '🎈',
+      def: '物价总水平持续上涨、货币购买力持续下降的现象。温和通胀是常态，恶性通胀摧毁储蓄。',
+      how: '成因三型：需求拉动（需求过热）、成本推动（油价/工资上涨）、货币超发（货币多商品少）。',
+      watch: '通胀是"隐性税收"——存款者与固定收入者受损，债务人与实物资产持有者受益；抗通胀资产：黄金、实物、权益。',
+      related: ['cpi', 'ppi', 'moneysupply', 'deflation', 'stagflation'],
+      policies: ['inflation-targeting'],
+      economists: ['friedman', 'keynes', 'hayek']
+    },
+    {
+      id: 'deflation', name: '通货紧缩', category: '经济现象', icon: '📉',
+      def: '物价总水平持续下跌的现象。看似"东西变便宜"，实则经济大敌——收入缩水、债务负担加重。',
+      how: '需求长期不足 → 企业降价去库存 → 利润与工资下降 → 需求更弱，形成通缩螺旋。',
+      watch: '通缩中"现金为王"但持有债务者痛苦；日本"失去的三十年"是教科书案例。央行以通胀目标制对抗通缩。',
+      related: ['inflation', 'cpi', 'interest-rate'],
+      policies: ['inflation-targeting'],
+      economists: ['keynes', 'fisher', 'krugman']
+    },
+    {
+      id: 'stagflation', name: '滞胀', category: '经济现象', icon: '🌫️',
+      def: '经济停滞（高失业）与高通胀同时出现的困境，是凯恩斯主义政策的最大挑战。',
+      how: '供给冲击（如 1970 年代石油危机）推高成本，导致"既涨又滞"——需求管理两头为难。',
+      watch: '滞胀下传统工具失效：刺激需求加剧通胀，紧缩加剧失业。弗里德曼用货币主义解释其本质是货币现象。',
+      related: ['inflation', 'unemployment', 'supply-side'],
+      policies: [],
+      economists: ['friedman', 'lucas', 'hayek']
+    },
+    {
+      id: 'business-cycle', name: '经济周期', category: '经济现象', icon: '🎢',
+      def: '经济活动的扩张与收缩交替：复苏→繁荣→衰退→萧条，循环往复。',
+      how: '由投资波动、库存调整、信贷周期与技术革命共同驱动；政策逆周期操作试图"熨平"波动。',
+      watch: '识别周期位置决定资产配置：复苏期股票、繁荣期大宗、衰退期债券、萧条期现金与优质资产。',
+      related: ['gdp', 'recession', 'unemployment', 'leverage'],
+      policies: ['new-deal', 'macro-prudential'],
+      economists: ['keynes', 'hayek', 'minsky', 'schumpeter']
+    },
+    {
+      id: 'shock-therapy', name: '休克疗法', category: '经济现象', icon: '⚡',
+      def: '以"一步到位"的激进方式推行市场化改革：同时放开价格、私有化、紧缩货币，典型于 1990 年代东欧与俄罗斯。',
+      how: '主张者（如萨克斯）认为渐进改革会半途而废，应让价格瞬间由市场决定；但代价是短期产出暴跌、通胀飙升。',
+      watch: '结果分化：波兰相对成功、俄罗斯长期阵痛；对比中国"渐进式改革"，两种路径是宏观转轨的经典对照。',
+      related: ['inflation', 'fiscal-deficit'],
+      policies: [],
+      economists: ['hayek', 'linyifu']
+    },
+    {
+      id: 'recession', name: '经济衰退', category: '经济现象', icon: '📉',
+      def: '经济活动显著下滑的时期，通俗定义：GDP 连续两个季度负增长。',
+      how: '需求萎缩→企业减产裁员→收入下降→需求更弱，自我强化的下行螺旋。',
+      watch: '衰退中：避险资产（国债/黄金）占优、权益承压；政策会逆周期发力（降息+财政刺激）。',
+      related: ['gdp', 'business-cycle', 'unemployment'],
+      policies: ['new-deal'],
+      economists: ['keynes', 'minsky']
+    },
+
+    /* ══ D. 金融投资 ══ */
+    {
+      id: 'stock', name: '股票', category: '金融投资', icon: '📈',
+      def: '公司所有权的份额凭证，持有者按份额分享公司利润（分红）并承担经营风险。',
+      how: '价格由公司盈利预期与市场情绪共同决定；一二级市场：IPO 是首次发行，二级市场是股民间交易。',
+      watch: '估值看市盈率（PE）；"买股票=买公司"是长期投资的底层逻辑，短线交易是高波动的零和博弈。',
+      related: ['pe', 'bond', 'interest-rate', 'ipo', 'diversification'],
+      policies: [],
+      economists: ['shiller', 'kahneman', 'thaler']
+    },
+    {
+      id: 'bond', name: '债券', category: '金融投资', icon: '📄',
+      def: '债务人（政府/企业）向债权人发行的借款凭证，约定还本付息。风险低于股票、收益相对固定。',
+      how: '票面利率固定，但市场价随利率反向波动：利率↑→存量债券价格↓（反之亦然）。久期衡量价格对利率的敏感度。',
+      watch: '利率与债券价格负相关是核心规律；信用债看违约风险（信用利差），国债看无风险基准。',
+      related: ['interest-rate', 'government-bond', 'stock', 'monetary-policy'],
+      policies: [],
+      economists: ['fisher', 'merton']
+    },
+    {
+      id: 'fund', name: '基金 · 证券投资基金', category: '金融投资', icon: '🧺',
+      def: '汇集众多投资者资金、由专业管理人投资于股票/债券等资产的组合产品。',
+      how: '按投向分：股票型/债券型/混合型/货币型/指数型（ETF）；按发行分：公募（大众可买）/私募（门槛高）。',
+      watch: '买基金=买"组合+管理"；低成本指数基金长期跑赢多数主动基金；定投是普通人的平滑成本利器。',
+      related: ['stock', 'bond', 'diversification', 'risk-return'],
+      policies: [],
+      economists: ['markowitz', 'sharpe', 'fama']
+    },
+    {
+      id: 'pe', name: '市盈率 · PE', category: '金融投资', icon: '🔍',
+      def: '股票价格与每股盈利的比值，衡量"买公司多少年回本"，是最常用的估值指标。',
+      how: 'PE = 股价 / 每股收益（EPS）。历史分位 vs 行业均值才有意义；成长股 PE 高，周期股 PE 低时反而可能是底部。',
+      watch: '低 PE 不等于便宜（可能盈利将下滑），高 PE 不等于贵（可能高增长）；配合 PEG（PE/增速）更全面。',
+      related: ['stock', 'fund'],
+      policies: [],
+      economists: ['shiller', 'graham']
+    },
+    {
+      id: 'compound-interest', name: '复利', category: '金融投资', icon: '⏳',
+      def: '"利滚利"——利息再投资产生新利息。时间是复利最好的朋友，也是最大的杠杆。',
+      how: '终值 = 本金 × (1+年化收益率)^年数。收益率小幅提高（8%→10%），长期结果天差地别。',
+      watch: '三个变量：本金、收益率、时间。普通人最容易做到的是拉长时间、减少亏损（亏损 50% 需涨 100% 回本）。',
+      related: ['risk-return'],
+      policies: [],
+      economists: ['kahneman', 'thaler']
+    },
+    {
+      id: 'risk-return', name: '风险与收益', category: '金融投资', icon: '⚖️',
+      def: '收益与风险的正相关是金融的第一定律：想获得更高收益，必须承受更高波动。',
+      how: '资产谱系：现金<债券<股票<期权/高杠杆资产（收益与波动依次升高）。投资组合的目标不是最高收益，而是风险调整后收益最优。',
+      watch: '别只看收益不看回撤；高收益承诺（如"保本高息"）必是骗局。风险承受能力决定股债配比。',
+      related: ['fund', 'stock', 'bond', 'diversification'],
+      policies: [],
+      economists: ['markowitz', 'kahneman']
+    },
+    {
+      id: 'diversification', name: '分散配置 · 资产配置', category: '金融投资', icon: '🎯',
+      def: '把资金分散到相关性低的资产（股、债、现金、黄金、海外）中，用"不把鸡蛋放一个篮子"降低整体波动。',
+      how: '现代组合理论（马科维茨）：组合风险<单项平均风险，因为资产间不完全相关；再平衡（定期恢复目标比例）是执行关键。',
+      watch: '分散的前提是资产相关性低；盲目多买基金（同质化）不算分散。股债 60/40 是经典起点。',
+      related: ['fund', 'risk-return', 'stock', 'bond'],
+      policies: [],
+      economists: ['markowitz', 'sharpe']
+    },
+
+    /* ══ E. 企业融资 ══ */
+    {
+      id: 'equity', name: '股权融资', category: '企业融资', icon: '🤝',
+      def: '企业通过出让部分所有权换取资金（投资人成为股东，共享利润共担风险）。',
+      how: '形式：天使轮→VC（风险投资）→PE→IPO；每一轮出让股权换取增长资金，估值随阶段抬升。',
+      watch: '股权融资"不用还本付息"但稀释控制权；投资人看赛道、团队、单位经济模型（UE）。',
+      related: ['ipo', 'venture-capital', 'valuation', 'cash-flow'],
+      policies: [],
+      economists: ['becker', 'coase']
+    },
+    {
+      id: 'debt-financing', name: '债权融资', category: '企业融资', icon: '🏦',
+      def: '企业向银行/债券持有人借款，约定还本付息，不稀释股权。',
+      how: '银行贷款、发行企业债/票据；成本看信用评级与利率；杠杆放大收益也放大风险。',
+      watch: '财务杠杆（资产负债率）过高→利息吞噬利润→经济下行时易爆雷；"借短投长"是流动性陷阱源头。',
+      related: ['equity', 'interest-rate', 'leverage', 'cash-flow'],
+      policies: ['macro-prudential'],
+      economists: ['minsky', 'fisher']
+    },
+    {
+      id: 'ipo', name: 'IPO · 首次公开募股', category: '企业融资', icon: '🚀',
+      def: '企业首次在公开市场发行股票上市，从"少数股东"变为"公众公司"。',
+      how: '流程：选择交易所→承销商定价→路演→发行→上市交易；募资用于扩张，原始股东获得退出通道。',
+      watch: '定价看发行市盈率 vs 同行；"打新"是申购上市首日红利，破发风险随市场热度波动。',
+      related: ['stock', 'equity', 'valuation', 'pe'],
+      policies: [],
+      economists: ['shiller']
+    },
+    {
+      id: 'venture-capital', name: '风险投资 · VC', category: '企业融资', icon: '🦄',
+      def: '投资于早期高成长、高风险创业公司的资本，赌的是"十倍甚至百倍"回报。',
+      how: 'VC 基金募资→寻找赛道→尽调→投早期（A/B/C 轮）→陪伴成长→通过 IPO 或被并购退出。',
+      watch: 'VC 的收益分布极度右偏（多数项目归零、少数十倍）；看创始人、市场空间、壁垒与烧钱效率。',
+      related: ['equity', 'ipo', 'valuation'],
+      policies: [],
+      economists: ['schumpeter']
+    },
+    {
+      id: 'leverage', name: '杠杆', category: '企业融资', icon: '🪜',
+      def: '用借来的钱放大投资规模，收益与风险同倍放大。杠杆是把双刃剑。',
+      how: '杠杆率 = 总资产 / 自有资金。房价首付 30% 即 3.3 倍杠杆；融资融券、期货、期权是更高杠杆工具。',
+      watch: '杠杆上行期财富效应显著，下行期爆仓与"明斯基时刻"随之而来——08 金融危机就是全球杠杆失控的样本。',
+      related: ['debt-financing', 'risk-return', 'business-cycle'],
+      policies: ['macro-prudential'],
+      economists: ['minsky', 'fisher']
+    },
+    {
+      id: 'cash-flow', name: '现金流', category: '企业融资', icon: '💧',
+      def: '一定时期内企业/个人实际收到与付出的现金净额。"利润是观点，现金是事实"——现金流比账面利润更能反映生存能力。',
+      how: '三张表：经营现金流（主业造血）、投资现金流（买卖资产）、筹资现金流（融资/还债）；自由现金流 = 经营−资本开支。',
+      watch: '企业暴雷多死于现金流断裂而非利润亏损；个人同样：收入-支出>0 的"现金流思维"是财务健康的地基。',
+      related: ['equity', 'debt-financing', 'compound-interest'],
+      policies: [],
+      economists: ['becker', 'thaler']
+    },
+    {
+      id: 'valuation', name: '估值 · 企业价值评估', category: '企业融资', icon: '🧮',
+      def: '对企业值多少钱的量化判断，是投融资、并购、上市定价的核心环节。',
+      how: '方法：绝对估值（DCF 现金流折现：未来现金流的现值之和）；相对估值（PE/PB/PS 对比同行）；资产法（重估净资产）。',
+      watch: '估值是"艺术+科学"：DCF 对增长假设极其敏感；一级市场看故事与对标，二级市场看盈利兑现。',
+      related: ['pe', 'equity', 'ipo', 'cash-flow'],
+      policies: [],
+      economists: ['shiller', 'merton', 'modigliani']
+    }
+  ]
 };
