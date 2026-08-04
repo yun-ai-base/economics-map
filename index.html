@@ -185,6 +185,9 @@ main { position: relative; z-index: 1; }
   letter-spacing: 0.04em;
   transition: all 0.2s ease;
   white-space: nowrap;
+  /* 在 nav 的 stacking context 内高于搜索结果（z:60），避免下拉框压住导航链接 */
+  position: relative;
+  z-index: 65;
 }
 .sn-link .sn-num {
   font-family: var(--font-mono);
