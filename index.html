@@ -1203,13 +1203,13 @@ section[id] { scroll-margin-top: 120px; }
 .term-card {
   border: 1px solid var(--line-soft);
   border-radius: 12px;
-  padding: 18px;
+  padding: 16px 18px 18px;
   background: linear-gradient(165deg, rgba(22,30,46,0.5), rgba(11,15,26,0.35));
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 100px;
+  gap: 10px;
+  min-height: 112px;
   transition: all 0.22s ease;
   position: relative;
 }
@@ -1219,25 +1219,39 @@ section[id] { scroll-margin-top: 120px; }
   box-shadow: 0 8px 24px rgba(201,160,99,0.15);
   background: linear-gradient(165deg, rgba(28,36,54,0.6), rgba(15,19,30,0.45));
 }
-.term-card .tc-top { display: flex; align-items: center; gap: 12px; }
+.term-card .tc-top { display: flex; align-items: flex-start; gap: 12px; }
 .term-card .tc-icon {
-  width: 38px; height: 38px;
+  width: 42px; height: 42px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
+  font-size: 21px;
   background: color-mix(in srgb, var(--gold) 10%, transparent);
   border: 1px solid var(--line-soft);
-  border-radius: 9px;
+  border-radius: 10px;
   flex: 0 0 auto;
 }
+.term-card .tc-title {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 .term-card .tc-name {
+  font-family: var(--font-serif);
   font-size: 14.5px;
   color: var(--text);
   font-weight: 600;
   letter-spacing: 0.01em;
-  flex: 1;
-  line-height: 1.4;
+  line-height: 1.35;
+}
+.term-card .tc-en {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
 }
 .term-card .tc-cat {
+  align-self: flex-start;
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--gold-bright);
@@ -1246,6 +1260,17 @@ section[id] { scroll-margin-top: 120px; }
   border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
   border-radius: 100px;
   background: color-mix(in srgb, var(--gold) 8%, transparent);
+  flex: 0 0 auto;
+}
+.term-card .tc-def {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 2px;
 }
 .term-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 @media (max-width: 820px) {
@@ -2846,10 +2871,15 @@ footer .foot-twin a:hover {
       if (!list.length) return;
       var meta = catMeta[cat] || { tag: cat, sub: '' };
       var cards = list.map(function (t) {
+        var enName = (t.name.indexOf('·') > 0 ? t.name.split('·')[0].trim() : '');
         return '<div class="term-card" data-term="' + t.id + '" tabindex="0" role="button">'
           + '<div class="tc-top"><div class="tc-icon">' + t.icon + '</div>'
-          + '<div class="tc-name">' + t.name + '</div></div>'
-          + '<div class="tc-cat">' + t.category + '</div></div>';
+          + '<div class="tc-title"><div class="tc-name">' + esc(t.name) + '</div>'
+          + (enName && enName !== t.name ? '<div class="tc-en">' + esc(enName) + '</div>' : '')
+          + '</div></div>'
+          + '<div class="tc-cat">' + esc(t.category) + '</div>'
+          + (t.def ? '<div class="tc-def">' + esc(t.def) + '</div>' : '')
+          + '</div>';
       }).join('');
       th += '<div class="term-group"><div class="term-group-title">'
         + cat + '<span class="tg-tag">' + meta.tag + '</span>'
