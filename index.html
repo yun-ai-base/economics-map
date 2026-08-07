@@ -206,6 +206,97 @@ main { position: relative; z-index: 1; }
 }
 .sn-link.active .sn-num { color: var(--gold-bright); }
 
+/* 汉堡菜单（移动端） */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.nav-burger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text-dim);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* 返回顶部 */
+.back-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(18,24,38,0.92);
+  backdrop-filter: blur(8px);
+  color: var(--gold-bright);
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.back-top:hover { border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 14%, transparent); }
+
+/* 可点击卡片的通用"展开"提示箭头 */
+.policy-card, .life-topic, .term-card, .milestone-card { position: relative; }
+.policy-card::after, .life-topic::after, .term-card::after, .milestone-card::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: 13px;
+  height: 13px;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23C9A063' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.policy-card:hover::after, .life-topic:hover::after, .term-card:hover::after, .milestone-card:hover::after { opacity: 1; }
+
+/* 选中态：当前打开的卡片 */
+.policy-card.selected, .life-topic.selected, .term-card.selected, .milestone-item.selected .milestone-card {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 1px var(--gold), 0 0 20px color-mix(in srgb, var(--gold) 16%, transparent);
+}
+
+/* 名言英文对照 */
+.detail-quote .quote-en {
+  display: block;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed color-mix(in srgb, var(--gold) 25%, transparent);
+  font-style: italic;
+  font-size: 0.85em;
+  line-height: 1.6;
+  color: var(--text-mute);
+  font-family: var(--font-serif);
+  letter-spacing: 0.02em;
+}
+
 /* ───────────── 全站搜索：独立条（介于 ticker 与 nav 之间）───────────── */
 .search-bar {
   position: static;
@@ -445,6 +536,48 @@ section[id] { scroll-margin-top: 120px; }
 .axis-label.axis-e { right: 14px; top: 50%; transform: translateY(-50%); }
 .axis-label.axis-w { left: 14px; top: 50%; transform: translateY(-50%); }
 .axis-label b { color: var(--gold-bright); font-weight: 500; }
+
+/* 罗盘工具条：搜索 + 年代筛选 */
+.compass-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px 0;
+}
+.compass-search {
+  flex: 1 1 240px;
+  min-width: 170px;
+  padding: 7px 14px 7px 32px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: rgba(18,24,38,0.7);
+  color: var(--text);
+  font-size: 12.5px;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: all 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%238A857A' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 13px center;
+}
+.compass-search::placeholder { color: var(--text-mute); }
+.compass-search:focus { border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 14%, transparent); }
+.era-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.era-chip {
+  padding: 5px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 11.5px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.era-chip:hover { border-color: var(--gold); color: var(--text); }
+.era-chip.active { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--gold-bright); }
 
 /* 学派筛选 */
 .school-filter {
@@ -1440,8 +1573,11 @@ footer .foot-twin a:hover {
 
 /* ───────────── 响应式 ───────────── */
 @media (max-width: 820px) {
-  .section-nav { justify-content: center; overflow-x: auto; flex-wrap: wrap; -webkit-overflow-scrolling: touch; }
-  .sn-link { flex: 0 0 auto; }
+  .section-nav { justify-content: flex-start; overflow-x: visible; flex-wrap: wrap; -webkit-overflow-scrolling: touch; }
+  .nav-burger { display: inline-flex; }
+  .sn-link { flex: 0 0 auto; display: none; }
+  .section-nav.menu-open .sn-link { display: inline-flex; }
+  .section-nav.menu-open { justify-content: center; }
   .site-header { flex-direction: column; padding-top: 40px; }
   .header-stats { width: 100%; }
   .compass-section, .timeline-section, .market-section, .debate-section, .policy-section, .terms-section { padding-left: 16px; padding-right: 16px; }
@@ -1482,6 +1618,7 @@ footer .foot-twin a:hover {
 
 <!-- 区块导航 -->
 <nav class="section-nav" id="sectionNav">
+  <button class="nav-burger" id="navBurger" aria-label="展开导航菜单" aria-expanded="false"><span></span><span></span><span></span></button>
   <a class="sn-link active" href="#compass"><span class="sn-num">01</span>经济罗盘</a>
   <a class="sn-link" href="#timeline"><span class="sn-num">02</span>思想交割</a>
   <a class="sn-link" href="#debate"><span class="sn-num">03</span>思想擂台</a>
@@ -1525,6 +1662,17 @@ footer .foot-twin a:hover {
       <div class="compass-canvas-wrap">
         <canvas id="compassCanvas"></canvas>
         <div class="compass-hint"><span class="key">⌘/Ctrl+滚轮</span> 缩放 · <span class="key">拖拽</span> 平移 · <span class="key">点击节点</span> 打开档案</div>
+      </div>
+      <div class="compass-tools">
+        <input class="compass-search" id="compassSearch" type="text" placeholder="搜索大师：姓名 / 学派 / 国籍 / 关键词…" autocomplete="off" aria-label="在罗盘中搜索大师">
+        <div class="era-filter" id="eraFilter" aria-label="按年代筛选">
+          <button class="era-chip active" data-era="">全部年代</button>
+          <button class="era-chip" data-era="18">18世纪</button>
+          <button class="era-chip" data-era="19">19世纪</button>
+          <button class="era-chip" data-era="20a">20世纪前期</button>
+          <button class="era-chip" data-era="20b">20世纪后期</button>
+          <button class="era-chip" data-era="21">21世纪</button>
+        </div>
       </div>
       <div class="school-filter" id="schoolFilter"></div>
     </div>
@@ -1593,7 +1741,11 @@ footer .foot-twin a:hover {
 <footer>
   <p>经济经纬 · 思想交易所 — <span class="foot-mark">ECO</span>DATA v1.0</p>
   <p class="foot-twin"><a href="https://yun-ai-base.github.io/twinverse/" target="_blank" rel="noopener">🧬 孪生宇宙 · 我的其他项目 →</a></p>
-</footer>
+  </footer>
+
+<button class="back-top" id="backTop" aria-label="返回顶部" title="返回顶部" aria-hidden="true">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
 
 <script src="data/economists.js"></script>
 <script>
@@ -1769,6 +1921,8 @@ footer .foot-twin a:hover {
   var view = { scale: 1, tx: 0, ty: 0, target: { scale: 1, tx: 0, ty: 0 } };
   var viewMode = 'core';     // 'core' 仅核心节点 | 'all' 全部
   var activeFilter = null;   // schoolId or null
+  var activeEra = null;      // '18'|'19'|'20a'|'20b'|'21'|null
+  var searchTerm = '';       // 罗盘搜索词
   var hoverId = null;
   var dragState = null;
   var nodePos = {};  // id -> {x,y} screen coords
@@ -1800,9 +1954,29 @@ footer .foot-twin a:hover {
     });
   }
 
+  function eraYear(e) {
+    var m = String(e.era || '').match(/(\d{4})/);
+    return m ? +m[1] : 0;
+  }
+  function inEra(e) {
+    if (!activeEra) return true;
+    var y = eraYear(e);
+    if (activeEra === '18') return y > 0 && y <= 1800;
+    if (activeEra === '19') return y > 1800 && y <= 1900;
+    if (activeEra === '20a') return y > 1900 && y <= 1950;
+    if (activeEra === '20b') return y > 1950 && y <= 2000;
+    if (activeEra === '21') return y > 2000;
+    return true;
+  }
+  function matchSearch(e) {
+    if (!searchTerm) return true;
+    var school = schoolMap[e.schoolId] || {};
+    var hay = (e.name + ' ' + (e.nationality || '') + ' ' + (e.era || '') + ' ' + (school.name || '')).toLowerCase();
+    return hay.indexOf(searchTerm) !== -1;
+  }
   function isVisible(e) {
-    if (activeFilter) return e.schoolId === activeFilter; // 学派筛选优先，忽略 core/all
-    return viewMode === 'all' || e.influence >= 9;        // 核心阈值：12 位
+    if (activeFilter) return e.schoolId === activeFilter && inEra(e) && matchSearch(e);
+    return (viewMode === 'all' || e.influence >= 9) && inEra(e) && matchSearch(e);
   }
 
   function draw() {
@@ -1890,6 +2064,16 @@ footer .foot-twin a:hover {
     });
 
     ctx.restore();
+
+    // 无匹配结果提示（屏幕坐标系）
+    if (ECONOMISTS.filter(isVisible).length === 0) {
+      ctx.font = '500 14px "Noto Serif SC", serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'rgba(169,162,149,0.85)';
+      ctx.fillText('没有匹配的大师，换个关键词或筛选条件试试', W / 2, H / 2);
+      ctx.textBaseline = 'alphabetic';
+    }
   }
 
   function drawAxis() {
@@ -2055,6 +2239,24 @@ footer .foot-twin a:hover {
     view.tx = 0; view.ty = 0; view.scale = 1;
     draw();
     openSchool(s);
+  });
+
+  /* ─── 罗盘搜索 ─── */
+  var compassSearch = document.getElementById('compassSearch');
+  compassSearch.addEventListener('input', function () {
+    searchTerm = compassSearch.value.trim().toLowerCase();
+    draw();
+  });
+
+  /* ─── 年代筛选 ─── */
+  var eraFilter = document.getElementById('eraFilter');
+  eraFilter.addEventListener('click', function (ev) {
+    var chip = ev.target.closest('.era-chip');
+    if (!chip) return;
+    eraFilter.querySelectorAll('.era-chip').forEach(function (c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    activeEra = chip.getAttribute('data-era') || null;
+    draw();
   });
 
   /* ─── 罗盘视图切换：核心 / 全部 ─── */
@@ -2350,7 +2552,14 @@ footer .foot-twin a:hover {
   function closeOverlay() {
     overlay.classList.remove('open');
     document.body.classList.remove('modal-open');
+    document.querySelectorAll('.selected').forEach(function (el) { el.classList.remove('selected'); });
     if (location.hash.indexOf('#/') === 0) history.replaceState(null, '', location.pathname + location.search);
+  }
+  /* 标记当前打开的卡片（选中态） */
+  function markSelected(sel, attr, id) {
+    document.querySelectorAll('.selected').forEach(function (el) { el.classList.remove('selected'); });
+    var el = document.querySelector(sel + '[' + attr + '="' + id + '"]');
+    if (el) el.classList.add('selected');
   }
   /* hash 深链接：同步地址栏，支持刷新/分享直达 */
   var currentRoute = null; // 当前弹层路由，用于避免重复渲染 & 支持 hash 切换
@@ -2443,7 +2652,7 @@ footer .foot-twin a:hover {
       + '<span class="meta-item">⌛ ' + e.lifespan + '</span>'
       + '</div>'
       + '</div>'
-      + (e.quote ? '<div class="detail-quote">' + e.quote + '</div>' : '')
+      + (e.quote ? '<div class="detail-quote">' + e.quote + (e.enQuote ? '<span class="quote-en">' + e.enQuote + '</span>' : '') + '</div>' : '')
       + '<div class="detail-body">'
       + (e.bio ? '<div class="d-block"><div class="d-block-title">生平 · Life</div><p>' + e.bio + '</p></div>' : '')
       + (theories ? '<div class="d-block"><div class="d-block-title">核心理论 · Theses</div><div class="theory-list">' + theories + '</div></div>' : '')
@@ -2467,6 +2676,7 @@ footer .foot-twin a:hover {
   }
 
   function openMilestone(md) {
+    markSelected('.milestone-item', 'data-ms', md.id);
     contentEl.innerHTML =
       '<div class="detail-hero" style="--sc:#C9A063">'
       + '<div class="detail-hero-top">'
@@ -2488,6 +2698,7 @@ footer .foot-twin a:hover {
   }
 
   function openPolicy(p) {
+    markSelected('.policy-card', 'data-policy', p.id);
     var figs = (p.economists || []).map(function (id) {
       var e = econMap[id];
       if (!e) return '';
@@ -2518,6 +2729,7 @@ footer .foot-twin a:hover {
   }
 
   function openTopic(t) {
+    markSelected('.life-topic', 'data-topic', t.id);
     var matches = (t.matches || []).map(function (m) {
       var e = econMap[m.econId];
       if (!e) return '';
@@ -2564,6 +2776,7 @@ footer .foot-twin a:hover {
   function openTerm(id) {
     var t = termMap[id];
     if (!t) return;
+    markSelected('.term-card', 'data-term', id);
     // 相关术语 chips
     var rels = (t.related || []).map(function (rid) {
       var rt = termMap[rid];
@@ -2721,6 +2934,47 @@ footer .foot-twin a:hover {
   }
 
   document.getElementById('detailClose').addEventListener('click', function () { closeOverlay(); });
+
+  /* ─── 全局键盘快捷键 ─── */
+  document.addEventListener('keydown', function (ev) {
+    var tag = (ev.target.tagName || '').toLowerCase();
+    var isTyping = tag === 'input' || tag === 'textarea' || ev.target.isContentEditable;
+    if (ev.key === 'Escape') {
+      if (overlay.classList.contains('open')) { closeOverlay(); return; }
+      var results = document.getElementById('searchResults');
+      if (results && !results.hidden) { results.hidden = true; return; }
+      if (document.activeElement === document.getElementById('searchInput')) { document.getElementById('searchInput').blur(); }
+      return;
+    }
+    if (ev.key === '/' && !isTyping) {
+      ev.preventDefault();
+      document.getElementById('searchInput').focus();
+    }
+  });
+
+  /* ─── 返回顶部 ─── */
+  var backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', function () {
+    backTop.classList.toggle('show', window.scrollY > 600);
+  }, { passive: true });
+  backTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ─── 移动端汉堡菜单 ─── */
+  var navBurger = document.getElementById('navBurger');
+  navBurger.addEventListener('click', function () {
+    var open = sectionNav.classList.toggle('menu-open');
+    navBurger.classList.toggle('open', open);
+    navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sectionNav.querySelectorAll('.sn-link').forEach(function (a) {
+    a.addEventListener('click', function () {
+      sectionNav.classList.remove('menu-open');
+      navBurger.classList.remove('open');
+      navBurger.setAttribute('aria-expanded', 'false');
+    });
+  });
   overlay.addEventListener('click', function (ev) {
     if (ev.target === overlay) closeOverlay();
   });

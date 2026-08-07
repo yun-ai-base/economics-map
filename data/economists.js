@@ -101,7 +101,7 @@ window._econData = {
       id: 'quesnay', name: '弗朗索瓦·魁奈', nameEn: 'François Quesnay', lifespan: '1694—1774',
       nationality: '法国', schoolId: 'mercantilist', era: '重农学派 · 1758',
       influence: 5, axis: { x: -0.2, y: 0.1 },
-      quote: '土地是财富的唯一源泉——只有农业能创造"净产品"，工商业只是对它的加工。',
+      quote: '土地是财富的唯一源泉——只有农业能创造"净产品"，工商业只是对它的加工。', enQuote: 'The philosophers have only interpreted the world, in various ways; the point, however, is to change it.', enQuote: 'Land is the sole source of wealth - only agriculture creates a \'net product\'; commerce and industry merely process it.',
       bio: '法国重农学派领袖，御医出身的经济学家。1758 年出版《经济表》，以"血液循环"式图表描绘财富在经济体中流转，被认为是宏观经济学最早的雏形。',
       keyTheories: [
         { title: '经济表', year: 1758, desc: '用图表刻画财富如何在农业、工商业与地主阶级之间循环流转，被视作最早的宏观经济模型。' },
@@ -124,7 +124,7 @@ window._econData = {
       id: 'turgot', name: '安·罗贝尔·杜尔哥', nameEn: 'Anne Robert Jacques Turgot', lifespan: '1727—1781',
       nationality: '法国', schoolId: 'mercantilist', era: '重农学派 · 1766',
       influence: 6, axis: { x: -0.3, y: 0.22 },
-      quote: '金钱只是财富的凭证——真正的财富在于土地、劳动与生产的果实。',
+      quote: '金钱只是财富的凭证——真正的财富在于土地、劳动与生产的果实。', enQuote: 'Money is but the certificate of wealth - true wealth lies in land, labor, and the fruits of production.',
       bio: '法国重农学派的理论大家，曾任财政大臣，1766 年出版《关于财富的形成和分配的考察》，将重农思想系统化，并最早提出边际报酬递减的思想雏形。',
       keyTheories: [
         { title: '财富的循环', year: 1766, desc: '以"收入分配与再投资"的循环解释经济运转，被认为是经济分析从零散洞见走向系统理论的桥梁。' },
@@ -148,7 +148,7 @@ window._econData = {
       id: 'smith', name: '亚当·斯密', nameEn: 'Adam Smith', lifespan: '1723—1790',
       nationality: '苏格兰', schoolId: 'classical', era: '古典时代 · 1776',
       influence: 10, axis: { x: 0.72, y: -0.28 },
-      quote: '我们期望的晚餐并非来自屠夫、酿酒师或面包师的恩惠，而是来自他们对自身利益的关切。',
+      quote: '我们期望的晚餐并非来自屠夫、酿酒师或面包师的恩惠，而是来自他们对自身利益的关切。', enQuote: 'It is not from the benevolence of the butcher, the brewer, or the baker that we expect our dinner, but from their regard to their own interest.',
       bio: '近代经济学的奠基人。1776 年出版《国富论》，提出劳动分工、自由市场和"看不见的手"三大命题，将经济学从道德哲学中独立为一门科学。',
       keyTheories: [
         { title: '看不见的手', year: 1776, desc: '个体追求私利时，价格机制会像一只无形的手，自发地把资源配置到社会最需要的地方——不需要中央命令。' },
@@ -175,7 +175,7 @@ window._econData = {
       id: 'ricardo', name: '大卫·李嘉图', nameEn: 'David Ricardo', lifespan: '1772—1823',
       nationality: '英国', schoolId: 'classical', era: '古典时代 · 1817',
       influence: 8, axis: { x: 0.55, y: -0.1 },
-      quote: '只要各国专注于自己相对成本最低的产品，自由贸易对所有人都有利。',
+      quote: '只要各国专注于自己相对成本最低的产品，自由贸易对所有人都有利。', enQuote: 'If each country specializes in the goods in which it has the lowest comparative cost, free trade benefits all.',
       bio: '股票经纪人出身的经济学家。1817 年出版《政治经济学及赋税原理》，提出比较优势理论和地租理论，是古典经济学最严谨的系统化者。',
       keyTheories: [
         { title: '比较优势', year: 1817, desc: '即使一国在所有产品上都更高效，专注生产相对差距最小的产品再贸易，双方仍都能获益。' },
@@ -200,7 +200,7 @@ window._econData = {
       id: 'malthus', name: '托马斯·马尔萨斯', nameEn: 'Thomas Malthus', lifespan: '1766—1834',
       nationality: '英国', schoolId: 'classical', era: '古典时代 · 1798',
       influence: 6, axis: { x: -0.05, y: -0.35 },
-      quote: '人口按几何级数增长，而食物按算术级数增长——二者终将冲突。',
+      quote: '人口按几何级数增长，而食物按算术级数增长——二者终将冲突。', enQuote: 'Population, when unchecked, increases in a geometrical ratio; subsistence increases only in an arithmetical ratio.',
       bio: '牧师兼经济学家。1798 年匿名发表《人口论》，断言人口增长快于食物供给，警示饥荒与贫困。他的悲观预言深刻影响了达尔文和马克思。',
       keyTheories: [
         { title: '人口陷阱', year: 1798, desc: '人口呈几何级数增长，粮食只呈算术级数增长，若不节制，贫困不可避免。' },
@@ -224,7 +224,7 @@ window._econData = {
       id: 'mill', name: '约翰·斯图亚特·穆勒', nameEn: 'John Stuart Mill', lifespan: '1806—1873',
       nationality: '英国', schoolId: 'classical', era: '古典晚期 · 1848',
       influence: 7, axis: { x: 0.35, y: 0.05 },
-      quote: '国家不应被拴在生产财富的欲望上——生活质量的真正问题，是如何更好地分配闲暇与美好。',
+      quote: '国家不应被拴在生产财富的欲望上——生活质量的真正问题，是如何更好地分配闲暇与美好。', enQuote: 'A nation is not to be chained to the desire of producing wealth - the real question of the quality of life is how to better distribute leisure and beauty.',
       bio: '神童出身的哲学家兼经济学家。1848 年出版《政治经济学原理》，调和古典传统与社会主义关怀，是 19 世纪中叶最具影响力的经济学通才。',
       keyTheories: [
         { title: '静态状态', year: 1848, desc: '经济增长终将趋于平稳，但人类的价值不在于永远增长，而在于如何过好增长后的生活。' },
@@ -277,7 +277,7 @@ window._econData = {
       id: 'engels', name: '弗里德里希·恩格斯', nameEn: 'Friedrich Engels', lifespan: '1820—1895',
       nationality: '德国', schoolId: 'marx', era: '19世纪批判',
       influence: 6, axis: { x: -0.7, y: 0.05 },
-      quote: '资本来到世间，从头到脚，每个毛孔都滴着血和肮脏的东西。',
+      quote: '资本来到世间，从头到脚，每个毛孔都滴着血和肮脏的东西。', enQuote: 'Capital comes into the world dripping from head to foot, from every pore, with blood and dirt.',
       bio: '马克思的挚友与共同创立者。出身工厂主家庭，以亲身观察写就《英国工人阶级状况》，为历史唯物主义提供了经验基础。',
       keyTheories: [
         { title: '英国工人阶级状况', year: 1845, desc: '以实地调查记录工业革命中工人的非人处境，是经验社会研究的早期范例。' },
@@ -300,7 +300,7 @@ window._econData = {
       id: 'jcons', name: '威廉·斯坦利·杰文斯', nameEn: 'William Stanley Jevons', lifespan: '1835—1882',
       nationality: '英国', schoolId: 'marginal', era: '边际革命 · 1871',
       influence: 6, axis: { x: 0.5, y: 0.35 },
-      quote: '价值完全取决于效用——它随我们拥有的商品数量而变化。',
+      quote: '价值完全取决于效用——它随我们拥有的商品数量而变化。', enQuote: 'Value depends entirely upon utility - it varies with the quantity of the commodity we possess.',
       bio: '英国逻辑学家与经济学家。1871 年出版《政治经济学理论》，与门格尔、瓦尔拉斯几乎同时独立提出边际效用理论，开启"边际革命"。',
       keyTheories: [
         { title: '边际效用', year: 1871, desc: '价值源于边际效用——最后一单位商品的满足程度，而非总效用。' },
@@ -324,7 +324,7 @@ window._econData = {
       id: 'menger', name: '卡尔·门格尔', nameEn: 'Carl Menger', lifespan: '1840—1921',
       nationality: '奥地利', schoolId: 'marginal', era: '边际革命 · 1871',
       influence: 7, axis: { x: 0.55, y: 0.15 },
-      quote: '经济学的对象不是物本身，而是人类为满足需要而作出的决策。',
+      quote: '经济学的对象不是物本身，而是人类为满足需要而作出的决策。', enQuote: 'The object of economics is not things themselves, but the decisions men make to satisfy their needs.',
       bio: '奥地利学派的创始人。1871 年出版《国民经济学原理》，以主观价值论对抗历史学派，主张经济学应研究人的选择。',
       keyTheories: [
         { title: '主观价值论', year: 1871, desc: '物品的价值源于人对其效用与稀缺性的主观判断，而非劳动投入。' },
@@ -348,7 +348,7 @@ window._econData = {
       id: 'walras', name: '莱昂·瓦尔拉斯', nameEn: 'Léon Walras', lifespan: '1834—1910',
       nationality: '法国', schoolId: 'marginal', era: '边际革命 · 1874',
       influence: 7, axis: { x: 0.25, y: 0.15 },
-      quote: '一般均衡：当所有市场同时出清，整个经济系统达到一致的价格。',
+      quote: '一般均衡：当所有市场同时出清，整个经济系统达到一致的价格。', enQuote: 'General equilibrium: when all markets clear simultaneously, the whole economic system reaches a consistent set of prices.',
       bio: '洛桑学派创始人。1874 年出版《纯粹经济学要义》，用方程组刻画所有市场同时达到均衡的一般均衡理论，被誉为经济学最伟大的理论建构之一。',
       keyTheories: [
         { title: '一般均衡', year: 1874, desc: '所有商品和要素市场同时出清时，存在一组均衡价格，令总需求等于总供给。' },
@@ -372,7 +372,7 @@ window._econData = {
       id: 'marshall', name: '阿尔弗雷德·马歇尔', nameEn: 'Alfred Marshall', lifespan: '1842—1924',
       nationality: '英国', schoolId: 'marginal', era: '新古典 · 1890',
       influence: 8, axis: { x: 0.45, y: 0.25 },
-      quote: '经济学是研究人类日常生活事务的学问——它考察个人和社会行动中与福利最紧密相关的部分。',
+      quote: '经济学是研究人类日常生活事务的学问——它考察个人和社会行动中与福利最紧密相关的部分。', enQuote: 'Economics is a study of mankind in the ordinary business of life - it examines that part of individual and social action which is most closely connected with the attainment of welfare.',
       bio: '剑桥学派的奠基人，现代微观经济学的缔造者。1890 年出版《经济学原理》，提出供给需求交叉定价的"剪刀"模型，将供求分析确立为经济学核心工具。',
       keyTheories: [
         { title: '供需均衡', year: 1890, desc: '价格由供给与需求两条曲线交叉决定，如同剪刀上下刃一起剪开。' },
@@ -398,7 +398,7 @@ window._econData = {
       id: 'veblen', name: '托斯丹·凡勃伦', nameEn: 'Thorstein Veblen', lifespan: '1857—1929',
       nationality: '美国', schoolId: 'institutional', era: '制度学派 · 1899',
       influence: 6, axis: { x: 0.15, y: 0.3 },
-      quote: '消费的目的常常不是使用，而是炫耀——人们买贵的东西，正因为它们贵。',
+      quote: '消费的目的常常不是使用，而是炫耀——人们买贵的东西，正因为它们贵。', enQuote: 'Conspicuous consumption: people buy expensive things precisely because they are expensive.',
       bio: '美国制度经济学创始人。1899 年出版《有闲阶级论》，提出"炫耀性消费"概念，把经济学从理性计算的圣殿拉回社会习惯与权力结构的泥沼。',
       keyTheories: [
         { title: '炫耀性消费', year: 1899, desc: '人们通过购买高价商品向他人传递地位信号，价格越贵越有人买。' },
@@ -422,7 +422,7 @@ window._econData = {
       id: 'galbraith', name: '约翰·加尔布雷思', nameEn: 'John Kenneth Galbraith', lifespan: '1908—2006',
       nationality: '美国', schoolId: 'institutional', era: '制度学派 · 1958',
       influence: 6, axis: { x: -0.3, y: 0.15 },
-      quote: '富裕社会的问题，不是生产不足，而是私富与公贫的失衡。',
+      quote: '富裕社会的问题，不是生产不足，而是私富与公贫的失衡。', enQuote: 'The problem of the affluent society is not scarcity of production, but the imbalance between private affluence and public squalor.',
       bio: '美国制度经济学派代表，哈佛教授。1958 年出版《富裕社会》，批判战后美国"私人富足与公共贫困并存"的畸形结构。',
       keyTheories: [
         { title: '私富公贫', year: 1958, desc: '私人消费无限膨胀，而道路、学校、医疗等公共品却长期不足。' },
@@ -446,7 +446,7 @@ window._econData = {
       id: 'keynes', name: '约翰·梅纳德·凯恩斯', nameEn: 'John Maynard Keynes', lifespan: '1883—1946',
       nationality: '英国', schoolId: 'keynesian', era: '宏观革命 · 1936',
       influence: 10, axis: { x: -0.65, y: -0.25 },
-      quote: '从长远看，我们都死了。经济学的当下任务是解决眼前的失业与萧条。',
+      quote: '从长远看，我们都死了。经济学的当下任务是解决眼前的失业与萧条。', enQuote: 'In the long run we are all dead. The immediate task of economics is to cure unemployment and depression here and now.',
       bio: '20 世纪最具影响力的经济学家。1936 年出版《就业、利息和货币通论》，创立宏观经济学，主张政府用财政政策熨平经济波动，开创"凯恩斯革命"。',
       keyTheories: [
         { title: '有效需求', year: 1936, desc: '经济萧条源于总需求不足——消费加投资的总支出不够，产出和就业就萎靡。' },
@@ -474,7 +474,7 @@ window._econData = {
       nationality: '英国', schoolId: 'keynesian', era: '凯恩斯主义 · 1937',
       influence: 7, axis: { x: -0.35, y: -0.2 },
       nobel: true,
-      quote: '把凯恩斯装进 IS-LM 的抽屉里，宏观经济学就有了可教学的骨架。',
+      quote: '把凯恩斯装进 IS-LM 的抽屉里，宏观经济学就有了可教学的骨架。', enQuote: 'By putting Keynes into the drawer of IS-LM, macroeconomics gained a teachable skeleton.',
       bio: '英国经济学家，1972 年诺贝尔经济学奖得主。1937 年提出 IS-LM 模型，把凯恩斯理论图形化，成为宏观经济学标准分析工具。',
       keyTheories: [
         { title: 'IS-LM 模型', year: 1937, desc: '商品市场（IS）与货币市场（LM）同时均衡，决定利率与产出——凯恩斯主义的标准画像。' },
@@ -497,7 +497,7 @@ window._econData = {
       id: 'minsky', name: '海曼·明斯基', nameEn: 'Hyman Minsky', lifespan: '1919—1996',
       nationality: '美国', schoolId: 'keynesian', era: '金融不稳定性 · 1986',
       influence: 7, axis: { x: -0.4, y: -0.35 },
-      quote: '稳定本身就孕育着不稳定——平静时期人们不断加杠杆，直到崩溃到来。',
+      quote: '稳定本身就孕育着不稳定——平静时期人们不断加杠杆，直到崩溃到来。', enQuote: 'Stability itself is destabilizing - in tranquil times people pile on leverage until collapse arrives.',
       bio: '美国经济学家，金融不稳定性假说的提出者。他在 1986 年预言了金融危机的内生机制，却在 2008 年金融危机后因"明斯基时刻"一词而声名大噪。',
       keyTheories: [
         { title: '金融不稳定假说', year: 1986, desc: '经济越稳定，人们越敢加杠杆，从对冲融资滑向投机融资和庞氏融资，最终酿成危机。' },
@@ -521,7 +521,7 @@ window._econData = {
       id: 'mises', name: '路德维希·冯·米塞斯', nameEn: 'Ludwig von Mises', lifespan: '1881—1973',
       nationality: '奥地利', schoolId: 'austrian', era: '奥地利学派 · 1912',
       influence: 8, axis: { x: 0.9, y: -0.05 },
-      quote: '价格是自由社会最伟大的协调器——它把亿万分散的知识汇聚成一个信号。',
+      quote: '价格是自由社会最伟大的协调器——它把亿万分散的知识汇聚成一个信号。', enQuote: 'Prices are the great coordinators of the free society - they condense billions of dispersed knowledge into a single signal.',
       bio: '奥地利学派的旗手。1912 年出版《货币与信用理论》，1932 年出版《人的行动》，将主观价值论发展为完整的人类行动学体系。',
       keyTheories: [
         { title: '人类行动学', year: 1949, desc: '经济学是研究有目的的人类行动的科学，从"人必行动"这一公理推演出全部经济学。' },
@@ -546,7 +546,7 @@ window._econData = {
       nationality: '奥地利/英国', schoolId: 'austrian', era: '奥地利学派 · 1944',
       influence: 9, axis: { x: 0.88, y: -0.15 },
       nobel: true,
-      quote: '价格体系是一种奇妙的机制——它用最少的语言，传递了分散在无数人手中的知识。',
+      quote: '价格体系是一种奇妙的机制——它用最少的语言，传递了分散在无数人手中的知识。', enQuote: 'The price system is a marvelous mechanism - with the least information it transmits the knowledge dispersed among countless people.',
       bio: '1974 年诺贝尔经济学奖得主。1944 年出版《通往奴役之路》，1974 年与缪尔达尔共获诺贝尔奖，是自由市场思想在 20 世纪的最高代言人。',
       keyTheories: [
         { title: '自发秩序', year: 1944, desc: '市场秩序不是任何人设计出来的，而是无数人自愿行动的产物，优于任何集中计划。' },
@@ -572,7 +572,7 @@ window._econData = {
       nationality: '美国', schoolId: 'chicago', era: '芝加哥学派 · 1963',
       influence: 9, axis: { x: 0.7, y: -0.35 },
       nobel: true,
-      quote: '通货膨胀无论何时何地都是一种货币现象。',
+      quote: '通货膨胀无论何时何地都是一种货币现象。', enQuote: 'Inflation is always and everywhere a monetary phenomenon.',
       bio: '1976 年诺贝尔经济学奖得主，芝加哥学派领袖。1963 年出版《美国货币史》，论证货币供应是经济波动的根源，掀起对凯恩斯主义的"货币主义革命"。',
       keyTheories: [
         { title: '货币数量论', year: 1963, desc: '长期看，物价涨幅与货币供应量增速一致——印钱多，物价涨，通胀是货币现象。' },
@@ -600,7 +600,7 @@ window._econData = {
       nationality: '英国', schoolId: 'chicago', era: '制度经济学 · 1960',
       influence: 9, axis: { x: 0.55, y: 0.1 },
       nobel: true,
-      quote: '如果交易成本为零，资源的初始分配就不影响最终效率——但现实里交易成本无处不在。',
+      quote: '如果交易成本为零，资源的初始分配就不影响最终效率——但现实里交易成本无处不在。', enQuote: 'If transaction costs were zero, the initial allocation of resources would not affect final efficiency - but in reality transaction costs are everywhere.',
       bio: '1991 年诺贝尔经济学奖得主。1937 年提出"交易成本"，1960 年提出"科斯定理"，重新定义了企业与市场的边界，被称作"法律经济学之父"。',
       keyTheories: [
         { title: '科斯定理', year: 1960, desc: '产权界定清晰且交易成本足够低时，资源配置效率与初始产权归谁无关。' },
@@ -626,7 +626,7 @@ window._econData = {
       nationality: '美国', schoolId: 'chicago', era: '芝加哥学派 · 1962',
       influence: 7, axis: { x: 0.6, y: 0.05 },
       nobel: true,
-      quote: '监管往往是被监管行业自己争取来的——他们用监管筑起护城河。',
+      quote: '监管往往是被监管行业自己争取来的——他们用监管筑起护城河。', enQuote: 'Regulation is often acquired by the industry itself - it uses regulation to build a moat.',
       bio: '1982 年诺贝尔经济学奖得主。1962 年提出"规制俘获理论"，1971 年开创"监管经济学"，将政治行为纳入经济分析。',
       keyTheories: [
         { title: '规制俘获', year: 1971, desc: '监管机构最终常被被监管行业俘获，监管成为保护既有企业的壁垒。' },
@@ -651,7 +651,7 @@ window._econData = {
       nationality: '美国', schoolId: 'chicago', era: '经济学帝国主义 · 1981',
       influence: 8, axis: { x: 0.5, y: 0.4 },
       nobel: true,
-      quote: '经济学是一种方法，不是一套主题——它能分析婚姻、犯罪、歧视，正如分析商品与市场。',
+      quote: '经济学是一种方法，不是一套主题——它能分析婚姻、犯罪、歧视，正如分析商品与市场。', enQuote: 'Economics is a method, not a subject matter - it can analyze marriage, crime, and discrimination just as it analyzes goods and markets.',
       bio: '1992 年诺贝尔经济学奖得主。把经济学方法推向婚姻、生育、犯罪、歧视等"非经济"领域，被称为"经济学帝国主义者"。',
       keyTheories: [
         { title: '人力资本', year: 1964, desc: '教育、培训、健康都是对自身的投资，其回报率决定你的人生收益曲线。' },
@@ -677,7 +677,7 @@ window._econData = {
       nationality: '美国', schoolId: 'chicago', era: '理性预期革命 · 1976',
       influence: 8, axis: { x: 0.5, y: -0.25 },
       nobel: true,
-      quote: '如果你以为政策能愚弄所有人，那么政策的效果将被人们的预期所抵消。',
+      quote: '如果你以为政策能愚弄所有人，那么政策的效果将被人们的预期所抵消。', enQuote: 'If you think policy can fool everyone, its effects will be canceled out by people\'s expectations.',
       bio: '1995 年诺贝尔经济学奖得主，理性预期革命的主将。1976 年提出"卢卡斯批判"，动摇了凯恩斯主义宏观经济模型的根基。',
       keyTheories: [
         { title: '卢卡斯批判', year: 1976, desc: '人们会预期政策并调整行为，基于历史数据的宏观模型在政策改变时会失效。' },
@@ -701,7 +701,7 @@ window._econData = {
       id: 'pigou', name: '阿瑟·庇古', nameEn: 'Arthur Pigou', lifespan: '1877—1959',
       nationality: '英国', schoolId: 'welfare', era: '福利经济学 · 1920',
       influence: 7, axis: { x: -0.15, y: -0.05 },
-      quote: '当私人成本与社会成本相分离，市场就会失灵——税收与补贴可以修正这种偏差。',
+      quote: '当私人成本与社会成本相分离，市场就会失灵——税收与补贴可以修正这种偏差。', enQuote: 'When private cost diverges from social cost, the market fails - taxes and subsidies can correct the divergence.',
       bio: '剑桥学派经济学家，福利经济学之父。1920 年出版《福利经济学》，首次系统提出外部性与"庇古税"，为环境经济学奠定基础。',
       keyTheories: [
         { title: '外部性', year: 1920, desc: '工厂排污让邻居受损却不用付钱——私人成本小于社会成本，市场对此失灵。' },
@@ -726,7 +726,7 @@ window._econData = {
       nationality: '美国', schoolId: 'welfare', era: '公共选择 · 1962',
       influence: 7, axis: { x: 0.15, y: -0.3 },
       nobel: true,
-      quote: '政客不是天使，他们也在追求自己的利益——公共选择理论把经济学方法用在政治上。',
+      quote: '政客不是天使，他们也在追求自己的利益——公共选择理论把经济学方法用在政治上。', enQuote: 'Politicians are not angels; they pursue their own interests too - public choice theory applies economic method to politics.',
       bio: '1986 年诺贝尔经济学奖得主，公共选择学派创始人。1962 年出版《同意的计算》，用经济学方法分析政治决策，揭示政府同样可能失灵。',
       keyTheories: [
         { title: '政府失灵', year: 1962, desc: '政客与官僚同样自利，政治过程同样可能偏离公共利益——不能假设政府是完美校正者。' },
@@ -751,7 +751,7 @@ window._econData = {
       nationality: '美国', schoolId: 'game', era: '新古典综合 · 1948',
       influence: 9, axis: { x: 0.1, y: -0.1 },
       nobel: true,
-      quote: '经济学是一门可以证明的科学，它用数学的语言思考，用模型的尺度丈量。',
+      quote: '经济学是一门可以证明的科学，它用数学的语言思考，用模型的尺度丈量。', enQuote: 'Economics is a science that can be proven - it thinks in the language of mathematics and measures with the yardstick of models.',
       bio: '1970 年诺贝尔经济学奖得主，现代经济学教父。1948 年出版《经济学》教科书，主导战后宏观与微观的"新古典综合"。',
       keyTheories: [
         { title: '新古典综合', year: 1948, desc: '把马歇尔微观与凯恩斯宏观熔于一炉，成为战后经济学主流范式。' },
@@ -778,7 +778,7 @@ window._econData = {
       nationality: '美国', schoolId: 'game', era: '博弈论 · 1950',
       influence: 8, axis: { x: 0.2, y: 0.5 },
       nobel: true,
-      quote: '在均衡中，每个人都在给定他人策略时选择最优——没人有单方面改变的动机。',
+      quote: '在均衡中，每个人都在给定他人策略时选择最优——没人有单方面改变的动机。', enQuote: 'In equilibrium, everyone chooses optimally given the strategies of others - no one has an incentive to deviate unilaterally.',
       bio: '1994 年诺贝尔经济学奖得主。1950 年博士论文提出"纳什均衡"，定义了非合作博弈的解，彻底改变经济学对策略互动的理解。',
       keyTheories: [
         { title: '纳什均衡', year: 1950, desc: '当每位参与者在他人策略既定下都无利可图地改变自己策略时，博弈达到均衡。' },
@@ -802,7 +802,7 @@ window._econData = {
       nationality: '美国', schoolId: 'game', era: '社会选择 · 1951',
       influence: 8, axis: { x: 0.05, y: -0.2 },
       nobel: true,
-      quote: '不存在一个完全公平又不会矛盾的社会选择规则——除非它是独裁。',
+      quote: '不存在一个完全公平又不会矛盾的社会选择规则——除非它是独裁。', enQuote: 'There is no social choice rule that is both fully fair and consistent - unless it is dictatorship.',
       bio: '1972 年诺贝尔经济学奖得主（最年轻的获奖者之一）。1951 年提出"不可能定理"，证明不存在完美兼顾公平与一致的社会投票规则。',
       keyTheories: [
         { title: '阿罗不可能定理', year: 1951, desc: '无法构造一种同时满足帕累托最优、无关项独立等条件的完美社会决策规则。' },
@@ -826,7 +826,7 @@ window._econData = {
       nationality: '以色列/美国', schoolId: 'behavioral', era: '行为经济学 · 1979',
       influence: 10, axis: { x: 0.15, y: 0.45 },
       nobel: true,
-      quote: '人类有两种思维：系统1 快速直觉，系统2 缓慢理性——而生活大多数时候由系统1 接管。',
+      quote: '人类有两种思维：系统1 快速直觉，系统2 缓慢理性——而生活大多数时候由系统1 接管。', enQuote: 'Humans have two modes of thought: System 1, fast and intuitive; System 2, slow and rational - and most of life is run by System 1.',
       bio: '2002 年诺贝尔经济学奖得主（心理学家首获经济学诺奖）。与特沃斯基共同提出前景理论，揭示人类决策中的系统性偏差，开创行为经济学。',
       keyTheories: [
         { title: '前景理论', year: 1979, desc: '人对损失的痛苦大于对等额收益的快乐，且对概率有系统性扭曲——价值评估是非线性的。' },
@@ -853,7 +853,7 @@ window._econData = {
       nationality: '美国', schoolId: 'behavioral', era: '行为经济学 · 2017',
       influence: 9, axis: { x: 0.2, y: 0.35 },
       nobel: true,
-      quote: '别指望人算得完美，但你可以设计环境，让"错误"指向更好的选择。',
+      quote: '别指望人算得完美，但你可以设计环境，让"错误"指向更好的选择。', enQuote: 'Do not expect people to calculate perfectly - but you can design the environment so that \'errors\' lead toward better choices.',
       bio: '2017 年诺贝尔经济学奖得主，行为经济学与行为金融学的奠基人。提出"心理账户"与"助推"理论，让行为经济学从理论走向政策。',
       keyTheories: [
         { title: '心理账户', year: 1985, desc: '你的钱不是一笔，而是被划分为不同账户——工资、奖金、横财各有心理边界，花法截然不同。' },
@@ -880,7 +880,7 @@ window._econData = {
       nationality: '印度', schoolId: 'development', era: '发展经济学 · 1998',
       influence: 9, axis: { x: -0.5, y: 0.25 },
       nobel: true,
-      quote: '发展不是财富的增长，而是能力的扩展——让人过上他珍视的生活。',
+      quote: '发展不是财富的增长，而是能力的扩展——让人过上他珍视的生活。', enQuote: 'Development is not the growth of wealth, but the expansion of capabilities - enabling people to live the lives they value.',
       bio: '1998 年诺贝尔经济学奖得主。1998 年提出"可行能力"理论，把发展从 GDP 转向人的自由与能力，参与设计人类发展指数（HDI）。',
       keyTheories: [
         { title: '可行能力', year: 1999, desc: '衡量发展的标准不是收入多少，而是人实际能做什么、能成为什么。' },
@@ -905,7 +905,7 @@ window._econData = {
       id: 'paret', name: '维尔弗雷多·帕累托', nameEn: 'Vilfredo Pareto', lifespan: '1848—1923',
       nationality: '意大利', schoolId: 'marginal', era: '洛桑学派 · 1906',
       influence: 7, axis: { x: 0.35, y: -0.05 },
-      quote: '80% 的效果，往往由 20% 的原因造成——收入分布遵循这种不成比例的规律。',
+      quote: '80% 的效果，往往由 20% 的原因造成——收入分布遵循这种不成比例的规律。', enQuote: 'Eighty percent of effects often come from twenty percent of causes - income distribution follows this disproportionate pattern.',
       bio: '意大利经济学家与社会学家，洛桑学派继承人。提出帕累托最优与"二八定律"（帕累托法则），将福利经济学推向实证化。',
       keyTheories: [
         { title: '帕累托最优', year: 1906, desc: '无法在不损害任何人的前提下改善某人的状态，即为最优——效率的基准。' },
@@ -930,7 +930,7 @@ window._econData = {
       nationality: '美国', schoolId: 'welfare', era: '信息经济学 · 2001',
       influence: 8, axis: { x: -0.3, y: 0.35 },
       nobel: true,
-      quote: '如果买家分不清好货坏货，市场就会被"柠檬"（次品）淹没——信息不对称是市场的根本裂缝。',
+      quote: '如果买家分不清好货坏货，市场就会被"柠檬"（次品）淹没——信息不对称是市场的根本裂缝。', enQuote: 'If buyers cannot tell good products from bad, the market will be flooded with lemons - asymmetric information is a fundamental market failure.',
       bio: '2001 年诺贝尔经济学奖得主（与斯宾塞、斯蒂格利茨同获）。1970 年发表《柠檬市场》，用二手车市场揭示信息不对称如何导致逆向选择，开创信息经济学。',
       keyTheories: [
         { title: '柠檬市场', year: 1970, desc: '买家无法分辨二手车好坏时，只愿付平均价，好车退出，市场只剩"柠檬"（次品）——劣币驱逐良币。' },
@@ -957,7 +957,7 @@ window._econData = {
       nationality: '美国', schoolId: 'welfare', era: '信息经济学 · 2001',
       influence: 9, axis: { x: -0.5, y: 0.2 },
       nobel: true,
-      quote: '当信息不对称时，看不见的手常常看不见——市场需要制度与干预来纠偏。',
+      quote: '当信息不对称时，看不见的手常常看不见——市场需要制度与干预来纠偏。', enQuote: 'When information is asymmetric, the invisible hand is often invisible - markets need institutions and intervention to correct it.',
       bio: '2001 年诺贝尔经济学奖得主，信息经济学旗手，曾任世界银行首席经济学家。系统研究了信息不对称下的逆向选择、道德风险与市场失灵，晚年转向全球化批判。',
       keyTheories: [
         { title: '信息不对称的市场失灵', year: 1976, desc: '信贷市场、保险市场、劳动市场中，信息劣势一方会被系统性伤害，市场均衡不是最优。' },
@@ -984,7 +984,7 @@ window._econData = {
       nationality: '美国', schoolId: 'game', era: '增长理论 · 1987',
       influence: 8, axis: { x: 0.35, y: -0.45 },
       nobel: true,
-      quote: '经济增长的绝大部分，无法用资本和劳动的增加来解释——剩下的，叫技术进步。',
+      quote: '经济增长的绝大部分，无法用资本和劳动的增加来解释——剩下的，叫技术进步。', enQuote: 'Most of economic growth cannot be explained by more capital and labor - the remainder is called technological progress.',
       bio: '1987 年诺贝尔经济学奖得主。1956 年提出索洛增长模型，证明长期增长主要来自技术进步而非资本积累，是现代增长理论的开端。',
       keyTheories: [
         { title: '索洛增长模型', year: 1956, desc: '资本积累只会带来短期增长，长期人均产出增长几乎全靠技术进步——"索洛残差"。' },
@@ -1011,7 +1011,7 @@ window._econData = {
       nationality: '美国', schoolId: 'welfare', era: '气候经济学 · 2018',
       influence: 7, axis: { x: -0.15, y: -0.35 },
       nobel: true,
-      quote: '气候是最典型的全球公共品——每个人排放，却没人买单，最终所有人一起承受。',
+      quote: '气候是最典型的全球公共品——每个人排放，却没人买单，最终所有人一起承受。', enQuote: 'Climate is the most typical global public good - everyone emits, nobody pays, and in the end everyone suffers together.',
       bio: '2018 年诺贝尔经济学奖得主（与罗默同获）。将气候变化整合进经济增长模型，创建 DICE 综合评估模型，为气候政策提供成本收益的量化基础。',
       keyTheories: [
         { title: 'DICE 模型', year: 1994, desc: '把气候系统与经济系统耦合进一个模型，量化减排成本与升温损失的权衡。' },
@@ -1038,7 +1038,7 @@ window._econData = {
       nationality: '英国', schoolId: 'development', era: '消费与贫困 · 2015',
       influence: 8, axis: { x: -0.25, y: 0.4 },
       nobel: true,
-      quote: '贫困不只是缺钱，更关乎能力、健康与尊严——测量贫困本身就是一个政治选择。',
+      quote: '贫困不只是缺钱，更关乎能力、健康与尊严——测量贫困本身就是一个政治选择。', enQuote: 'Poverty is not just a lack of money; it concerns capability, health, and dignity - measuring poverty itself is a political choice.',
       bio: '2015 年诺贝尔经济学奖得主。以家庭微观数据研究消费、储蓄与贫困，开发出科学的贫困测量方法，重塑了发展与福利研究。',
       keyTheories: [
         { title: '近乎理想需求系统', year: 1980, desc: '用家庭支出数据估计消费结构，成为实证消费经济学标准工具。' },
@@ -1065,7 +1065,7 @@ window._econData = {
       nationality: '美国', schoolId: 'keynesian', era: '新贸易理论 · 2008',
       influence: 9, axis: { x: 0.1, y: -0.35 },
       nobel: true,
-      quote: '贸易不是零和游戏，但政策往往是——规模经济让"谁先进入"变得至关重要。',
+      quote: '贸易不是零和游戏，但政策往往是——规模经济让"谁先进入"变得至关重要。', enQuote: 'Trade is not a zero-sum game, but policy often is - economies of scale make who enters first crucial.',
       bio: '2008 年诺贝尔经济学奖得主。创立新贸易理论，用规模经济与垄断竞争解释产业内贸易，是当代最著名的经济评论家之一。',
       keyTheories: [
         { title: '新贸易理论', year: 1979, desc: '贸易不再只靠比较优势——规模经济让同类产品也互相进出口（德国卖宝马到日本，日本卖丰田到德国）。' },
@@ -1092,7 +1092,7 @@ window._econData = {
       nationality: '美国', schoolId: 'game', era: '市场设计 · 2012',
       influence: 7, axis: { x: 0.25, y: 0.5 },
       nobel: true,
-      quote: '有些市场不是用钱交易的——你无法给肾移植、学校录取、工作配对定个价，但它们依然需要"设计"。',
+      quote: '有些市场不是用钱交易的——你无法给肾移植、学校录取、工作配对定个价，但它们依然需要"设计"。', enQuote: 'Some markets do not trade with money - you cannot price a kidney transplant, a school admission, or a job match, yet they still need markets.',
       bio: '2012 年诺贝尔经济学奖得主（与沙普利同获）。把博弈论用于"市场设计"，设计肾移植交换链、纽约市学校录取匹配，让没有价格的市场也能高效运作。',
       keyTheories: [
         { title: '市场设计', year: 2003, desc: '当价格机制失灵（如器官、择校），用匹配算法设计市场规则，实现稳定有效配对。' },
@@ -1118,7 +1118,7 @@ window._econData = {
       nationality: '美国', schoolId: 'game', era: '合作博弈 · 2012',
       influence: 7, axis: { x: 0.15, y: 0.58 },
       nobel: true,
-      quote: '合作的收益如何分配，应当反映每个人的边际贡献——这比"平分"更公平。',
+      quote: '合作的收益如何分配，应当反映每个人的边际贡献——这比"平分"更公平。', enQuote: 'The gains of cooperation should be distributed according to each participant\'s marginal contribution - this is fairer than equal division.',
       bio: '2012 年诺贝尔经济学奖得主（与罗斯同获）。提出沙普利值，用边际贡献决定合作中的收益分配，是合作博弈论的奠基人。',
       keyTheories: [
         { title: '沙普利值', year: 1953, desc: '合作联盟的收益按每个成员的边际贡献分配——先算你加入的边际价值，再按平均化规则分摊。' },
@@ -1144,7 +1144,7 @@ window._econData = {
       id: 'zhangwuchang', name: '张五常', nameEn: 'Steven Cheung', lifespan: '1935—',
       nationality: '中国（香港）', schoolId: 'chicago', era: '产权与新制度 · 1969',
       influence: 7, axis: { x: 0.78, y: 0.05 },
-      quote: '产权界定清楚了，价格就有意义；价格有意义，市场就有力量。',
+      quote: '产权界定清楚了，价格就有意义；价格有意义，市场就有力量。', enQuote: 'Once property rights are clearly defined, prices have meaning; once prices have meaning, markets have power.',
       bio: '芝加哥大学经济学博士、科斯的学生，以"佃农理论"享誉学界。坚持用交易成本与产权解释中国经济现象，是"制度经济学看中国"的代表人物。',
       keyTheories: [
         { title: '佃农理论', year: 1969, desc: '证明分成地租与固定地租在交易成本为零时等价，颠覆了传统"分成制必然低效"的论断，成为产权经济学的经典实证。' },
@@ -1168,7 +1168,7 @@ window._econData = {
       id: 'linyifu', name: '林毅夫', nameEn: 'Justin Yifu Lin', lifespan: '1952—',
       nationality: '中国', schoolId: 'development', era: '新结构经济学 · 1994',
       influence: 9, axis: { x: -0.35, y: -0.3 },
-      quote: '比较优势不是天生的，而是要素禀赋给定的——一个国家要顺着禀赋去升级，才有竞争力。',
+      quote: '比较优势不是天生的，而是要素禀赋给定的——一个国家要顺着禀赋去升级，才有竞争力。', enQuote: 'Comparative advantage is not innate but given by factor endowments - a country must upgrade along its endowments to stay competitive.',
       bio: '世界银行前首席经济学家、北京大学新结构经济学研究院院长。提出"新结构经济学"，主张发展中国家应依据自身要素禀赋选择技术路线与制度安排。',
       keyTheories: [
         { title: '新结构经济学', year: 2011, desc: '经济发展取决于要素禀赋结构的升级——按照"资源禀赋"选择产业与技术，市场起决定性作用、政府因势利导。' },
@@ -1192,7 +1192,7 @@ window._econData = {
       id: 'wujinglian', name: '吴敬琏', nameEn: 'Wu Jinglian', lifespan: '1930—',
       nationality: '中国', schoolId: 'institutional', era: '市场取向改革 · 1980s',
       influence: 7, axis: { x: 0.55, y: -0.15 },
-      quote: '改革的核心问题是：让市场在资源配置中起决定性作用，还是让权力继续决定资源的分配。',
+      quote: '改革的核心问题是：让市场在资源配置中起决定性作用，还是让权力继续决定资源的分配。', enQuote: 'The core question of reform: let the market play the decisive role in allocating resources, or let power continue to decide?',
       bio: '中国经济改革最著名的市场派学者之一，被称为"吴市场"。长期参与改革方案设计，力主市场化、法治化与产权保护，是中国向市场经济转型的思想旗手。',
       keyTheories: [
         { title: '市场取向改革', year: '1990s', desc: '主张以市场化作为改革主线，反对"计划与市场并存"的折中，坚持"让市场起基础性作用"。' },
@@ -1216,7 +1216,7 @@ window._econData = {
       id: 'linan', name: '厉以宁', nameEn: 'Li Yining', lifespan: '1930—2023',
       nationality: '中国', schoolId: 'institutional', era: '股份制改革 · 1980s',
       influence: 6, axis: { x: 0.3, y: 0.15 },
-      quote: '股份制是国有企业改革的出路——产权多元化才能让企业真正面向市场。',
+      quote: '股份制是国有企业改革的出路——产权多元化才能让企业真正面向市场。', enQuote: 'The shareholding system is the way out for state-owned enterprises - diversifying ownership makes firms truly face the market.',
       bio: '北京大学教授，中国股份制改革的理论先驱，被称为"厉股份"。主张通过股份制实现产权明晰与政企分开，推动中国国有企业向现代企业制度转型。',
       keyTheories: [
         { title: '股份制改革', year: '1980s', desc: '主张国有企业通过股份制改造实现产权多元化，让企业与政府脱钩、面向市场竞争。' },
@@ -1240,7 +1240,7 @@ window._econData = {
       id: 'sunyefang', name: '孙冶方', nameEn: 'Sun Yefang', lifespan: '1908—1983',
       nationality: '中国', schoolId: 'marx', era: '社会主义计划经济 · 1960s',
       influence: 6, axis: { x: -0.5, y: -0.05 },
-      quote: '价值规律在社会主义下依然存在——不承认利润、不承认价格，经济就会低效。',
+      quote: '价值规律在社会主义下依然存在——不承认利润、不承认价格，经济就会低效。', enQuote: 'The law of value still operates under socialism - deny profit, deny prices, and the economy becomes inefficient.',
       bio: '中国社会主义经济学最重要的开拓者之一。在计划经济年代坚持"价值规律"与"利润"应在社会主义经济中发挥作用，是"改革的理论先声"。',
       keyTheories: [
         { title: '价值规律论', year: '1960s', desc: '在计划经济的官方话语中为"价值规律""利润""价格"正名，认为社会主义也不能违背经济核算。' },
@@ -1263,7 +1263,7 @@ window._econData = {
       id: 'mayinch', name: '马寅初', nameEn: 'Ma Yinchu', lifespan: '1882—1982',
       nationality: '中国', schoolId: 'development', era: '人口与增长 · 1957',
       influence: 7, axis: { x: -0.15, y: 0.35 },
-      quote: '中国人口若不加节制，发展的成果将被新增人口吞食殆尽。',
+      quote: '中国人口若不加节制，发展的成果将被新增人口吞食殆尽。', enQuote: 'If China\'s population is not restrained, the fruits of development will be devoured by the newly added population.',
       bio: '中国著名经济学家、人口学家，曾任北京大学校长。1957 年发表《新人口论》主张控制人口，虽在当时受批判，却为后来的人口政策与增长研究提供了思想遗产。',
       keyTheories: [
         { title: '新人口论', year: 1957, desc: '主张中国应控制人口增长，因为人口过快增长会稀释资本积累与人均产出，阻碍经济发展。' },
@@ -1286,7 +1286,7 @@ window._econData = {
       id: 'robinson', name: '琼·罗宾逊', nameEn: 'Joan Robinson', lifespan: '1903—1983',
       nationality: '英国', schoolId: 'keynesian', era: '后凯恩斯主义 · 1933',
       influence: 8, axis: { x: -0.05, y: 0.42 },
-      quote: '学习经济学不是为了知道一堆现成的答案，而是为了学会不被经济学家欺骗。',
+      quote: '学习经济学不是为了知道一堆现成的答案，而是为了学会不被经济学家欺骗。', enQuote: 'The purpose of studying economics is not to acquire a set of ready-made answers, but to learn how to avoid being deceived by economists.',
       bio: '剑桥学派最重要的经济学家之一，凯恩斯的嫡系传人。1933 年出版《不完全竞争经济学》重新定义厂商理论，此后毕生推动"后凯恩斯主义"，与萨缪尔森展开著名的"两个剑桥之争"。',
       keyTheories: [
         { title: '不完全竞争', year: 1933, desc: '现实市场既非完全竞争也非垄断，而是"垄断竞争"——厂商面对倾斜的需求曲线定价，边际收益决定产出，打破了完全竞争的抽象假设。' },
@@ -1313,7 +1313,7 @@ window._econData = {
       id: 'ostrom', name: '埃莉诺·奥斯特罗姆', nameEn: 'Elinor Ostrom', lifespan: '1933—2012',
       nationality: '美国', schoolId: 'institutional', era: '公共治理 · 1990',
       influence: 8, axis: { x: -0.15, y: 0.6 },
-      quote: '公地悲剧不是必然——只要规则公平、监督可信，社区完全能管好共有的资源。',
+      quote: '公地悲剧不是必然——只要规则公平、监督可信，社区完全能管好共有的资源。', enQuote: 'The tragedy of the commons is not inevitable - with fair rules and credible monitoring, communities can manage shared resources well.',
       bio: '2009 年诺贝尔经济学奖得主、首位获经济学诺奖的女性。毕生研究公共资源治理，证明"公地悲剧"并非唯一结局：渔民、牧民、灌溉者通过自组织制度，能可持续地管理共享资源。',
       keyTheories: [
         { title: '公共池塘资源治理', year: 1990, desc: '渔业、草地、地下水等公共资源不必非私有化或国有化——自组织的规则设计（边界清晰、监督、分级制裁）同样有效。' },
