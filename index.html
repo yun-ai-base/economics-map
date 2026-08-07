@@ -579,6 +579,32 @@ section[id] { scroll-margin-top: 120px; }
 .era-chip:hover { border-color: var(--gold); color: var(--text); }
 .era-chip.active { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--gold-bright); }
 
+/* 时间线年代筛选 + 工具箱快速跳转（与 era-chip 同风格） */
+.tl-filter, .terms-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0 22px;
+}
+.tl-chip, .tj-chip {
+  padding: 5px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 11.5px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.tl-chip:hover, .tj-chip:hover { border-color: var(--gold); color: var(--text); }
+.tl-chip.active, .tj-chip.active { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--gold-bright); }
+.tj-chip .tj-count { font-family: var(--font-mono); font-size: 10px; color: var(--text-mute); margin-left: 4px; }
+.tj-chip.active .tj-count { color: var(--gold-bright); }
+.term-group-title.tj-flash { color: var(--gold-bright); }
+.term-group-title.tj-flash::after { background: color-mix(in srgb, var(--gold) 60%, transparent); }
+
 /* 学派筛选 */
 .school-filter {
   display: flex;
@@ -631,6 +657,50 @@ section[id] { scroll-margin-top: 120px; }
   font-size: 11px;
   color: var(--gold-bright);
 }
+
+/* 罗盘节点关系悬停提示 */
+.compass-tip {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  min-width: 190px;
+  max-width: 260px;
+  padding: 10px 12px;
+  background: rgba(14,20,33,0.96);
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,160,99,0.12);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  transform: translate(14px, -50%);
+}
+.compass-tip .ct-name {
+  font-family: var(--font-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin-bottom: 2px;
+}
+.compass-tip .ct-meta {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.compass-tip .ct-rel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.compass-tip .ct-rel .ct-arrow { font-size: 11px; color: var(--gold); flex: 0 0 auto; }
+.compass-tip .ct-rel .ct-target { color: var(--text); font-weight: 500; }
+.compass-tip .ct-rel.debate .ct-arrow { color: #E05D5D; }
+.compass-tip .ct-norel { font-size: 11.5px; color: var(--text-mute); font-style: italic; }
 
 /* ───────────── 思想交割时间线 ───────────── */
 .timeline-section {
@@ -1662,6 +1732,7 @@ footer .foot-twin a:hover {
       <div class="compass-canvas-wrap">
         <canvas id="compassCanvas"></canvas>
         <div class="compass-hint"><span class="key">⌘/Ctrl+滚轮</span> 缩放 · <span class="key">拖拽</span> 平移 · <span class="key">点击节点</span> 打开档案</div>
+        <div class="compass-tip" id="compassTip" hidden></div>
       </div>
       <div class="compass-tools">
         <input class="compass-search" id="compassSearch" type="text" placeholder="搜索大师：姓名 / 学派 / 国籍 / 关键词…" autocomplete="off" aria-label="在罗盘中搜索大师">
@@ -1684,6 +1755,14 @@ footer .foot-twin a:hover {
       <div class="section-kicker">02 · Settlement</div>
       <h2 class="section-title">思想交割 — 改变世界价格的关键时刻</h2>
       <p class="section-sub">每一次理论"成交"，都改变了人类看待财富与分配的方式。点击事件查看背后的思想交易。</p>
+    </div>
+    <div class="tl-filter" id="tlFilter" aria-label="按时期筛选时间线">
+      <button class="tl-chip active" data-r="">全部时期</button>
+      <button class="tl-chip" data-r="pre1800">1800年以前</button>
+      <button class="tl-chip" data-r="1800-1900">1800–1900</button>
+      <button class="tl-chip" data-r="1900-1950">1900–1950</button>
+      <button class="tl-chip" data-r="1950-2000">1950–2000</button>
+      <button class="tl-chip" data-r="post2000">2000年以后</button>
     </div>
     <div class="milestone-track" id="milestoneTrack"></div>
   </section>
@@ -1725,6 +1804,7 @@ footer .foot-twin a:hover {
       <h2 class="section-title">经济工具箱 — 读懂宏观指标与金融术语</h2>
       <p class="section-sub">GDP、利率、通胀、股票、融资……日常经济金融里绕不开的词，都有定义、算法与相互关联。点击任意词条展开。</p>
     </div>
+    <div class="terms-jump" id="termsJump"></div>
     <div class="layer-grid" id="layerGrid"></div>
     <div class="term-group" id="termGroups"></div>
   </section>
@@ -2142,6 +2222,42 @@ footer .foot-twin a:hover {
     return { x: x, y: y };
   }
 
+  var compassTip = document.getElementById('compassTip');
+  function relLabel(type) {
+    if (type === 'teacher-student') return '师承';
+    if (type === 'debate') return '论战';
+    if (type === 'cooperation') return '合作';
+    return '关联';
+  }
+  function updateTip(id, clientX, clientY) {
+    var e = econMap[id];
+    if (!e) return;
+    var s = schoolMap[e.schoolId] || {};
+    var yrM = String(e.era || '').match(/(\d{4})/);
+    var meta = (s.name || '') + (yrM ? ' · ' + yrM[1] : '');
+    var rels = (e.relationships || []).map(function (rel) {
+      var t = econMap[rel.target];
+      if (!t) return '';
+      var label = relLabel(rel.type);
+      var arrow = rel.type === 'debate' ? '↔' : '→';
+      var cls = rel.type === 'debate' ? 'ct-rel debate' : 'ct-rel';
+      return '<div class="' + cls + '"><span class="ct-arrow">' + arrow + ' ' + label + '</span><span class="ct-target">' + t.name.split('·').pop() + '</span></div>';
+    }).join('');
+    compassTip.innerHTML = '<div class="ct-name">' + e.name + '</div>'
+      + '<div class="ct-meta">' + meta + '</div>'
+      + (rels ? rels : '<div class="ct-norel">暂无关系连线</div>');
+    compassTip.hidden = false;
+    // 跟随鼠标定位，防溢出
+    var rect = compassTip.parentElement.getBoundingClientRect();
+    var tx = clientX - rect.left + 10;
+    var ty = clientY - rect.top;
+    if (clientX + 280 > rect.right) tx = clientX - rect.left - compassTip.offsetWidth - 10;
+    if (clientY - compassTip.offsetHeight / 2 < rect.top) ty = rect.top + 16;
+    compassTip.style.left = tx + 'px';
+    compassTip.style.top = ty + 'px';
+  }
+  function hideTip() { compassTip.hidden = true; }
+
   canvas.addEventListener('pointermove', function (ev) {
     if (dragState) {
       view.tx = view.target.tx + (ev.clientX - dragState.sx);
@@ -2151,13 +2267,18 @@ footer .foot-twin a:hover {
     }
     var w = toWorld(ev.clientX, ev.clientY);
     var hit = hitTest(w.x, w.y);
-    if (hit && hit.id !== hoverId) { hoverId = hit.id; canvas.style.cursor = 'pointer'; draw(); }
-    else if (!hit && hoverId) { hoverId = null; canvas.style.cursor = 'grab'; draw(); }
+    if (hit) {
+      if (hit.id !== hoverId) { hoverId = hit.id; canvas.style.cursor = 'pointer'; draw(); }
+      updateTip(hit.id, ev.clientX, ev.clientY);
+    } else {
+      if (hoverId) { hoverId = null; canvas.style.cursor = 'grab'; draw(); }
+      hideTip();
+    }
   });
   canvas.addEventListener('pointerdown', function (ev) {
     var w = toWorld(ev.clientX, ev.clientY);
     var hit = hitTest(w.x, w.y);
-    if (hit) { openDetail(hit.id); return; }
+    if (hit) { hideTip(); openDetail(hit.id); return; }
     dragState = { sx: ev.clientX, sy: ev.clientY, tx: view.tx, ty: view.ty };
     canvas.style.cursor = 'grabbing';
     canvas.setPointerCapture(ev.pointerId);
@@ -2168,6 +2289,7 @@ footer .foot-twin a:hover {
   });
   canvas.addEventListener('pointerleave', function () {
     hoverId = null;
+    hideTip();
     if (!dragState) draw();
   });
   canvas.addEventListener('wheel', function (ev) {
@@ -2310,6 +2432,28 @@ footer .foot-twin a:hover {
       + '</div></div>';
   });
   tl.innerHTML = tlHtml;
+  /* 时间线年代筛选 */
+  var tlFilter = document.getElementById('tlFilter');
+  function applyTlFilter(range) {
+    var items = tl.querySelectorAll('.milestone-item');
+    items.forEach(function (it) {
+      var year = +(it.querySelector('.ms-year') ? it.querySelector('.ms-year').textContent : 0);
+      var show = !range;
+      if (range === 'pre1800') show = year < 1800;
+      else if (range === '1800-1900') show = year >= 1800 && year <= 1900;
+      else if (range === '1900-1950') show = year > 1900 && year <= 1950;
+      else if (range === '1950-2000') show = year > 1950 && year <= 2000;
+      else if (range === 'post2000') show = year > 2000;
+      it.style.display = show ? '' : 'none';
+    });
+  }
+  tlFilter.addEventListener('click', function (ev) {
+    var chip = ev.target.closest('.tl-chip');
+    if (!chip) return;
+    tlFilter.querySelectorAll('.tl-chip').forEach(function (c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    applyTlFilter(chip.getAttribute('data-r') || null);
+  });
   enableKeyNav(tl, '.milestone-item', function (card) { card.dispatchEvent(new MouseEvent('click', { bubbles: true })); });
   tl.addEventListener('click', function (ev) {
     var tag = ev.target.closest('.ms-tag');
@@ -2469,6 +2613,31 @@ footer .foot-twin a:hover {
     });
     th += '</div>';
     termGroups.innerHTML = th;
+    /* 分类快速跳转条 */
+    var jumpEl = document.getElementById('termsJump');
+    if (jumpEl) {
+      var jh = cats.map(function (cat, i) {
+        var list = byCat[cat] || [];
+        if (!list.length) return '';
+        return '<button class="tj-chip" data-jump="' + i + '">' + cat + '<span class="tj-count">' + list.length + '</span></button>';
+      }).join('');
+      jumpEl.innerHTML = jh;
+      jumpEl.querySelectorAll('.tj-chip').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var g = termGroups.querySelectorAll('.term-group')[+chip.getAttribute('data-jump')];
+          if (!g) return;
+          g.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          jumpEl.querySelectorAll('.tj-chip').forEach(function (c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+          var hd = g.querySelector('.term-group-title');
+          if (hd) {
+            hd.classList.remove('tj-flash');
+            void hd.offsetWidth;
+            hd.classList.add('tj-flash');
+          }
+        });
+      });
+    }
     termGroups.querySelectorAll('.term-card').forEach(function (card) {
       card.addEventListener('click', function () {
         var tid = card.getAttribute('data-term');
