@@ -316,6 +316,22 @@ main { position: relative; z-index: 1; }
 }
 .detail-crumb .cr-sep { opacity: 0.5; }
 .detail-crumb .cr-cur { color: var(--gold-bright); }
+.detail-crumb .crumb-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--line-soft);
+  border-radius: 100px;
+  color: var(--gold-bright);
+  font-size: 11px;
+  font-family: var(--font-sans);
+  padding: 3px 10px;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: all 0.2s ease;
+}
+.detail-crumb .crumb-back:hover { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 10%, transparent); }
 .detail-share {
   position: absolute;
   top: 14px;
@@ -2928,8 +2944,10 @@ footer .foot-twin a:hover {
 
   /* ─── 学派研报弹层 ─── */
   function openSchool(id) {
+    beforeOpen();
     var s = schoolMap[id];
     if (!s || !s.report) return;
+    setCrumb(['思想罗盘', '学派', s.name]);
     var color = s.color || '#C9A063';
     var members = ECONOMISTS.filter(function (e) { return e.schoolId === id; })
       .map(function (e) {
@@ -2994,7 +3012,45 @@ footer .foot-twin a:hover {
     overlay.classList.add('open');
     document.body.classList.add('modal-open');
   }
-  function closeOverlay() {
+  /* ─── 面板层级栈：子面板（概念/人物/术语）关闭时返回父面板 ─── */
+  var panelStack = [];
+  var routeJumping = false;
+  function beforeOpen() {
+    if (routeJumping || !overlay.classList.contains('open') || !currentRoute) return;
+    var parts = currentRoute.split('/');
+    var k = parts[0], pid = parts[1] || '';
+    try { pid = decodeURIComponent(pid); } catch (e) {}
+    var top = panelStack[panelStack.length - 1];
+    if (!top || top.kind !== k || top.id !== pid) panelStack.push({ kind: k, id: pid });
+  }
+  function renderFromStack(prev) {
+    if (!prev) return;
+    if (prev.kind === 'policy') {
+      var p = null;
+      DATA.policies.forEach(function (x) { if (x.id === prev.id) p = x; });
+      if (p) openPolicy(p);
+    } else if (prev.kind === 'topic') {
+      var t = null;
+      DATA.lifeTopics.forEach(function (x) { if (x.id === prev.id) t = x; });
+      if (t) openTopic(t);
+    } else if (prev.kind === 'milestone') {
+      var md = DATA.milestoneDetail ? DATA.milestoneDetail[prev.id] : null;
+      if (md) openMilestone(md);
+    } else if (prev.kind === 'school' && schoolMap[prev.id]) openSchool(prev.id);
+    else if (prev.kind === 'concept' && DATA.conceptDefs && DATA.conceptDefs[prev.id]) openConcept(prev.id);
+    else if (prev.kind === 'term' && termMap[prev.id]) openTerm(prev.id);
+    else if (prev.kind === 'econ' && econMap[prev.id]) openDetail(prev.id);
+  }
+  function closeOverlay(force) {
+    // 非强制关闭且栈中有父面板 → 返回上一级
+    if (!force && panelStack.length) {
+      var prev = panelStack.pop();
+      routeJumping = true;
+      renderFromStack(prev);
+      routeJumping = false;
+      return;
+    }
+    panelStack.length = 0;
     overlay.classList.remove('open');
     document.body.classList.remove('modal-open');
     document.querySelectorAll('.selected').forEach(function (el) { el.classList.remove('selected'); });
@@ -3024,6 +3080,7 @@ footer .foot-twin a:hover {
       + '<span class="dn-label">下一条 →</span><span class="dn-name">' + (next ? esc(nn) : '已是最后一条') + '</span></button>';
   }
   function navGo(dir) {
+    routeJumping = true;
     var ni = navState.idx + dir;
     if (ni < 0 || ni >= navState.items.length || navState.kind === '') return;
     var item = navState.items[ni];
@@ -3046,13 +3103,20 @@ footer .foot-twin a:hover {
   var crumbEl = document.getElementById('detailCrumb');
   function setCrumb(parts) {
     if (!crumbEl) return;
-    if (!parts || !parts.length) { crumbEl.innerHTML = ''; return; }
-    var h = '';
-    parts.forEach(function (p, i) {
-      if (i > 0) h += '<span class="cr-sep">/</span>';
-      h += i === parts.length - 1 ? '<span class="cr-cur">' + esc(p) + '</span>' : '<span>' + esc(p) + '</span>';
-    });
+    var backBtn = panelStack.length ? '<button class="crumb-back" title="返回上一级">← 返回上一级</button>' : '';
+    var h = backBtn;
+    if (parts && parts.length) {
+      parts.forEach(function (p, i) {
+        if (i > 0) h += '<span class="cr-sep">/</span>';
+        h += i === parts.length - 1 ? '<span class="cr-cur">' + esc(p) + '</span>' : '<span>' + esc(p) + '</span>';
+      });
+    }
     crumbEl.innerHTML = h;
+  }
+  if (crumbEl) {
+    crumbEl.addEventListener('click', function (ev) {
+      if (ev.target.closest('.crumb-back')) closeOverlay();
+    });
   }
 
   /* ─── Toast ─── */
@@ -3127,12 +3191,12 @@ footer .foot-twin a:hover {
   function handleHash() {
     var h = location.hash || '';
     var m = h.match(/^#\/(econ|school|policy|topic|milestone|concept|term)\/([\w%]+)$/);
-    if (!m) { if (overlay.classList.contains('open')) closeOverlay(); currentRoute = null; return; }
+    if (!m) { if (overlay.classList.contains('open')) closeOverlay(true); currentRoute = null; return; }
     var kind = m[1], id = m[2];
     var route = kind + '/' + id;
     if (overlay.classList.contains('open')) {
       if (currentRoute === route) return;          // 同内容，跳过
-      closeOverlay();                               // 不同内容，先关旧弹层再开新的
+      closeOverlay(true);                           // 不同内容，先关旧弹层再开新的
     }
     currentRoute = route;
     if (kind === 'concept') {
@@ -3156,6 +3220,7 @@ footer .foot-twin a:hover {
   window.addEventListener('hashchange', handleHash);
 
   function openDetail(id) {
+    beforeOpen();
     var e = econMap[id];
     if (!e) return;
     var s = schoolMap[e.schoolId] || {};
@@ -3236,6 +3301,7 @@ footer .foot-twin a:hover {
   }
 
   function openMilestone(md) {
+    beforeOpen();
     markSelected('.milestone-item', 'data-ms', md.id);
     var mIdx = -1;
     for (var mi = 0; mi < DATA.milestones.length; mi++) { if (DATA.milestones[mi].id === md.id) { mIdx = mi; break; } }
@@ -3262,6 +3328,7 @@ footer .foot-twin a:hover {
   }
 
   function openPolicy(p) {
+    beforeOpen();
     markSelected('.policy-card', 'data-policy', p.id);
     var pIdx = -1;
     for (var pi = 0; pi < DATA.policies.length; pi++) { if (DATA.policies[pi].id === p.id) { pIdx = pi; break; } }
@@ -3297,6 +3364,7 @@ footer .foot-twin a:hover {
   }
 
   function openTopic(t) {
+    beforeOpen();
     markSelected('.life-topic', 'data-topic', t.id);
     var tIdx = -1;
     for (var ti = 0; ti < DATA.lifeTopics.length; ti++) { if (DATA.lifeTopics[ti].id === t.id) { tIdx = ti; break; } }
@@ -3326,8 +3394,10 @@ footer .foot-twin a:hover {
   }
 
   function openConcept(name) {
+    beforeOpen();
     var def = DATA.conceptDefs ? DATA.conceptDefs[name] : null;
     if (!def) return;
+    setCrumb(['思想罗盘', '概念释义', name]);
     contentEl.innerHTML =
       '<div class="detail-hero" style="--sc:#C9A063">'
       + '<div class="detail-hero-top">'
@@ -3346,6 +3416,7 @@ footer .foot-twin a:hover {
 
   /* ─── 经济工具箱：术语详情弹层 ─── */
   function openTerm(id) {
+    beforeOpen();
     var t = termMap[id];
     if (!t) return;
     markSelected('.term-card', 'data-term', id);
@@ -3564,9 +3635,6 @@ footer .foot-twin a:hover {
   });
   overlay.addEventListener('click', function (ev) {
     if (ev.target === overlay) closeOverlay();
-  });
-  document.addEventListener('keydown', function (ev) {
-    if (ev.key === 'Escape') closeOverlay();
   });
 
   window.addEventListener('resize', resize);
