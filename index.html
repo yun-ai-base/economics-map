@@ -4,7 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>经济经纬 · 思想交易所</title>
-<meta name="description" content="从亚当·斯密到行为经济学——49 位经济学大师的思想光谱，理论与生活的每一次兑换">
+<meta name="description" content="从亚当·斯密到行为经济学——58 位经济学大师的思想光谱，理论与生活的每一次兑换">
+<meta property="og:type" content="website">
+<meta property="og:title" content="经济经纬 · 思想交易所">
+<meta property="og:description" content="58 位经济学大师的思想光谱：罗盘定位、时间线交割、擂台论战、政策溯源、生活应用与金融术语工具箱。">
+<meta property="og:image" content="https://yun-ai-base.github.io/economics-map/favicon.svg">
+<meta property="og:url" content="https://yun-ai-base.github.io/economics-map/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0B0F1A">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.loli.net">
 <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
@@ -260,8 +267,8 @@ main { position: relative; z-index: 1; }
 .back-top:hover { border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 14%, transparent); }
 
 /* 可点击卡片的通用"展开"提示箭头 */
-.policy-card, .life-topic, .term-card, .milestone-card { position: relative; }
-.policy-card::after, .life-topic::after, .term-card::after, .milestone-card::after {
+.policy-card, .life-topic, .term-card, .milestone-card, .debate-item { position: relative; }
+.policy-card::after, .life-topic::after, .term-card::after, .milestone-card::after, .debate-item::after {
   content: '';
   position: absolute;
   right: 12px;
@@ -275,12 +282,182 @@ main { position: relative; z-index: 1; }
   transition: opacity 0.2s ease;
   pointer-events: none;
 }
-.policy-card:hover::after, .life-topic:hover::after, .term-card:hover::after, .milestone-card:hover::after { opacity: 1; }
+.policy-card:hover::after, .life-topic:hover::after, .term-card:hover::after, .milestone-card:hover::after, .debate-item:hover::after { opacity: 1; }
 
 /* 选中态：当前打开的卡片 */
-.policy-card.selected, .life-topic.selected, .term-card.selected, .milestone-item.selected .milestone-card {
+.policy-card.selected, .life-topic.selected, .term-card.selected, .milestone-item.selected .milestone-card, .debate-item.selected {
   border-color: var(--gold) !important;
   box-shadow: 0 0 0 1px var(--gold), 0 0 20px color-mix(in srgb, var(--gold) 16%, transparent);
+}
+
+/* 阅读进度条 */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), #E8C98A);
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* 弹层面包屑 + 分享 */
+.detail-crumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-mute);
+  padding: 10px 18px 0;
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+}
+.detail-crumb .cr-sep { opacity: 0.5; }
+.detail-crumb .cr-cur { color: var(--gold-bright); }
+.detail-share {
+  position: absolute;
+  top: 14px;
+  right: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border: 1px solid var(--line-soft);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 11px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 3;
+}
+.detail-share:hover { border-color: var(--gold); color: var(--gold-bright); }
+
+/* 弹层底部导航：上一条/下一条 */
+.detail-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+.detail-nav .dn-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  background: rgba(18,24,38,0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-family: var(--font-sans);
+  min-width: 0;
+}
+.detail-nav .dn-btn:hover { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 8%, transparent); }
+.detail-nav .dn-btn.dn-next { text-align: right; align-items: flex-end; }
+.detail-nav .dn-label { font-size: 10px; color: var(--text-mute); font-family: var(--font-mono); letter-spacing: 0.08em; }
+.detail-nav .dn-name {
+  font-size: 12.5px;
+  color: var(--text);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.detail-nav .dn-btn.dn-disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+
+/* Toast 提示 */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%) translateY(16px);
+  background: rgba(14,20,33,0.96);
+  border: 1px solid var(--gold);
+  color: var(--text);
+  font-size: 12.5px;
+  padding: 9px 18px;
+  border-radius: 100px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 300;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* 快捷键帮助面板 */
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(6,9,16,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.help-overlay.open { opacity: 1; pointer-events: auto; }
+.help-panel {
+  width: min(440px, 90vw);
+  background: rgba(14,20,33,0.97);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 26px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.help-panel h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin: 0 0 14px;
+}
+.help-panel .hp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 6px 0;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+.help-panel .hp-row .hp-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold-bright);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 2px 8px;
+  flex: 0 0 auto;
+}
+.help-panel .hp-close {
+  margin-top: 14px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+  color: var(--gold-bright);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.help-panel .hp-close:hover { background: color-mix(in srgb, var(--gold) 22%, transparent); }
+@media (max-width: 820px) {
+  .detail-nav { flex-direction: column; }
+  .detail-nav .dn-btn.dn-next { text-align: left; align-items: flex-start; }
 }
 
 /* 名言英文对照 */
@@ -600,6 +777,16 @@ section[id] { scroll-margin-top: 120px; }
 }
 .tl-chip:hover, .tj-chip:hover { border-color: var(--gold); color: var(--text); }
 .tl-chip.active, .tj-chip.active { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--gold-bright); }
+.tl-empty {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 12.5px;
+  color: var(--text-mute);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  margin: 8px 0;
+}
 .tj-chip .tj-count { font-family: var(--font-mono); font-size: 10px; color: var(--text-mute); margin-left: 4px; }
 .tj-chip.active .tj-count { color: var(--gold-bright); }
 .term-group-title.tj-flash { color: var(--gold-bright); }
@@ -1624,6 +1811,7 @@ footer {
 }
 footer p { font-family: var(--font-mono); font-size: 12px; color: var(--text-mute); letter-spacing: 0.05em; }
 footer .foot-mark { color: var(--gold); }
+footer .foot-src { margin-top: 6px; font-size: 11px; color: var(--text-mute); font-family: var(--font-mono); letter-spacing: 0.03em; }
 footer .foot-twin { margin-top: 14px; font-family: var(--font-sans); }
 footer .foot-twin a {
   color: var(--text-mute);
@@ -1705,7 +1893,7 @@ footer .foot-twin a:hover {
       <h1>经济经纬
         <span class="en">ECONOMIC MERIDIANS</span>
       </h1>
-      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>49 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
+      <p class="tagline">三百年来，人类对<strong>「如何分配稀缺」</strong>的追问从未停歇。这里是思想的交易所——<strong>58 位经济学大师</strong>在自由与干预、个体与系统之间完成的一场永不收盘的博弈。</p>
     </div>
     <div class="header-stats">
       <div class="stat-cell"><div class="n" id="statCount">0</div><div class="l">经济学大师</div></div>
@@ -1813,13 +2001,36 @@ footer .foot-twin a:hover {
 <!-- 理论档案弹层 -->
 <div class="detail-overlay" id="detailOverlay">
   <div class="detail-panel" id="detailPanel">
+    <button class="detail-share" id="detailShare" aria-label="分享链接">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.7 10.7l6.6-3.4M8.7 13.3l6.6 3.4"/></svg>
+      分享
+    </button>
     <button class="detail-close" id="detailClose" aria-label="关闭">&times;</button>
+    <div class="detail-crumb" id="detailCrumb"></div>
     <div id="detailContent"></div>
+    <div class="detail-nav" id="detailNav"></div>
   </div>
 </div>
 
+<div class="help-overlay" id="helpOverlay" aria-hidden="true">
+  <div class="help-panel" role="dialog" aria-label="快捷键帮助">
+    <h3>⌨ 快捷键</h3>
+    <div class="hp-row"><span>打开 / 聚焦全局搜索</span><span class="hp-key">/</span></div>
+    <div class="hp-row"><span>关闭弹层 / 搜索结果</span><span class="hp-key">Esc</span></div>
+    <div class="hp-row"><span>弹层内：上一条 / 下一条</span><span class="hp-key">← / →</span></div>
+    <div class="hp-row"><span>罗盘缩放</span><span class="hp-key">Ctrl + 滚轮</span></div>
+    <div class="hp-row"><span>罗盘平移</span><span class="hp-key">拖拽</span></div>
+    <div class="hp-row"><span>返回顶部</span><span class="hp-key">↑ 按钮</span></div>
+    <div class="hp-row"><span>显示本面板</span><span class="hp-key">?</span></div>
+    <button class="hp-close" id="helpClose">知道了</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <footer>
   <p>经济经纬 · 思想交易所 — <span class="foot-mark">ECO</span>DATA v1.0</p>
+  <p class="foot-src">数据由公开资料整理，内容供学习参考 · 更新于 2026-08</p>
   <p class="foot-twin"><a href="https://yun-ai-base.github.io/twinverse/" target="_blank" rel="noopener">🧬 孪生宇宙 · 我的其他项目 →</a></p>
   </footer>
 
@@ -1831,6 +2042,13 @@ footer .foot-twin a:hover {
 <script>
 (function () {
   'use strict';
+
+  /* HTML 转义（全局，供所有 innerHTML 拼接使用） */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
 
   var DATA = window._econData;
   if (!DATA) { document.getElementById('compassCanvas').outerHTML = '<p style="padding:40px;color:#A9A295">数据加载失败</p>'; return; }
@@ -2062,6 +2280,7 @@ footer .foot-twin a:hover {
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
+    var labelBoxes = [];  // 标签碰撞检测
 
     ctx.save();
     ctx.translate(view.tx, view.ty);
@@ -2130,16 +2349,36 @@ footer .foot-twin a:hover {
         ctx.textBaseline = 'alphabetic';
       }
 
-      // 名字标签（影响力高的始终显示，其余悬浮显示）
+      // 名字标签（影响力高的始终显示，其余悬浮显示；密集区自动错开）
       var showLabel = e.influence >= 8 || isHover;
       if (view.scale > 0.9) {
         if (e.influence >= 7) showLabel = true;
       }
       if (showLabel) {
-        ctx.font = '500 ' + (isHover ? 13 : 11) + 'px "Noto Serif SC", serif';
+        var fs = isHover ? 13 : 11;
+        ctx.font = '500 ' + fs + 'px "Noto Serif SC", serif';
         ctx.textAlign = 'center';
-        ctx.fillStyle = isHover ? '#EFE9DC' : 'rgba(239,233,220,0.78)';
-        ctx.fillText(e.name, p.x, p.y - r - 7);
+        var tw = ctx.measureText(e.name).width;
+        var ly = p.y - r - 7;
+        var lh = fs + 4;
+        var hitLb = false;
+        for (var li = 0; li < 3; li++) {
+          hitLb = false;
+          for (var lj = 0; lj < labelBoxes.length; lj++) {
+            var lb = labelBoxes[lj];
+            if (Math.abs(lb.x - p.x) < (lb.w + tw) / 2 + 6 && Math.abs(lb.y - ly) < (lb.h + lh) / 2 + 2) {
+              hitLb = true;
+              ly += lh + 2;
+              break;
+            }
+          }
+          if (!hitLb) break;
+        }
+        if (!hitLb) {
+          labelBoxes.push({ x: p.x, y: ly, w: tw, h: lh });
+          ctx.fillStyle = isHover ? '#EFE9DC' : 'rgba(239,233,220,0.78)';
+          ctx.fillText(e.name, p.x, ly);
+        }
       }
     });
 
@@ -2434,8 +2673,13 @@ footer .foot-twin a:hover {
   tl.innerHTML = tlHtml;
   /* 时间线年代筛选 */
   var tlFilter = document.getElementById('tlFilter');
+  var tlEmpty = document.createElement('div');
+  tlEmpty.className = 'tl-empty';
+  tlEmpty.textContent = '该时期暂无里程碑事件，换个年代区间看看';
+  tl.parentNode.insertBefore(tlEmpty, tl.nextSibling);
   function applyTlFilter(range) {
     var items = tl.querySelectorAll('.milestone-item');
+    var visibleCount = 0;
     items.forEach(function (it) {
       var year = +(it.querySelector('.ms-year') ? it.querySelector('.ms-year').textContent : 0);
       var show = !range;
@@ -2445,7 +2689,9 @@ footer .foot-twin a:hover {
       else if (range === '1950-2000') show = year > 1950 && year <= 2000;
       else if (range === 'post2000') show = year > 2000;
       it.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
     });
+    tlEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
   }
   tlFilter.addEventListener('click', function (ev) {
     var chip = ev.target.closest('.tl-chip');
@@ -2730,6 +2976,117 @@ footer .foot-twin a:hover {
     var el = document.querySelector(sel + '[' + attr + '="' + id + '"]');
     if (el) el.classList.add('selected');
   }
+
+  /* ─── 弹层导航：上一条/下一条 ─── */
+  var navState = { items: [], idx: -1, kind: '' };
+  var detailNavEl = document.getElementById('detailNav');
+  function setDetailNav(items, idx, kind) {
+    navState = { items: items || [], idx: idx, kind: kind };
+    if (!detailNavEl) return;
+    if (!items || items.length < 2) { detailNavEl.innerHTML = ''; return; }
+    var prev = items[idx - 1], next = items[idx + 1];
+    var pn = prev ? (prev.name || prev.title || '') : '';
+    var nn = next ? (next.name || next.title || '') : '';
+    detailNavEl.innerHTML =
+      '<button class="dn-btn' + (prev ? '' : ' dn-disabled') + '" data-dir="-1" aria-label="上一条">'
+      + '<span class="dn-label">← 上一条</span><span class="dn-name">' + (prev ? esc(pn) : '已是第一条') + '</span></button>'
+      + '<button class="dn-btn dn-next' + (next ? '' : ' dn-disabled') + '" data-dir="1" aria-label="下一条">'
+      + '<span class="dn-label">下一条 →</span><span class="dn-name">' + (next ? esc(nn) : '已是最后一条') + '</span></button>';
+  }
+  function navGo(dir) {
+    var ni = navState.idx + dir;
+    if (ni < 0 || ni >= navState.items.length || navState.kind === '') return;
+    var item = navState.items[ni];
+    var k = navState.kind;
+    if (k === 'econ') openDetail(item.id);
+    else if (k === 'policy') openPolicy(item);
+    else if (k === 'term') openTerm(item.id);
+    else if (k === 'milestone') openMilestone(item);
+    else if (k === 'topic') openTopic(item);
+  }
+  if (detailNavEl) {
+    detailNavEl.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('.dn-btn');
+      if (!btn || btn.classList.contains('dn-disabled')) return;
+      navGo(+btn.getAttribute('data-dir'));
+    });
+  }
+
+  /* ─── 弹层面包屑 ─── */
+  var crumbEl = document.getElementById('detailCrumb');
+  function setCrumb(parts) {
+    if (!crumbEl) return;
+    if (!parts || !parts.length) { crumbEl.innerHTML = ''; return; }
+    var h = '';
+    parts.forEach(function (p, i) {
+      if (i > 0) h += '<span class="cr-sep">/</span>';
+      h += i === parts.length - 1 ? '<span class="cr-cur">' + esc(p) + '</span>' : '<span>' + esc(p) + '</span>';
+    });
+    crumbEl.innerHTML = h;
+  }
+
+  /* ─── Toast ─── */
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2200);
+  }
+
+  /* ─── 分享深链接 ─── */
+  var shareBtn = document.getElementById('detailShare');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function () {
+      var url = location.origin + location.pathname + location.hash;
+      var done = function () { showToast('链接已复制 ✓ 可分享给朋友'); };
+      var fail = function () { showToast('复制失败，请手动复制地址栏链接'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, fail);
+      } else {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = url;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          done();
+        } catch (e) { fail(); }
+      }
+    });
+  }
+
+  /* ─── 快捷键帮助面板 ─── */
+  var helpOverlay = document.getElementById('helpOverlay');
+  var helpClose = document.getElementById('helpClose');
+  function toggleHelp(show) {
+    if (!helpOverlay) return;
+    helpOverlay.classList.toggle('open', show);
+    helpOverlay.setAttribute('aria-hidden', show ? 'false' : 'true');
+  }
+  if (helpClose) helpClose.addEventListener('click', function () { toggleHelp(false); });
+  if (helpOverlay) {
+    helpOverlay.addEventListener('click', function (ev) {
+      if (ev.target === helpOverlay) toggleHelp(false);
+    });
+  }
+
+  /* ─── 阅读进度条 ─── */
+  var progBar = document.createElement('div');
+  progBar.className = 'read-progress';
+  document.body.appendChild(progBar);
+  var progTicking = false;
+  function updateProgress() {
+    progTicking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progBar.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', function () {
+    if (!progTicking) { progTicking = true; requestAnimationFrame(updateProgress); }
+  }, { passive: true });
   /* hash 深链接：同步地址栏，支持刷新/分享直达 */
   var currentRoute = null; // 当前弹层路由，用于避免重复渲染 & 支持 hash 切换
   function syncHash(kind, id) {
@@ -2773,6 +3130,10 @@ footer .foot-twin a:hover {
     if (!e) return;
     var s = schoolMap[e.schoolId] || {};
     var color = s.color || '#C9A063';
+    var eIdx = -1;
+    for (var ei = 0; ei < ECONOMISTS.length; ei++) { if (ECONOMISTS[ei].id === id) { eIdx = ei; break; } }
+    setDetailNav(ECONOMISTS, eIdx, 'econ');
+    setCrumb(['思想罗盘', '经济学家', e.name]);
 
     var theories = (e.keyTheories || []).map(function (t) {
       return '<div class="theory-item"><span class="th-title">' + t.title + '</span>'
@@ -2846,6 +3207,10 @@ footer .foot-twin a:hover {
 
   function openMilestone(md) {
     markSelected('.milestone-item', 'data-ms', md.id);
+    var mIdx = -1;
+    for (var mi = 0; mi < DATA.milestones.length; mi++) { if (DATA.milestones[mi].id === md.id) { mIdx = mi; break; } }
+    setDetailNav(DATA.milestones, mIdx, 'milestone');
+    setCrumb(['思想交割', md.year + ' · ' + md.title]);
     contentEl.innerHTML =
       '<div class="detail-hero" style="--sc:#C9A063">'
       + '<div class="detail-hero-top">'
@@ -2868,6 +3233,10 @@ footer .foot-twin a:hover {
 
   function openPolicy(p) {
     markSelected('.policy-card', 'data-policy', p.id);
+    var pIdx = -1;
+    for (var pi = 0; pi < DATA.policies.length; pi++) { if (DATA.policies[pi].id === p.id) { pIdx = pi; break; } }
+    setDetailNav(DATA.policies, pIdx, 'policy');
+    setCrumb(['政策溯源馆', '政策', p.name]);
     var figs = (p.economists || []).map(function (id) {
       var e = econMap[id];
       if (!e) return '';
@@ -2899,6 +3268,10 @@ footer .foot-twin a:hover {
 
   function openTopic(t) {
     markSelected('.life-topic', 'data-topic', t.id);
+    var tIdx = -1;
+    for (var ti = 0; ti < DATA.lifeTopics.length; ti++) { if (DATA.lifeTopics[ti].id === t.id) { tIdx = ti; break; } }
+    setDetailNav(DATA.lifeTopics, tIdx, 'topic');
+    setCrumb(['街市应用馆', '生活话题', t.title]);
     var matches = (t.matches || []).map(function (m) {
       var e = econMap[m.econId];
       if (!e) return '';
@@ -2946,6 +3319,10 @@ footer .foot-twin a:hover {
     var t = termMap[id];
     if (!t) return;
     markSelected('.term-card', 'data-term', id);
+    var tmIdx = -1;
+    for (var tmi = 0; tmi < DATA.econTerms.length; tmi++) { if (DATA.econTerms[tmi].id === id) { tmIdx = tmi; break; } }
+    setDetailNav(DATA.econTerms, tmIdx, 'term');
+    setCrumb(['经济工具箱', t.category, t.name]);
     // 相关术语 chips
     var rels = (t.related || []).map(function (rid) {
       var rt = termMap[rid];
@@ -3109,6 +3486,7 @@ footer .foot-twin a:hover {
     var tag = (ev.target.tagName || '').toLowerCase();
     var isTyping = tag === 'input' || tag === 'textarea' || ev.target.isContentEditable;
     if (ev.key === 'Escape') {
+      if (helpOverlay && helpOverlay.classList.contains('open')) { toggleHelp(false); return; }
       if (overlay.classList.contains('open')) { closeOverlay(); return; }
       var results = document.getElementById('searchResults');
       if (results && !results.hidden) { results.hidden = true; return; }
@@ -3118,6 +3496,16 @@ footer .foot-twin a:hover {
     if (ev.key === '/' && !isTyping) {
       ev.preventDefault();
       document.getElementById('searchInput').focus();
+      return;
+    }
+    if (ev.key === '?' && !isTyping) {
+      ev.preventDefault();
+      toggleHelp(!(helpOverlay && helpOverlay.classList.contains('open')));
+      return;
+    }
+    if ((ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') && !isTyping && overlay.classList.contains('open')) {
+      ev.preventDefault();
+      navGo(ev.key === 'ArrowLeft' ? -1 : 1);
     }
   });
 

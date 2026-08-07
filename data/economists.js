@@ -1333,7 +1333,190 @@ window._econData = {
         { target: 'buchanan', type: 'influence', desc: '公共选择学派同侪，但转向自组织制度研究' },
         { target: 'coase', type: 'influence', desc: '吸收产权与交易成本框架分析公共资源' }
       ]
-    }
+    },
+      {
+      id: 'fisher', name: '欧文·费雪', enName: 'Irving Fisher',
+      nationality: '美国', schoolId: 'classical', era: '货币与债务 · 1896',
+      influence: 8, axis: { x: 0.5, y: 0.85 },
+      quote: '通货膨胀是货币现象——名义利率等于实际利率加通胀预期；当债务人被迫平仓清偿，债务通缩螺旋便将整个经济拖入大萧条。',
+      enQuote: "Inflation is a monetary phenomenon - the nominal interest rate equals the real rate plus expected inflation; when debtors are forced to liquidate, the debt-deflation spiral drags the whole economy into depression.",
+      bio: '美国经济学家、数学家、计量经济学先驱。耶鲁大学博士，货币数量论在美国的主要阐述者。',
+      keyTheories: [
+        { title: '交易方程式 MV=PY', year: 1911, desc: '货币流通量×速度=价格×产出——通胀归根到底是货币现象。' },
+        { title: '债务通缩理论', year: 1933, desc: '过度负债 → 抛售 → 价格下跌 → 实际债务更重 → 更多抛售——大萧条的发生机制。' }
+      ],
+      works: [
+        { title: '《货币的购买力》', year: 1911, desc: '现代货币数量论的奠基之作。' },
+        { title: '《繁荣与萧条》', year: 1933, desc: '用债务通缩解释大萧条，名噪一时却未被采纳。' }
+      ],
+      impact: '凯恩斯对他的债务通缩螺旋赞赏有加（凯恩斯主义危机框架的重要先驱）；费雪方程式至今是理解通胀的入门工具。',
+      lifeConvert: [
+        { scene: '理财规划', say: '你的收入减去支出 = 可投资金额。MV=PY 用国家尺度描述了这件事——你口袋里的钱就是微观版的 M×V。' }
+      ],
+      relationships: [{ target: 'keynes', type: 'teacher-student' }, { target: 'friedman', type: 'teacher-student' }]
+    },
+    {
+      id: 'schumpeter', name: '约瑟夫·熊彼特', enName: 'Joseph Schumpeter',
+      nationality: '美籍奥地利', schoolId: 'austrian', era: '创新与周期 · 1911',
+      influence: 8, axis: { x: 0.65, y: 0.4 },
+      quote: '资本主义不是稳态——它是"创造性破坏"的永恒引擎：新产品淘汰旧产品，新企业击垮旧企业，经济增长来自这种破坏本身。',
+      enQuote: "Capitalism is not a steady state - it is a perpetual engine of 'creative destruction': new products displace old ones, new firms destroy old ones, and economic growth comes from this destruction itself.",
+      bio: '奥地利经济学家，移民美国。哈佛大学教授。一生短暂任过奥匈财政部长，但以学者立命。',
+      keyTheories: [
+        { title: '创造性破坏', year: 1942, desc: '经济长期增长靠企业家创新——新组合（新产品、新工艺、新市场、新组织、新原料）摧毁旧秩序。' },
+        { title: '经济周期理论', year: 1939, desc: '三次康德拉季耶夫长波由创新集群驱动；创新使经济起飞，模仿使繁荣，最终衰退让位给下一轮创新。' }
+      ],
+      works: [
+        { title: '《经济发展理论》', year: 1911, desc: '把企业家精神重新引入经济学核心——"创新"而非均衡才是增长引擎。' },
+        { title: '《资本主义、社会主义与民主》', year: 1942, desc: '预言资本主义会被自身成功反噬（官僚化、大企业僵化）——至今仍被频繁引用。' }
+      ],
+      impact: '互联网时代的创新经济学几乎都是熊彼特的注脚；克里斯坦森的"颠覆式创新"也直接承袭。',
+      lifeConvert: [
+        { scene: '职业选择', say: '你正在为"新组合"工作——跳槽到新兴产业、跨界新技能、押注新趋势。熊彼特会说：这才是经济增长的真正来源。' }
+      ],
+      relationships: [{ target: 'hayek', type: 'cooperation' }, { target: 'keynes', type: 'debate' }]
+    },
+    {
+      id: 'modigliani', name: '弗朗哥·莫迪利亚尼', enName: 'Franco Modigliani',
+      nationality: '美籍意大利', schoolId: 'keynesian', era: '储蓄与生命周期 · 1944',
+      influence: 8, axis: { x: 0.55, y: 0.5 },
+      quote: '理性人会平滑一生消费——年轻时负债、中年储蓄、老年提取，宏观储蓄率反映人口结构与寿命预期，与凯恩斯"动物精神"无关。',
+      enQuote: "Rational individuals smooth consumption over their lifetime - borrowing when young, saving in middle age, drawing down when old. The aggregate savings rate reflects demographics and life expectancy, not Keynesian 'animal spirits'.",
+      bio: '美籍意大利裔经济学家，1985 年诺奖。他从凯恩斯主义出发，却用理性行为推翻了凯恩斯对储蓄的直觉解释。',
+      keyTheories: [
+        { title: '生命周期假说', year: 1954, desc: '人一生收入呈驼峰，理性人会平滑消费——年轻时借、中年存、老年提。' },
+        { title: 'MM 定理（与 Miller）', year: 1958, desc: '在完美市场，资本结构与企业价值无关——杠杆既不抬高也不降低公司价值（不考虑税与破产成本）。' }
+      ],
+      works: [
+        { title: '《国民收入与贸易》', year: 1944, desc: '与 Brumberg 合作的储蓄生命周期模型，后扩展成宏观消费函数的标准框架。' }
+      ],
+      impact: '今天的养老金体系设计、退休理财规划都直接用生命周期假说；MM 定理是公司金融课的起点。',
+      lifeConvert: [
+        { scene: '养老规划', say: '你想 60 岁退休？生命周期假说说：要在 35 岁起把年收入的 10-15% 存下来，复利才能在退休时攒够。' }
+      ],
+      relationships: [{ target: 'keynes', type: 'teacher-student' }, { target: 'friedman', type: 'debate' }]
+    },
+    {
+      id: 'markowitz', name: '哈利·马科维茨', enName: 'Harry Markowitz',
+      nationality: '美国', schoolId: 'chicago', era: '投资组合 · 1952',
+      influence: 8, axis: { x: 0.6, y: 0.2 },
+      quote: '"分散化"不是买一堆股票——它是用数学算出最优组合，使单位风险的收益最大化。鸡蛋不要放一个篮子里，但怎么放是数学问题。',
+      enQuote: "Diversification is not about owning many stocks - it is about computing the mathematically optimal portfolio that maximizes return per unit of risk. Don't put all eggs in one basket, but how you distribute them is a math problem.",
+      bio: '美国经济学家，1990 年诺奖。22 岁发表"投资组合选择"论文，开创了现代金融学。',
+      keyTheories: [
+        { title: '均值-方差组合', year: 1952, desc: '用期望收益与协方差矩阵描述资产，构造"有效前沿"——给定风险最高收益、或给定收益最低风险的组合集合。' },
+        { title: '分散化的数学证明', year: 1952, desc: '相关系数低于 1 的资产组合，整体风险低于加权平均——分散降低风险但分散有上限。' }
+      ],
+      works: [
+        { title: '《投资组合选择》', year: 1952, desc: '22 岁博士论文，现代金融学开山之作。' }
+      ],
+      impact: '今天所有共同基金、ETF、量化策略都在均值-方差框架上运行——你买任何"分散配置"产品，背后都是马科维茨。',
+      lifeConvert: [
+        { scene: '家庭资产配置', say: '把钱 100% 放余额宝是"一个篮子"——马科维茨会说：按风险等级把 40% 放稳健、30% 放权益、20% 放现金、10% 留应急。' }
+      ],
+      relationships: [{ target: 'sharpe', type: 'teacher-student' }, { target: 'fama', type: 'teacher-student' }]
+    },
+    {
+      id: 'sharpe', name: '威廉·夏普', enName: 'William Sharpe',
+      nationality: '美国', schoolId: 'chicago', era: 'CAPM 与夏普比率 · 1964',
+      influence: 8, axis: { x: 0.55, y: 0.25 },
+      quote: '资产收益只有两类来源：无风险利率 + 风险溢价。CAPM 把"风险"分解为系统性（市场）与非系统性（个别）——分散消除后者，前者承担成本。',
+      enQuote: "Asset returns have only two sources: the risk-free rate plus a risk premium. CAPM decomposes risk into systematic (market) and idiosyncratic (firm-specific) - diversification eliminates the latter, but the former comes at a price.",
+      bio: '美国经济学家，1990 年诺奖（与 Markowitz、Miller 同年）。CAPM 是金融学最广泛使用的资产定价模型。',
+      keyTheories: [
+        { title: '资本资产定价模型（CAPM）', year: 1964, desc: 'E(R) = Rf + β×(Rm-Rf)——股票期望收益是无风险利率加上系统性风险溢价。β 衡量个股对市场的敏感度。' },
+        { title: '夏普比率', year: 1966, desc: '(收益-无风险)/波动率——衡量每承担一单位风险获得的超额回报，是基金业绩最常用的指标。' }
+      ],
+      works: [
+        { title: '《投资组合理论与资本市场》', year: 1970, desc: '把 CAPM 从论文扩展为教科书级别的资产定价框架。' }
+      ],
+      impact: '每一个公开基金都会标榜自己的"夏普比率"；CFA 考试必考 CAPM；现代投资学的"圣经"。',
+      lifeConvert: [
+        { scene: '基金投资', say: '你看到两只基金过去 5 年都涨 12%，但 A 波动 8%、B 波动 18%——夏普比率高的 A，每单位风险给的回报多。' }
+      ],
+      relationships: [{ target: 'markowitz', type: 'teacher-student' }, { target: 'fama', type: 'cooperation' }]
+    },
+    {
+      id: 'fama', name: '尤金·法玛', enName: 'Eugene Fama',
+      nationality: '美国', schoolId: 'chicago', era: '有效市场 · 1970',
+      influence: 8, axis: { x: 0.85, y: 0.3 },
+      quote: '市场价格已反映所有可得信息——技术分析与基本面分析都不能持续战胜市场。"有效市场假说"不是市场永远对，而是没人能持续跑赢。',
+      enQuote: "Market prices already reflect all available information - neither technical nor fundamental analysis can consistently beat the market. The 'efficient market hypothesis' does not say markets are always right; it says no one can consistently outrun them.",
+      bio: '美国经济学家，2013 年诺奖。芝加哥大学终身教授，"有效市场假说"之父，被尊为现代金融学的奠基人之一。',
+      keyTheories: [
+        { title: '有效市场假说（EMH）', year: 1970, desc: '弱有效（价格已反映历史价格）、半强有效（已反映公开信息）、强有效（已含内幕）。指数基金之父由此而生。' },
+        { title: '三因子模型（与 French）', year: 1993, desc: '股票超额收益来自市场风险、规模（小盘股溢价）、价值（低估值溢价）三因子，CAPM 的扩展。' }
+      ],
+      works: [
+        { title: '《金融市场基础》', year: 1976, desc: 'EMH 的标准教科书，至今仍是金融系研究生教材。' }
+      ],
+      impact: '指数基金（先锋领航创始人 Bogle 的灵感直接来自 EMH）已成为全球最大的投资品类——万亿级市场建立在法玛的洞察上。',
+      lifeConvert: [
+        { scene: '选基金', say: '你想挑一只"能跑赢大盘"的主动基金？法玛说：长期来看，能持续跑赢的不到 10%。买宽基指数更省钱省心。' }
+      ],
+      relationships: [{ target: 'sharpe', type: 'cooperation' }, { target: 'merton', type: 'debate' }]
+    },
+    {
+      id: 'merton', name: '罗伯特·默顿', enName: 'Robert Merton',
+      nationality: '美国', schoolId: 'chicago', era: '金融工程 · 1973',
+      influence: 8, axis: { x: 0.6, y: 0.45 },
+      quote: '金融工程不是关于钱的赌博——是用数学给不确定性定价，把风险分解、转移、重组，让原本不可能的事变得可交易。',
+      enQuote: "Financial engineering is not gambling with money - it is the mathematics of pricing uncertainty, decomposing, transferring, and recombining risk so that what was once impossible becomes tradable.",
+      bio: '美国经济学家，1997 年诺奖（与 Scholes、Myron 共同）。现代金融工程、期权定价理论的奠基人之一。',
+      keyTheories: [
+        { title: 'Black-Scholes 期权定价（与 Black、Scholes）', year: 1973, desc: '用连续时间随机过程为期权定出闭式解——衍生品市场从此爆发式增长。' },
+        { title: '跨期资本资产定价（ICAPM）', year: 1973, desc: 'CAPM 的多期扩展，把消费与投资决策跨期优化纳入资产定价框架。' }
+      ],
+      works: [
+        { title: '《连续时间金融》', year: 1990, desc: '把随机分析引入金融的里程碑著作，默顿研究生涯的总结。' }
+      ],
+      impact: '现在全球衍生品市场名义规模超 600 万亿美元——没有 B-S 模型，这一切都不存在；长期资本管理公司（LTCM）的兴衰也是默顿式思路的极端试验。',
+      lifeConvert: [
+        { scene: '风险管理', say: '你家房贷选固定还是浮动？本质是持有一个利率期权——默顿的框架告诉你怎么给"未来不确定性"定价。' }
+      ],
+      relationships: [{ target: 'fama', type: 'debate' }, { target: 'sharpe', type: 'cooperation' }]
+    },
+    {
+      id: 'shiller', name: '罗伯特·席勒', enName: 'Robert Shiller',
+      nationality: '美国', schoolId: 'behavioral', era: '行为金融与非理性繁荣 · 1981',
+      influence: 8, axis: { x: 0.2, y: 0.55 },
+      quote: '市场并非有效——价格由"动物精神"驱动的反馈循环决定，会大幅偏离基本面。2000 年互联网泡沫与 2008 年房地产泡沫，证明 CAPM 严重低估人类非理性。',
+      enQuote: "Markets are not efficient - prices are driven by feedback loops of 'animal spirits' and can deviate wildly from fundamentals. The 2000 dot-com bubble and 2008 housing bubble prove CAPM seriously underestimates human irrationality.",
+      bio: '美国经济学家，2013 年诺奖（与 Fama、Hansen 共同）。同时也是标普/凯斯-席勒房价指数的共同创始人——美国房价的风向标。',
+      keyTheories: [
+        { title: '非理性繁荣', year: 2000, desc: '资产价格泡沫由社会心理、媒体放大、反馈交易共同驱动——价格偏离基本面可达数年。' },
+        { title: '凯斯-席勒房价指数', year: 1991, desc: '重复销售法估算美国房价，被美联储与全球央行广泛引用。' }
+      ],
+      works: [
+        { title: '《非理性繁荣》', year: 2000, desc: '预言了 2000 年互联网泡沫，2005/2006 年再版预言房地产泡沫——均被验证。' }
+      ],
+      impact: '行为金融学由此进入主流——Fama 与 Shiller 同年获诺奖，正是"市场有效 vs 市场非理性"的标志性辩论。',
+      lifeConvert: [
+        { scene: '买房决策', say: '席勒反复说：房子首先是住所，不是投资。如果你买是为了"涨价卖出"——你已经在泡沫的末端。' }
+      ],
+      relationships: [{ target: 'fama', type: 'debate' }, { target: 'kahneman', type: 'cooperation' }]
+    },
+    {
+      id: 'graham', name: '本杰明·格雷厄姆', enName: 'Benjamin Graham',
+      nationality: '美籍英国', schoolId: 'chicago', era: '价值投资 · 1934',
+      influence: 8, axis: { x: 0.5, y: 0.15 },
+      quote: '股票不是彩票券——它代表一家真实公司的部分所有权。用"安全边际"买入被市场低估的资产，等待价值回归，是普通人能赢的唯一方式。',
+      enQuote: "A stock is not a lottery ticket - it represents part ownership of a real business. Buying undervalued assets with a 'margin of safety' and waiting for value to revert is the only way ordinary people can win.",
+      bio: '英籍美国经济学家、投资者，被尊为"价值投资之父"。巴菲特在哥伦比亚大学读了他的研究生课程，从此立志一生投资。',
+      keyTheories: [
+        { title: '安全边际', year: 1934, desc: '只用远低于内在价值的价格买入——给预测错误留缓冲。' },
+        { title: '市场先生寓言', year: 1949, desc: '市场是情绪波动的"市场先生"——他每天报出买入价，但价格常偏离价值。投资者利用他的情绪，不被其感染。' }
+      ],
+      works: [
+        { title: '《聪明的投资者》', year: 1949, desc: '价值投资的"圣经"，巴菲特亲自作序推荐。' },
+        { title: '《证券分析》', year: 1934, desc: '与 David Dodd 合著，专业投资者的方法论基础。' }
+      ],
+      impact: '巴菲特、芒格、塞斯·卡拉曼等价值投资大师都是格雷厄姆的学生；指数基金兴起前 20 世纪最赚钱的投资策略。',
+      lifeConvert: [
+        { scene: '个人投资', say: '不要追涨杀跌——格雷厄姆说："买入时假设市场明天会停业 5 年，你愿意吗？" 愿意，就买；不愿意，就别买。' }
+      ],
+      relationships: [{ target: 'kahneman', type: 'cooperation' }, { target: 'shiller', type: 'cooperation' }]
+    },
   ],
 
   /* ── 思想交割时间线 ── */
